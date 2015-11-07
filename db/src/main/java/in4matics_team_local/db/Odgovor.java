@@ -18,26 +18,33 @@ public class Odgovor extends Model{
     @Column(name="naziv")
     private String naziv;
 
-    @Column(name = "pitanje")
-    private Pitanja pitanje;
-
     @Column (name = "tocan")
     private int tocan;
+
+    @Column (name="IDpitanja")
+    private long IDpitanja;
+
+    @Column(name = "pitanje")
+    private Pitanja pitanje;
 
     public Odgovor(){
         super();
     }
 
-    public Odgovor(long IDodgovor, String naziv, int tocan) {
+
+    public Odgovor(long IDodgovor, String naziv, int tocan, long IDpitanja) {
         this.IDodgovor = IDodgovor;
         this.naziv = naziv;
         this.tocan = tocan;
+        this.IDpitanja = IDpitanja;
     }
 
 
     public void updateOdgovor(Odgovor updateOdgovor){
         this.IDodgovor=updateOdgovor.getIDodgovor();
         this.naziv=updateOdgovor.getNaziv();
+        this.tocan=updateOdgovor.getTocan();
+        this.IDpitanja=updateOdgovor.getIDpitanja();
         this.save();
     }
 
@@ -73,5 +80,13 @@ public class Odgovor extends Model{
 
     public void setTocan(int tocan) {
         this.tocan = tocan;
+    }
+
+    public long getIDpitanja() {
+        return IDpitanja;
+    }
+
+    public void setIDpitanja(long IDpitanja) {
+        this.IDpitanja = IDpitanja;
     }
 }
