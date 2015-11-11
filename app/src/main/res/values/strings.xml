@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">In4maticsQuiz</string>
+    <string name="data_loaded_tip_korisnika">Uspješno dohvaćeni tipovi korisnika.</string>
+    <string name="data_error_tip_korisnika">Došlo je do greške kod tipova korisnika.</string>
+    <string name="title_activity_odabir_razreda">In4maticsQuiz</string>
+    <string name="title_activity_registracija">In4maticsQuiz</string>
 </resources>

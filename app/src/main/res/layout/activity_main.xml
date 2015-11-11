@@ -20,7 +20,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="@android:dimen/notification_large_icon_height"
-        android:id="@+id/editText"
+        android:id="@+id/korisnickoIme"
         android:hint="Korisnicko ime"
         android:focusable="true"
         android:textColorHighlight="#a0a899"
@@ -33,12 +33,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:id="@+id/editText2"
-        android:layout_below="@+id/editText"
-        android:layout_alignRight="@+id/editText"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignStart="@+id/editText"
-        android:layout_alignEnd="@+id/editText"
+        android:id="@+id/lozinka"
+        android:layout_below="@+id/korisnickoIme"
+        android:layout_alignRight="@+id/korisnickoIme"
+        android:layout_alignLeft="@+id/korisnickoIme"
+        android:layout_alignStart="@+id/korisnickoIme"
+        android:layout_alignEnd="@+id/korisnickoIme"
         android:textColorHint="#272526"
         android:hint="Lozinka"
         android:layout_centerHorizontal="true" />
@@ -48,27 +48,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="prijava"
-        android:id="@+id/button"
-        android:layout_below="@+id/checkBox"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/btnPrijava"
+        android:layout_below="@+id/checkboxZapamti"
+        android:layout_centerHorizontal="true"
+        android:onClick="login"
+        />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Zapamti me"
-        android:id="@+id/checkBox"
-        android:layout_below="@+id/editText2"
-        android:layout_alignRight="@+id/editText2"
-        android:layout_alignEnd="@+id/editText2" />
+        android:id="@+id/checkboxZapamti"
+        android:layout_below="@+id/lozinka"
+        android:layout_alignRight="@+id/lozinka"
+        android:layout_alignEnd="@+id/lozinka" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Registriraj se"
-        android:id="@+id/textView3"
-
-
-        android:layout_below="@+id/button"
+        android:id="@+id/btnRegistriraj"
+        android:layout_below="@+id/btnPrijava"
 
         android:layout_centerHorizontal="true"
         />
