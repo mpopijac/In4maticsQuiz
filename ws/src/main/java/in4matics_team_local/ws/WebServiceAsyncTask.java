@@ -25,10 +25,8 @@ public class WebServiceAsyncTask extends AsyncTask <WebServiceParams, Void, Asyn
 
         asyncTaskInnerResult.wsResult = "";
 
-        // promjeniti url do baze
 
-        String url = "http://cortex.foi.hr/mtl/courses/air/"
-                + params[0].serviceName + ".php";
+        String url = "http://www.in4maticsquiz.16mb.com/"+ params[0].serviceName + ".php";
 
         String urlParameters = "";
         urlParameters += "method=" + params[0].methodName;

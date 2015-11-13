@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
 
+import in4matics_team.in4maticsquiz.loaders.WebServiceDataLoader;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText korisnickoIme, lozinka;
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences korisnickiPodaci = this.getSharedPreferences("korisnickiPodaci", MODE_PRIVATE);
 
         if(korisnickiPodaci.getLong("IDkorisnik", 0)!=0){
-            PrijavljeniKorisnik.getInstance().setIDkorisnik(korisnickiPodaci.getLong("IDkorisnik",0));
+            PrijavljeniKorisnik.getInstance().setIDkorisnik(korisnickiPodaci.getLong("IDkorisnik", 0));
             PrijavljeniKorisnik.getInstance().setIme(korisnickiPodaci.getString("ime", ""));
             PrijavljeniKorisnik.getInstance().setPrezime(korisnickiPodaci.getString("prezime", ""));
             PrijavljeniKorisnik.getInstance().setKorisnickoIme(korisnickiPodaci.getString("korisnickoIme", ""));
@@ -49,11 +51,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(this,odabirRazredaActivity.class);
             this.startActivity(intent);
         }
-/*
 
-        DataLoader dataLoader = new WebServiceDataLoader();
-        dataLoader.LoadData(this);
-*/
+
+
     }
 
     @Override

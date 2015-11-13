@@ -33,8 +33,8 @@ public class WebServiceDataLoader extends DataLoader{
         WebServiceParams paramsTip_korisnika = new WebServiceParams();
         paramsTip_korisnika.jsonParams = "";
         paramsTip_korisnika.methodName = "getAll";
-        paramsTip_korisnika.serviceName = "";
-        paramsTip_korisnika.targetAttribute="";
+        paramsTip_korisnika.serviceName = "tip_korisnika";
+        paramsTip_korisnika.targetAttribute="items";
         paramsTip_korisnika.resultHandler=getAllTip_korisnikaHandler;
         atTip_korisnika.execute(new WebServiceParams[]{paramsTip_korisnika});
 
