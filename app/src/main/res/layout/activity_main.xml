@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="@android:dimen/notification_large_icon_height"
         android:id="@+id/korisnickoIme"
-        android:hint="Korisnicko ime"
+        android:hint="Unesite korisničko ime"
         android:focusable="true"
         android:textColorHighlight="#a0a899"
         android:textColorHint="#0d0d0d"
@@ -40,7 +40,7 @@
         android:layout_alignStart="@+id/korisnickoIme"
         android:layout_alignEnd="@+id/korisnickoIme"
         android:textColorHint="#272526"
-        android:hint="Lozinka"
+        android:hint="Unesite lozinku"
         android:layout_centerHorizontal="true" />
 
 
@@ -52,7 +52,7 @@
         android:layout_below="@+id/checkboxZapamti"
         android:layout_centerHorizontal="true"
         android:onClick="login"
-        />
+        android:layout_marginBottom="0.2dp" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -60,18 +60,18 @@
         android:text="Zapamti me"
         android:id="@+id/checkboxZapamti"
         android:layout_below="@+id/lozinka"
-        android:layout_alignRight="@+id/lozinka"
-        android:layout_alignEnd="@+id/lozinka" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Registriraj se"
         android:id="@+id/btnRegistriraj"
-        android:layout_below="@+id/btnPrijava"
 
+        android:textStyle="bold"
+        android:layout_below="@+id/btnPrijava"
         android:layout_centerHorizontal="true"
-        />
+        android:paddingTop="0.5dp" />
 
 
 </RelativeLayout>

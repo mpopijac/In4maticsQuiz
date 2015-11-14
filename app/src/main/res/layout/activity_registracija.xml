@@ -4,13 +4,12 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="140dp"
-        android:layout_height="@dimen/abc_action_bar_progress_bar_size"
+        android:layout_width="135dp"
+        android:layout_height="40dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Registracija"
         android:id="@+id/textView"
         android:layout_gravity="top|center_horizontal"
-        android:textStyle="bold"
         android:layout_marginBottom="@dimen/abc_action_button_min_width_overflow_material" />
 
     <TextView
@@ -28,7 +27,8 @@
         android:ems="10"
         android:id="@+id/unos_ime"
         android:layout_gravity="center_horizontal"
-        android:focusable="true" />
+        android:focusable="true"
+        android:hint="Unesite vaše ime" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -44,7 +44,8 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/unos_prezime"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:hint="Unesite vaše prezime" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -60,7 +61,8 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/unos_korime"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:hint="Unesite vaše korisničko ime" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -76,7 +78,8 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/unos_email"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:hint="Unesite vaš e-mail" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -92,7 +95,8 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/unos_lozinke"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:hint="Unesite vašu lozinku" />
 
     <Button
         android:layout_width="wrap_content"

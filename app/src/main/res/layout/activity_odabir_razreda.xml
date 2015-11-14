@@ -1,77 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/activity_vertical_margin"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Odaberi razred"
-        android:id="@+id/naslov"
-        android:layout_gravity="top|center_horizontal"
-        android:layout_weight="0.40"
-        android:editable="false"
-        android:textStyle="bold"
-        android:textSize="@dimen/abc_action_button_min_height_material"
-        android:autoText="false"
-        android:singleLine="false" />
-
-    <TableLayout
+<android.support.v4.widget.DrawerLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1">
+            <!-- The ActionBar displayed at the top -->
+            <include
+                layout="@layout/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <!-- The main content view where fragments are loaded -->
 
-            <Button
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:text="5"
-                android:id="@+id/peti_razred"
-                android:textSize="@dimen/abc_action_bar_content_inset_material"
-                android:theme="@style/AppTheme"
-                android:layout_weight="0.13"
-
-                android:layout_gravity="left"
-                android:layout_column="0" />
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="6"
-                android:id="@+id/sesti_razred"
+            <TextView
+                android:layout_width="309dp"
+                android:layout_height="56dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="ODABERI RAZRED"
+                android:id="@+id/naslov"
                 android:layout_gravity="right"
-                android:layout_weight="0.14"
-                android:layout_column="10" />
-        </TableRow>
+                android:textAlignment="center"
+                android:textStyle="bold" />
 
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="366dp"
+                android:paddingTop="50dp"
+                android:layout_weight="0.25">
 
-            <Button
-                android:layout_width="140dp"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/odjava"
+                    android:id="@+id/odjava"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:layout_weight="0.22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/imePrijavljenog"
+                    android:id="@+id/imePrijavljenog"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.07" />
+
+
+                <TableLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="7"
-                android:id="@+id/sedmi_razred"
-                android:textSize="@dimen/abc_action_bar_content_inset_material"
-                android:theme="@style/AppTheme"
-                android:layout_weight="0.13"
-                android:layout_gravity="left"
-                android:layout_column="0"/>
+                >
 
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="8"
-                android:id="@+id/osmi_razred"
-                android:layout_gravity="right"
-                android:layout_weight="0.14"
-                android:layout_column="10" />
-        </TableRow>
-    </TableLayout>
+                <TableRow
+                    android:layout_below="@+id/naslov"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:paddingBottom="0.1dp">
 
-</LinearLayout>
+                    <Button
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:text="5"
+                        android:id="@+id/peti_razred"
+                        android:textSize="@dimen/abc_action_bar_content_inset_material"
+                        android:theme="@style/AppTheme"
+                        android:layout_weight="0.13"
+
+                        android:layout_gravity="left"
+                        android:layout_column="0" />
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="6"
+                        android:id="@+id/sesti_razred"
+                        android:layout_gravity="right"
+                        android:layout_weight="0.14"
+                        android:layout_column="10" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="0.2dp"
+                    android:paddingBottom="@dimen/abc_action_bar_stacked_max_height">
+
+                    <Button
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:text="7"
+                        android:id="@+id/sedmi_razred"
+                        android:textSize="@dimen/abc_action_bar_content_inset_material"
+                        android:theme="@style/AppTheme"
+                        android:layout_weight="0.13"
+                        android:layout_gravity="left"
+                        android:layout_column="0"/>
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="8"
+                        android:id="@+id/osmi_razred"
+                        android:layout_gravity="right"
+                        android:layout_weight="0.14"
+                        android:layout_column="10" />
+                </TableRow>
+            </TableLayout>
+
+            </FrameLayout>
+        </LinearLayout>
+
+        <android.support.design.widget.NavigationView
+            android:id="@+id/nv_drawer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@android:color/white"
+            app:menu="@menu/drawer_menu" />
+
+    </android.support.v4.widget.DrawerLayout>
+
+
+
