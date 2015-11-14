@@ -4,7 +4,13 @@
     <string name="action_settings">Settings</string>
 
     <string name="data_loaded_tip_korisnika">Uspješno dohvaćeni tipovi korisnika.</string>
-    <string name="data_error_tip_korisnika">Došlo je do greške kod tipova korisnika.</string>
+    <string name="data_error_tip_korisnika">Došlo je do greške kod dohvaćanja tipova korisnika.</string>
+    <string name="data_error_korisnik">Došlo je do greške kod dohvaćanja korisnika.</string>
+    <string name="data_error_rezultat">Došlo je do greške kod dohvaćanja rezultata.</string>
+    <string name="data_error_razred">Došlo je do greške kod dohvaćanja razreda.</string>
+    <string name="data_error_pitanja">Došlo je do greške kod dohvaćanja pitanja.</string>
+    <string name="data_error_poglavlja">Došlo je do greške kod dohvaćanja poglavlja.</string>
+    <string name="data_error_odgovor">Došlo je do greške kod dohvaćanja odgovora.</string>
     <string name="title_activity_odabir_razreda">In4maticsQuiz</string>
     <string name="title_activity_registracija">In4maticsQuiz</string>
     <string name="title_activity_logout">In4matichQuiz</string>
