@@ -2,6 +2,7 @@ package in4matics_team.in4maticsquiz;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -25,13 +26,16 @@ public class SigninActivity extends AsyncTask<String, String, String> {
 
     private Context context;
     private EditText s;
+    private String z;
 
 
 
 
-    public SigninActivity(Context context, EditText lozinka, String prava){
+    public SigninActivity(Context context, EditText lozinka, String zapamti){
         this.context=context;
         this.s=lozinka;
+        this.z=zapamti;
+
 
     }
 
@@ -41,6 +45,7 @@ public class SigninActivity extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... arg0){
+
         try{
             String username = (String)arg0[0];
             String password = (String)arg0[1];
@@ -101,6 +106,18 @@ public class SigninActivity extends AsyncTask<String, String, String> {
 
                 }
 
+                if(z.equals("true")){
+                    SharedPreferences korisnickiPodaci = context.getSharedPreferences("korisnickiPodaci", context.MODE_PRIVATE);
+                    SharedPreferences.Editor edit = korisnickiPodaci.edit();
+                    edit.clear();
+                    edit.putLong("IDkorisnik", PrijavljeniKorisnik.getInstance().getIDkorisnik());
+                    edit.putString("ime", PrijavljeniKorisnik.getInstance().getIme());
+                    edit.putString("prezime",PrijavljeniKorisnik.getInstance().getPrezime());
+                    edit.putString("korisnickoIme", PrijavljeniKorisnik.getInstance().getKorisnickoIme());
+                    edit.putString("email", PrijavljeniKorisnik.getInstance().getEmail());
+                    edit.putLong("IDtip", PrijavljeniKorisnik.getInstance().getIDtip());
+                    edit.commit();
+                }
 
                 Intent intent = new Intent(context,odabirRazredaActivity.class);
                 context.startActivity(intent);

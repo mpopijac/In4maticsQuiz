@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.activeandroid.ActiveAndroid;
 
@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button bLogin;
     private TextView bRegistriraj;
     private CheckBox zapamti;
+    private String korisnickoImeSt, lozinkaSt;
+    private String z;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences korisnickiPodaci = this.getSharedPreferences("korisnickiPodaci", MODE_PRIVATE);
 
         if(korisnickiPodaci.getLong("IDkorisnik", 0)!=0){
+
             PrijavljeniKorisnik.getInstance().setIDkorisnik(korisnickiPodaci.getLong("IDkorisnik", 0));
             PrijavljeniKorisnik.getInstance().setIme(korisnickiPodaci.getString("ime", ""));
             PrijavljeniKorisnik.getInstance().setPrezime(korisnickiPodaci.getString("prezime", ""));
@@ -61,10 +64,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.btnPrijava:
 
-                String korisnickoImeSt = korisnickoIme.getText().toString();
-                String lozinkaSt = lozinka.getText().toString();
+                korisnickoImeSt = korisnickoIme.getText().toString();
+                lozinkaSt = lozinka.getText().toString();
+                z= String.valueOf(zapamti.isChecked());
 
-                new SigninActivity(this,lozinka,"Prava").execute(korisnickoImeSt, lozinkaSt);
+                new SigninActivity(this,lozinka,z).execute(korisnickoImeSt, lozinkaSt,z);
 
                 if (zapamti.isChecked()== true){
 
@@ -80,9 +84,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     edit.commit();
 
                 }
-
-                Intent intent = new Intent(this,odabirRazredaActivity.class);
-                this.startActivity(intent);
 
                 break;
 
