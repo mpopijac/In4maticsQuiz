@@ -8,7 +8,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-
 import in4matics_team_local.db.Korisnik;
 import in4matics_team_local.db.Odgovor;
 import in4matics_team_local.db.Pitanja;
@@ -21,6 +20,7 @@ import in4matics_team_local.db.Tip_korisnika;
  * Created by Anabel Li Kečkeš on 7.11.2015..
  */
 public class JsonAdapter {
+
 
     public static ArrayList<Tip_korisnika> getTip_korisnika(String jsonString){
 
@@ -44,6 +44,8 @@ public class JsonAdapter {
 
         return tip_korisnikas;
     }
+
+
 
     public static ArrayList<Korisnik> getKorisnik(String jsonString){
 
@@ -84,9 +86,7 @@ public class JsonAdapter {
             for (int i=0; i<size; i++){
                 JSONObject jsonObject=jsonArray.getJSONObject(i);
 
-
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-
 
                 Rezultat rezultat = new Rezultat(
                         jsonObject.getLong("IDrezultat"),
@@ -94,7 +94,6 @@ public class JsonAdapter {
                         jsonObject.getLong("IDrazred"),
                         jsonObject.getLong("bodovi"),
                         sdf.parse(jsonObject.getString("datum"))
-
                 );
                 rezultati.add(rezultat);
             }
@@ -105,6 +104,8 @@ public class JsonAdapter {
 
         return rezultati;
     }
+
+
 
     public static ArrayList<Odgovor> getOdgovor(String jsonString){
 
@@ -132,6 +133,9 @@ public class JsonAdapter {
 
         return odgovori;
     }
+
+
+
     public static ArrayList<Pitanja> getPitanja(String jsonString){
 
         ArrayList<Pitanja> pitanja =new ArrayList<Pitanja>();
@@ -157,6 +161,8 @@ public class JsonAdapter {
 
         return pitanja;
     }
+
+
 
     public static ArrayList<Poglavlje> getPoglavlje(String jsonString){
 
@@ -184,6 +190,8 @@ public class JsonAdapter {
         return poglavlja;
     }
 
+
+
     public static ArrayList<Razred> getRazred(String jsonString){
 
         ArrayList<Razred> razredi =new ArrayList<Razred>();
@@ -208,9 +216,5 @@ public class JsonAdapter {
 
         return razredi;
     }
-
-
-
-
 
 }

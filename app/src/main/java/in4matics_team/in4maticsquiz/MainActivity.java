@@ -1,6 +1,5 @@
 package in4matics_team.in4maticsquiz;
 
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -10,11 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-
-
 import com.activeandroid.ActiveAndroid;
-
-import in4matics_team.in4maticsquiz.loaders.WebServiceDataLoader;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -52,19 +47,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             PrijavljeniKorisnik.getInstance().setKorisnickoIme(korisnickiPodaci.getString("korisnickoIme", ""));
             PrijavljeniKorisnik.getInstance().setEmail(korisnickiPodaci.getString("email", ""));
             PrijavljeniKorisnik.getInstance().setIDtip(korisnickiPodaci.getLong("IDtip",0));
+
             Intent intent = new Intent(this,odabirRazredaActivity.class);
             this.startActivity(intent);
         }
-
-
-
     }
 
     @Override
     public void onClick(View v){
         switch (v.getId()){
+
             case R.id.btnPrijava:
+
                 if(clicked==false || PrijavljeniKorisnik.getInstance().isClicked()==false) {
+
                     korisnickoImeSt = korisnickoIme.getText().toString();
                     lozinkaSt = lozinka.getText().toString();
                     z = String.valueOf(zapamti.isChecked());
@@ -90,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
                 break;
+
 
             case R.id.btnRegistriraj:
 

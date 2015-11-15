@@ -29,7 +29,6 @@ public class PrijavljeniKorisnik {
     }
 
 
-
     private PrijavljeniKorisnik() {
 
     }

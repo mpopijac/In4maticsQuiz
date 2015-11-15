@@ -121,10 +121,6 @@ public class WebServiceDataLoader extends DataLoader{
                     for (Tip_korisnika t : tip_korisnikas){
                         t.save();
                     }
-                    /*
-                    Toast.makeText(activity, R.string.data_loaded_tip_korisnika, Toast.LENGTH_SHORT).show();
-                    tip_korisnikaLoaded=true;
-                    */
                     tip_korisnikaLoaded=true;
                     bindTables();
                 }catch (Exception e){

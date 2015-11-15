@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -26,15 +25,10 @@ public class SigninActivity extends AsyncTask<String, String, String> {
     private boolean clicked;
     private String z;
 
-
-
-
     public SigninActivity(Context context, boolean clicked, String zapamti){
         this.context=context;
         this.clicked=clicked;
         this.z=zapamti;
-
-
     }
 
     protected void onPreExecute(){
@@ -43,7 +37,6 @@ public class SigninActivity extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... arg0){
-
         try{
             String username = (String)arg0[0];
             String password = (String)arg0[1];
@@ -83,6 +76,7 @@ public class SigninActivity extends AsyncTask<String, String, String> {
     protected void onPostExecute(String result){
 
         if(result.equals("0")){
+
             Toast toast = Toast.makeText(context, "Pogrešno uneseni podaci. Pokušajte ponovo.", Toast.LENGTH_SHORT);
             toast.show();
             PrijavljeniKorisnik.getInstance().setClicked(false);
@@ -92,7 +86,9 @@ public class SigninActivity extends AsyncTask<String, String, String> {
             try {
 
                 JSONArray jsonArray = new JSONArray(result);
+
                 for (int i=0; i<jsonArray.length();i++){
+
                     JSONObject json_data = jsonArray.getJSONObject(i);
                     PrijavljeniKorisnik.getInstance().setIDkorisnik(json_data.getLong("IDkorisnik"));
                     PrijavljeniKorisnik.getInstance().setIme(json_data.getString("ime"));
@@ -104,6 +100,7 @@ public class SigninActivity extends AsyncTask<String, String, String> {
                 }
 
                 if(z.equals("true")){
+
                     SharedPreferences korisnickiPodaci = context.getSharedPreferences("korisnickiPodaci", context.MODE_PRIVATE);
                     SharedPreferences.Editor edit = korisnickiPodaci.edit();
                     edit.clear();
@@ -114,6 +111,7 @@ public class SigninActivity extends AsyncTask<String, String, String> {
                     edit.putString("email", PrijavljeniKorisnik.getInstance().getEmail());
                     edit.putLong("IDtip", PrijavljeniKorisnik.getInstance().getIDtip());
                     edit.commit();
+
                 }
                 PrijavljeniKorisnik.getInstance().setClicked(false);
                 Intent intent = new Intent(context,odabirRazredaActivity.class);

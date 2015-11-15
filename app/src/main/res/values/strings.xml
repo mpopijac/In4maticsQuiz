@@ -2,7 +2,6 @@
     <string name="app_name">In4maticsQuiz</string>
     <string name="action_search">Search</string>
     <string name="action_settings">Settings</string>
-
     <string name="data_loaded_tip_korisnika">Uspješno dohvaćeni tipovi korisnika.</string>
     <string name="data_error_tip_korisnika">Došlo je do greške kod dohvaćanja tipova korisnika.</string>
     <string name="data_error_korisnik">Došlo je do greške kod dohvaćanja korisnika.</string>

@@ -40,6 +40,7 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_odabir_razreda);
 
@@ -80,7 +81,7 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
 
         // poruka sa imenom i prezimenom
         CharSequence text;
-        text = PrijavljeniKorisnik.getInstance().getIme() + PrijavljeniKorisnik.getInstance().getPrezime();
+        text = PrijavljeniKorisnik.getInstance().getIme() +" "+ PrijavljeniKorisnik.getInstance().getPrezime();
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(this, text, duration);
         toast.show();
