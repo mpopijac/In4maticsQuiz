@@ -2,6 +2,9 @@ package in4matics_team.in4maticsquiz;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -33,7 +36,7 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
     private Toolbar mToolbar;
     private ActionBarDrawerToggle mDrawerToggle;
     private FragmentManager mFm;
-
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,7 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
 
         //displej provjereznanja
 
-        in4matics_team.in4maticsquiz.fragments.provjeriZnanje dlf = new in4matics_team.in4maticsquiz.fragments.provjeriZnanje();
+        in4matics_team.in4maticsquiz.fragments.provjeraZnanja dlf = new in4matics_team.in4maticsquiz.fragments.provjeraZnanja();
         FragmentTransaction fm = getFragmentManager().beginTransaction();
         fm.replace(R.id.fragment_container, dlf);
         fm.commit();
@@ -90,12 +93,60 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
 
         odjava = (TextView)findViewById(R.id.odjava);
 
-        //odjava.setOnClickListener(new View.OnClickListener() {
-          //  public void onClick(View arg0) {
-           //     PrijavljeniKorisnik.getInstance().setKorisnickoIme(null);
-             //   finish();
-           // }
-        //});
+        odjava.setOnClickListener(new View.OnClickListener() {
+           public void onClick(View v) {
+               SharedPreferences korisnickiPodaci = getSharedPreferences("korisnickiPodaci", MODE_PRIVATE);
+               SharedPreferences.Editor edit = korisnickiPodaci.edit();
+               edit.clear();
+               edit.commit();
+               Intent intent = new Intent(context,MainActivity.class);
+               context.startActivity(intent);
+
+           }
+        });
+        Button peti = (Button)findViewById(R.id.peti_razred);
+
+        peti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentR = new Intent(odabirRazredaActivity.this,menuActivity.class);
+                startActivity(intentR);
+
+            }
+        });
+
+        Button sesti = (Button)findViewById(R.id.sesti_razred);
+
+        sesti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentR = new Intent(odabirRazredaActivity.this,menuActivity.class);
+                startActivity(intentR);
+
+            }
+        });
+
+        Button sedmi = (Button)findViewById(R.id.sedmi_razred);
+
+        sedmi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentR = new Intent(odabirRazredaActivity.this, menuActivity.class);
+                startActivity(intentR);
+
+            }
+        });
+
+        Button osmi = (Button)findViewById(R.id.osmi_razred);
+
+        osmi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentR = new Intent(odabirRazredaActivity.this, menuActivity.class);
+                startActivity(intentR);
+
+            }
+        });
 
     }
     @Override

@@ -25,6 +25,15 @@
             android:label="@string/title_activity_registracija"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity
+            android:name=".menuActivity"
+            android:label="@string/title_activity_registracija"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity android:name=".provjeriZnanje" >
+        </activity>
+        <activity android:name=".rangListeActivity" >
+        </activity>
     </application>
 
 </manifest>
