@@ -87,9 +87,9 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
         TextView odjava;
 
         PrijavljeniKorisnik currentUser = PrijavljeniKorisnik.getInstance();
-       String struser = currentUser.getKorisnickoIme().toString();
-      TextView txtuser = (TextView)findViewById(R.id.imePrijavljenog);
-       txtuser.setText("Prijavili ste se kao " + struser );
+        String struser = currentUser.getKorisnickoIme().toString();
+        TextView txtuser = (TextView)findViewById(R.id.imePrijavljenog);
+        txtuser.setText("Prijavili ste se kao " + struser );
 
         odjava = (TextView)findViewById(R.id.odjava);
 

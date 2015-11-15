@@ -244,72 +244,80 @@ public class WebServiceDataLoader extends DataLoader{
     };
 
     private void bindTables(){
-        if(tip_korisnikaLoaded && korisnikLoaded && rezultatLoaded && razredLoaded && pitanjaLoaded && poglavljaLoaded && odgovoriLoaded){
 
+        if(tip_korisnikaLoaded && korisnikLoaded) {
             // povezujemo tablicu tip_korisnika sa tablicom kotisnik
-            for (Tip_korisnika t : tip_korisnikas){
-                for (Korisnik k : korisnici){
-                    if (k.getIDtip() == t.getIDtip()){
+            for (Tip_korisnika t : tip_korisnikas) {
+                for (Korisnik k : korisnici) {
+                    if (k.getIDtip() == t.getIDtip()) {
                         k.setTip_korisnika(t);
                         k.save();
                     }
                 }
             }
+            tip_korisnikaLoaded = false;
+        }
 
+        if (korisnikLoaded && rezultatLoaded) {
             //povezujemo tablicu korisnik sa tablicom rezultat
-            for (Korisnik k: korisnici){
-                for (Rezultat r: rezultati){
-                    if (r.getIDkorisnik()==k.getIDkorisnik()){
+            for (Korisnik k : korisnici) {
+                for (Rezultat r : rezultati) {
+                    if (r.getIDkorisnik() == k.getIDkorisnik()) {
                         r.setKorisnik(k);
                         r.save();
                     }
                 }
             }
+            korisnikLoaded = false;
+        }
 
+        if(razredLoaded && rezultatLoaded && pitanjaLoaded) {
             //povezujemo tablicu rezultati sa tablicom razred
-            for (Razred r: razredi){
-                for (Rezultat rz : rezultati){
-                    if (rz.getIDrazred()==r.getIDrazred()){
+            for (Razred r : razredi) {
+                for (Rezultat rz : rezultati) {
+                    if (rz.getIDrazred() == r.getIDrazred()) {
                         rz.setRazred(r);
                         rz.save();
                     }
                 }
                 //povezujemo tablicu razred sa tablicom pitanja
-                for (Pitanja p: pitanjas){
-                    if(p.getIDrazred()==r.getIDrazred()){
+                for (Pitanja p : pitanjas) {
+                    if (p.getIDrazred() == r.getIDrazred()) {
                         p.setRazred(r);
                         p.save();
                     }
                 }
             }
+            rezultatLoaded = false;
+            razredLoaded = false;
+        }
 
+        if (poglavljaLoaded && pitanjaLoaded) {
             //povezujemo tablicu poglavlje sa tablicom pitanja
-            for (Poglavlje p : poglavlja){
-                for (Pitanja pi : pitanjas){
-                    if(p.getIDpoglavlje()==pi.getIDpoglavlje()){
+            for (Poglavlje p : poglavlja) {
+                for (Pitanja pi : pitanjas) {
+                    if (p.getIDpoglavlje() == pi.getIDpoglavlje()) {
                         pi.setPoglavlje(p);
                         pi.save();
                     }
                 }
             }
+            poglavljaLoaded = false;
+        }
 
+        if(pitanjaLoaded && odgovoriLoaded) {
             //povezujemo tablicu odgovor sa tablicom pitanja
-            for (Pitanja p : pitanjas){
-                for (Odgovor o: odgovori){
-                    if(p.getIDpitanja()==o.getIDpitanja()){
+            for (Pitanja p : pitanjas) {
+                for (Odgovor o : odgovori) {
+                    if (p.getIDpitanja() == o.getIDpitanja()) {
                         o.setPitanje(p);
                         o.save();
                     }
                 }
             }
-            tip_korisnikaLoaded=false;
-            korisnikLoaded=false;
-            rezultatLoaded=false;
-            razredLoaded=false;
-            pitanjaLoaded=false;
-            poglavljaLoaded=false;
-            odgovoriLoaded=false;
+            pitanjaLoaded = false;
+            odgovoriLoaded = false;
         }
-    }
 
+    }
 }
