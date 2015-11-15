@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private CheckBox zapamti;
     private String korisnickoImeSt, lozinkaSt;
     private String z;
+    private boolean clicked=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,26 +64,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v){
         switch (v.getId()){
             case R.id.btnPrijava:
+                if(clicked==false || PrijavljeniKorisnik.getInstance().isClicked()==false) {
+                    korisnickoImeSt = korisnickoIme.getText().toString();
+                    lozinkaSt = lozinka.getText().toString();
+                    z = String.valueOf(zapamti.isChecked());
 
-                korisnickoImeSt = korisnickoIme.getText().toString();
-                lozinkaSt = lozinka.getText().toString();
-                z= String.valueOf(zapamti.isChecked());
+                    new SigninActivity(this, clicked, z).execute(korisnickoImeSt, lozinkaSt, z);
 
-                new SigninActivity(this,lozinka,z).execute(korisnickoImeSt, lozinkaSt,z);
+                    if (zapamti.isChecked() == true) {
 
-                if (zapamti.isChecked()== true){
+                        SharedPreferences korisnickiPodaci = this.getSharedPreferences("korisnickiPodaci", MODE_PRIVATE);
+                        SharedPreferences.Editor edit = korisnickiPodaci.edit();
+                        edit.clear();
+                        edit.putLong("IDkorisnik", PrijavljeniKorisnik.getInstance().getIDkorisnik());
+                        edit.putString("ime", PrijavljeniKorisnik.getInstance().getIme());
+                        edit.putString("prezime", PrijavljeniKorisnik.getInstance().getPrezime());
+                        edit.putString("korisnickoIme", PrijavljeniKorisnik.getInstance().getKorisnickoIme());
+                        edit.putString("email", PrijavljeniKorisnik.getInstance().getEmail());
+                        edit.putLong("IDtip", PrijavljeniKorisnik.getInstance().getIDtip());
+                        edit.commit();
 
-                    SharedPreferences korisnickiPodaci = this.getSharedPreferences("korisnickiPodaci", MODE_PRIVATE);
-                    SharedPreferences.Editor edit = korisnickiPodaci.edit();
-                    edit.clear();
-                    edit.putLong("IDkorisnik", PrijavljeniKorisnik.getInstance().getIDkorisnik());
-                    edit.putString("ime", PrijavljeniKorisnik.getInstance().getIme());
-                    edit.putString("prezime",PrijavljeniKorisnik.getInstance().getPrezime());
-                    edit.putString("korisnickoIme", PrijavljeniKorisnik.getInstance().getKorisnickoIme());
-                    edit.putString("email", PrijavljeniKorisnik.getInstance().getEmail());
-                    edit.putLong("IDtip", PrijavljeniKorisnik.getInstance().getIDtip());
-                    edit.commit();
-
+                    }
+                    clicked=true;
+                    PrijavljeniKorisnik.getInstance().setClicked(true);
                 }
 
                 break;

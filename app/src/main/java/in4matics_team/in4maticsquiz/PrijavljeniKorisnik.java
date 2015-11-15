@@ -18,6 +18,8 @@ public class PrijavljeniKorisnik {
 
     private long IDtip;
 
+    private boolean clicked;
+
 
     public static PrijavljeniKorisnik getInstance() {
         if (ourInstance == null){
@@ -78,5 +80,13 @@ public class PrijavljeniKorisnik {
 
     public void setIDtip(long IDtip) {
         this.IDtip = IDtip;
+    }
+
+    public boolean isClicked() {
+        return clicked;
+    }
+
+    public void setClicked(boolean clicked) {
+        this.clicked = clicked;
     }
 }

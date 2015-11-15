@@ -23,15 +23,15 @@ import java.net.URLEncoder;
 public class SigninActivity extends AsyncTask<String, String, String> {
 
     private Context context;
-    private EditText s;
+    private boolean clicked;
     private String z;
 
 
 
 
-    public SigninActivity(Context context, EditText lozinka, String zapamti){
+    public SigninActivity(Context context, boolean clicked, String zapamti){
         this.context=context;
-        this.s=lozinka;
+        this.clicked=clicked;
         this.z=zapamti;
 
 
@@ -83,10 +83,9 @@ public class SigninActivity extends AsyncTask<String, String, String> {
     protected void onPostExecute(String result){
 
         if(result.equals("0")){
-            CharSequence text = "Pogrešno uneseni podaci. Pokušajte ponovo.";
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
+            Toast toast = Toast.makeText(context, "Pogrešno uneseni podaci. Pokušajte ponovo.", Toast.LENGTH_SHORT);
             toast.show();
+            PrijavljeniKorisnik.getInstance().setClicked(false);
 
         }else{
 
@@ -116,7 +115,7 @@ public class SigninActivity extends AsyncTask<String, String, String> {
                     edit.putLong("IDtip", PrijavljeniKorisnik.getInstance().getIDtip());
                     edit.commit();
                 }
-
+                PrijavljeniKorisnik.getInstance().setClicked(false);
                 Intent intent = new Intent(context,odabirRazredaActivity.class);
                 context.startActivity(intent);
 
@@ -125,6 +124,7 @@ public class SigninActivity extends AsyncTask<String, String, String> {
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+                PrijavljeniKorisnik.getInstance().setClicked(false);
             }
 
 

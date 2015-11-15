@@ -53,6 +53,10 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
         mFm.addOnBackStackChangedListener(this);
         mToolbar.setNavigationOnClickListener(navigationClick);
 
+        //pozivanje WebServiceDataLoader-a za dohvaćanje podataka sa servera
+        DataLoader dataLoader = new WebServiceDataLoader();
+        dataLoader.LoadData(odabirRazredaActivity.this);
+
         //displej provjereznanja
 
         in4matics_team.in4maticsquiz.fragments.provjeraZnanja dlf = new in4matics_team.in4maticsquiz.fragments.provjeraZnanja();
