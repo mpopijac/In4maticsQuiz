@@ -99,8 +99,8 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
                SharedPreferences.Editor edit = korisnickiPodaci.edit();
                edit.clear();
                edit.commit();
-               Intent intent = new Intent(context,MainActivity.class);
-               context.startActivity(intent);
+               Intent intent = new Intent(odabirRazredaActivity.this,MainActivity.class);
+               odabirRazredaActivity.this.startActivity(intent);
 
            }
         });
