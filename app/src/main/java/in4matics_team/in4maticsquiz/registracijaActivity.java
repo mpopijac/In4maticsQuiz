@@ -7,6 +7,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class registracijaActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText etIme, etPrezime, etKorisnickoIme, etEmail, etLozinka, etPotvrdaLozinke;
@@ -32,6 +35,16 @@ public class registracijaActivity extends AppCompatActivity implements View.OnCl
         PrijavljeniKorisnik.getInstance().setClicked(false);
     }
 
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
+                    Pattern.CASE_INSENSITIVE);
+
+    public static boolean validate(String emailStr) {
+
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+        return matcher.find();
+    }
+
     @Override
     public void onClick(View v) {
 
@@ -42,19 +55,26 @@ public class registracijaActivity extends AppCompatActivity implements View.OnCl
                 if ((etIme.length()!=0) &&(etPrezime.length()!=0) && (etKorisnickoIme.length()!=0) && (etEmail.length()!=0) && (etLozinka.length()!=0) && (etPotvrdaLozinke.length()!=0) ){
 
                     if (!(etLozinka.getText().toString().equals(etPotvrdaLozinke.getText().toString()))){
-                        Toast.makeText(this, "Lozinke nisu jednake!", Toast.LENGTH_LONG).show();
-                        //proba
+                        Toast.makeText(this, getString(R.string.registracijaLozinke), Toast.LENGTH_LONG).show();
+
                     }else {
 
-                        if (etLozinka.length() < 6){
+                        boolean validacijaEmaila= validate(etEmail.getText().toString());
 
-                            Toast.makeText(this, "Lozinka je prekratka! Minimalno 6 znakova.", Toast.LENGTH_LONG).show();
+                        if (etLozinka.length() < 6 || !validacijaEmaila){
+                            if(!validacijaEmaila){
 
+                                Toast.makeText(this, getString(R.string.registracijaEmailGreska), Toast.LENGTH_LONG).show();
+                            }
+                            else {
+
+                                Toast.makeText(this, getString(R.string.registracijaLozinkaPrekratka), Toast.LENGTH_LONG).show();
+                            }
                         }
                         else {
 
                             if (PrijavljeniKorisnik.getInstance().isClicked() == false) {
-
+                                Toast.makeText(this, getString(R.string.registracijaUspjesna), Toast.LENGTH_LONG).show();
                                 new RegistrationActivity(this, "", "").execute(etIme.getText().toString(), etPrezime.getText().toString(), etKorisnickoIme.getText().toString(), etEmail.getText().toString(), etLozinka.getText().toString());
                                 PrijavljeniKorisnik.getInstance().setClicked(true);
 
@@ -62,7 +82,7 @@ public class registracijaActivity extends AppCompatActivity implements View.OnCl
                         }
                     }
                 }else {
-                    Toast.makeText(this, "Niste popunili sva polja!!!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.registracijaNijePopunjeno), Toast.LENGTH_LONG).show();
                 }
 
                 break;

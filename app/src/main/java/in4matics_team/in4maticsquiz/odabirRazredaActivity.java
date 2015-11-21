@@ -83,7 +83,7 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
         CharSequence text;
         text = PrijavljeniKorisnik.getInstance().getIme() +" "+ PrijavljeniKorisnik.getInstance().getPrezime();
         int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(this, text, duration);
+        Toast toast = Toast.makeText(this, text + getString(R.string.odabirRazredaUspjesnaPrijava), duration);
         toast.show();
 
 
@@ -94,7 +94,7 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
         PrijavljeniKorisnik currentUser = PrijavljeniKorisnik.getInstance();
         String struser = currentUser.getKorisnickoIme().toString();
         TextView txtuser = (TextView)findViewById(R.id.imePrijavljenog);
-        txtuser.setText("Prijavili ste se kao " + struser );
+        txtuser.setText(getString(R.string.odabirRazredaPrijava) +" "+ struser );
 
         odjava = (TextView)findViewById(R.id.odjava);
 
