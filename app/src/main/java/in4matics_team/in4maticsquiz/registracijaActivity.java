@@ -43,6 +43,7 @@ public class registracijaActivity extends AppCompatActivity implements View.OnCl
 
                     if (!(etLozinka.getText().toString().equals(etPotvrdaLozinke.getText().toString()))){
                         Toast.makeText(this, "Lozinke nisu jednake!", Toast.LENGTH_LONG).show();
+                        //proba
                     }else {
 
                         if (etLozinka.length() < 6){
