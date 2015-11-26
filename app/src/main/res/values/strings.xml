@@ -27,5 +27,12 @@
     <string name="registrationActivityLink">http://www.in4maticsquiz.16mb.com/post_registracija.php</string>
     <string name="registrationActivityGreska">Došlo je do greške. Pokušajte ponovo.</string>
     <string name="registracijaUspjesna">Uspješno ste se registrirali.</string>
+    <string name="title_activity_app_preference">AppPreferenceActivity</string>
+    <string name="title_activity_search_dialog">SearchDialog</string>
+    <string name="search">Pretraži</string>
+    <string name="search_dialog_title">Pretraži</string>
+    <string name="search_dialog_text">Što tražite?</string>
+    <string name="search_hint">Unesi željeni pojam</string>
+    <string name="search_results_found"> rezultati</string>
 
 </resources>

@@ -169,12 +169,17 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
                 mDrawer.openDrawer(GravityCompat.START);
                 break;
             case R.id.action_search:
+                SearchDialog sd = new SearchDialog(this);
+                sd.show();
                 break;
             case R.id.action_settings:
+                Intent intent = new Intent(this, AppPreferenceActivity.class);
+                startActivity(intent);
                 break;
         }
-
+        Toast.makeText(this, "Menu item " + item.getTitle() + " clicked!", Toast.LENGTH_SHORT).show();
         return true;
+
     }
     @Override
     public void onBackPressed() {
