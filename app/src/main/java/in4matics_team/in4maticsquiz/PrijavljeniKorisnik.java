@@ -20,6 +20,18 @@ public class PrijavljeniKorisnik {
 
     private boolean clicked;
 
+    private int odabraniRazred;
+
+    public int getOdabraniRazred() {
+        return odabraniRazred;
+    }
+
+    public void setOdabraniRazred(int odabraniRazred) {
+        this.odabraniRazred = odabraniRazred;
+    }
+
+
+
 
     public static PrijavljeniKorisnik getInstance() {
         if (ourInstance == null){

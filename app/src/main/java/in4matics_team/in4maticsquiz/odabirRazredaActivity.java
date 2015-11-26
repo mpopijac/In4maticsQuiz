@@ -14,6 +14,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.internal.view.menu.MenuView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,7 +31,7 @@ import in4matics_team.in4maticsquiz.fragments.rangListe;
 import in4matics_team.in4maticsquiz.loaders.WebServiceDataLoader;
 import in4matics_team_local.db.Tip_korisnika;
 
-public class odabirRazredaActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener  {
+public class odabirRazredaActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener, View.OnClickListener  {
 
     private DrawerLayout mDrawer;
     private Toolbar mToolbar;
@@ -98,6 +99,8 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
 
         odjava = (TextView)findViewById(R.id.odjava);
 
+
+
         odjava.setOnClickListener(new View.OnClickListener() {
            public void onClick(View v) {
                SharedPreferences korisnickiPodaci = getSharedPreferences("korisnickiPodaci", MODE_PRIVATE);
@@ -109,13 +112,24 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
 
            }
         });
+
+
+        Button odj = (Button)findViewById(R.id.odjavaMeni);
+        //odj.setOnClickListener(this.);
+
+
+
         Button peti = (Button)findViewById(R.id.peti_razred);
 
         peti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                PrijavljeniKorisnik.getInstance().setOdabraniRazred(5);
                 Intent intentR = new Intent(odabirRazredaActivity.this,menuActivity.class);
                 startActivity(intentR);
+
+
 
             }
         });
@@ -125,6 +139,7 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
         sesti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                PrijavljeniKorisnik.getInstance().setOdabraniRazred(6);
                 Intent intentR = new Intent(odabirRazredaActivity.this,menuActivity.class);
                 startActivity(intentR);
 
@@ -136,6 +151,7 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
         sedmi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                PrijavljeniKorisnik.getInstance().setOdabraniRazred(7);
                 Intent intentR = new Intent(odabirRazredaActivity.this, menuActivity.class);
                 startActivity(intentR);
 
@@ -147,6 +163,7 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
         osmi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                PrijavljeniKorisnik.getInstance().setOdabraniRazred(8);
                 Intent intentR = new Intent(odabirRazredaActivity.this, menuActivity.class);
                 startActivity(intentR);
 
@@ -229,4 +246,24 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
     };
 
 
+    @Override
+    public void onClick(View v) {
+
+        switch(v.getId()) {
+            case R.id.odjavaMeni:
+
+
+                SharedPreferences korisnickiPodaci = getSharedPreferences("korisnickiPodaci", MODE_PRIVATE);
+                SharedPreferences.Editor edit = korisnickiPodaci.edit();
+                edit.clear();
+                edit.commit();
+                Intent intent = new Intent(odabirRazredaActivity.this, MainActivity.class);
+                odabirRazredaActivity.this.startActivity(intent);
+
+                break;
+        }
+
+
+
+    }
 }
