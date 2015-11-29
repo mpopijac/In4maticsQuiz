@@ -27,11 +27,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import in4matics_team.in4maticsquiz.R;
+import in4matics_team.in4maticsquiz.fragments.provjeraZnanja;
 import in4matics_team.in4maticsquiz.fragments.rangListe;
 import in4matics_team.in4maticsquiz.loaders.WebServiceDataLoader;
 import in4matics_team_local.db.Tip_korisnika;
 
-public class odabirRazredaActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener, View.OnClickListener  {
+public class odabirRazredaActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener {
 
     private DrawerLayout mDrawer;
     private Toolbar mToolbar;
@@ -50,126 +51,26 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = setupDrawerToggle();
         mDrawer.setDrawerListener(mDrawerToggle);
-
         mFm = getFragmentManager();
         mFm.addOnBackStackChangedListener(this);
         mToolbar.setNavigationOnClickListener(navigationClick);
 
-        //pozivanje WebServiceDataLoader-a za dohvaćanje podataka sa servera
-        DataLoader dataLoader = new WebServiceDataLoader();
-        dataLoader.LoadData(odabirRazredaActivity.this);
-
-        //displej provjereznanja
-
-        in4matics_team.in4maticsquiz.fragments.provjeraZnanja dlf = new in4matics_team.in4maticsquiz.fragments.provjeraZnanja();
+        odabir_razreda_fragment od=new odabir_razreda_fragment();
         FragmentTransaction fm = getFragmentManager().beginTransaction();
-        fm.replace(R.id.fragment_container, dlf);
+        fm.replace(R.id.fragment_container, od);
         fm.commit();
-
-        //displej rangListe
-
-        in4matics_team.in4maticsquiz.fragments.rangListe dlf2 = new in4matics_team.in4maticsquiz.fragments.rangListe();
-        FragmentTransaction fm2 = getFragmentManager().beginTransaction();
-        fm2.replace(R.id.fragment_container, dlf2);
-        fm2.commit();
 
         NavigationManager nm = NavigationManager.getInstance();
         nm.setDependencies(this, mDrawer, (NavigationView) findViewById(R.id.nv_drawer));
-        dlf.setPosition(0);
-        nm.addItem(dlf);
-        dlf2.setPosition(1);
-        nm.addItem(dlf2);
 
-        // poruka sa imenom i prezimenom
-        CharSequence text;
-        text = PrijavljeniKorisnik.getInstance().getIme() +" "+ PrijavljeniKorisnik.getInstance().getPrezime();
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(this, text + getString(R.string.odabirRazredaUspjesnaPrijava), duration);
-        toast.show();
+        rangListe rg=new rangListe();
+        nm.addItem(rg);
 
+        provjeraZnanja pz=new provjeraZnanja();
+        nm.addItem(pz);
 
-        //odjava
-
-        TextView odjava;
-
-        PrijavljeniKorisnik currentUser = PrijavljeniKorisnik.getInstance();
-        String struser = currentUser.getKorisnickoIme().toString();
-        TextView txtuser = (TextView)findViewById(R.id.imePrijavljenog);
-        txtuser.setText(getString(R.string.odabirRazredaPrijava) +" "+ struser );
-
-        odjava = (TextView)findViewById(R.id.odjava);
-
-
-
-        odjava.setOnClickListener(new View.OnClickListener() {
-           public void onClick(View v) {
-               SharedPreferences korisnickiPodaci = getSharedPreferences("korisnickiPodaci", MODE_PRIVATE);
-               SharedPreferences.Editor edit = korisnickiPodaci.edit();
-               edit.clear();
-               edit.commit();
-               Intent intent = new Intent(odabirRazredaActivity.this,MainActivity.class);
-               odabirRazredaActivity.this.startActivity(intent);
-
-           }
-        });
-
-
-        Button odj = (Button)findViewById(R.id.odjavaMeni);
-        //odj.setOnClickListener(this.);
-
-
-
-        Button peti = (Button)findViewById(R.id.peti_razred);
-
-        peti.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                PrijavljeniKorisnik.getInstance().setOdabraniRazred(5);
-                Intent intentR = new Intent(odabirRazredaActivity.this,menuActivity.class);
-                startActivity(intentR);
-
-
-
-            }
-        });
-
-        Button sesti = (Button)findViewById(R.id.sesti_razred);
-
-        sesti.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PrijavljeniKorisnik.getInstance().setOdabraniRazred(6);
-                Intent intentR = new Intent(odabirRazredaActivity.this,menuActivity.class);
-                startActivity(intentR);
-
-            }
-        });
-
-        Button sedmi = (Button)findViewById(R.id.sedmi_razred);
-
-        sedmi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PrijavljeniKorisnik.getInstance().setOdabraniRazred(7);
-                Intent intentR = new Intent(odabirRazredaActivity.this, menuActivity.class);
-                startActivity(intentR);
-
-            }
-        });
-
-        Button osmi = (Button)findViewById(R.id.osmi_razred);
-
-        osmi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PrijavljeniKorisnik.getInstance().setOdabraniRazred(8);
-                Intent intentR = new Intent(odabirRazredaActivity.this, menuActivity.class);
-                startActivity(intentR);
-
-            }
-        });
-
+        odjava_fragment odjavi=new odjava_fragment();
+        nm.addItem(odjavi);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -246,24 +147,5 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
     };
 
 
-    @Override
-    public void onClick(View v) {
 
-        switch(v.getId()) {
-            case R.id.odjavaMeni:
-
-
-                SharedPreferences korisnickiPodaci = getSharedPreferences("korisnickiPodaci", MODE_PRIVATE);
-                SharedPreferences.Editor edit = korisnickiPodaci.edit();
-                edit.clear();
-                edit.commit();
-                Intent intent = new Intent(odabirRazredaActivity.this, MainActivity.class);
-                odabirRazredaActivity.this.startActivity(intent);
-
-                break;
-        }
-
-
-
-    }
 }

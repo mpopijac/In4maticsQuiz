@@ -22,15 +22,9 @@ public class rangListe extends Fragment implements NavigationItem {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.rang_liste, container, false);
+        return inflater.inflate(R.layout.activity_rang_liste, container, false);
     }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        DataLoader dl = new WebServiceDataLoader();
-        dl.LoadData(getActivity());
-    }
 
     @Override
     public String getItemName() {
