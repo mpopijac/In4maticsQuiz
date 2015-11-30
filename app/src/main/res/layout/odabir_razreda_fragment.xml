@@ -12,12 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:weightSum="1">
-        <!-- The ActionBar displayed at the top -->
-        <include
-            layout="@layout/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <!-- The main content view where fragments are loaded -->
+
 
         <TextView
             android:layout_width="309dp"
@@ -66,16 +61,13 @@
                     android:paddingBottom="0.1dp">
 
                     <Button
-                        android:layout_width="140dp"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:text="5"
                         android:id="@+id/peti_razred"
-                        android:textSize="@dimen/abc_action_bar_content_inset_material"
-                        android:theme="@style/AppTheme"
                         android:layout_weight="0.13"
-
                         android:layout_gravity="left"
-                        android:layout_column="0" />
+                        android:layout_column="0"/>
 
                     <Button
                         android:layout_width="fill_parent"
@@ -94,12 +86,10 @@
                     android:paddingBottom="@dimen/abc_action_bar_stacked_max_height">
 
                     <Button
-                        android:layout_width="140dp"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:text="7"
                         android:id="@+id/sedmi_razred"
-                        android:textSize="@dimen/abc_action_bar_content_inset_material"
-                        android:theme="@style/AppTheme"
                         android:layout_weight="0.13"
                         android:layout_gravity="left"
                         android:layout_column="0"/>

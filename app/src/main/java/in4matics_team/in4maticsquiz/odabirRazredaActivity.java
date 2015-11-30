@@ -4,33 +4,21 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.internal.view.menu.MenuView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
-import in4matics_team.in4maticsquiz.R;
-import in4matics_team.in4maticsquiz.fragments.provjeraZnanja;
-import in4matics_team.in4maticsquiz.fragments.rangListe;
-import in4matics_team.in4maticsquiz.loaders.WebServiceDataLoader;
-import in4matics_team_local.db.Tip_korisnika;
+import in4matics_team.in4maticsquiz.fragments.odabir_razreda_fragment;
+import in4matics_team.in4maticsquiz.fragments.odjava_fragment;
 
 public class odabirRazredaActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener {
 
@@ -63,14 +51,10 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
         NavigationManager nm = NavigationManager.getInstance();
         nm.setDependencies(this, mDrawer, (NavigationView) findViewById(R.id.nv_drawer));
 
-        rangListe rg=new rangListe();
-        nm.addItem(rg);
-
-        provjeraZnanja pz=new provjeraZnanja();
-        nm.addItem(pz);
-
         odjava_fragment odjavi=new odjava_fragment();
         nm.addItem(odjavi);
+
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

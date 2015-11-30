@@ -1,4 +1,4 @@
-package in4matics_team.in4maticsquiz;
+package in4matics_team.in4maticsquiz.fragments;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -11,6 +11,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import in4matics_team.in4maticsquiz.MainActivity;
+import in4matics_team.in4maticsquiz.NavigationItem;
+import in4matics_team.in4maticsquiz.PrijavljeniKorisnik;
+import in4matics_team.in4maticsquiz.R;
+import in4matics_team.in4maticsquiz.menuActivity;
+
 /**
  * Created by Dario on 29.11.2015..
  */
@@ -18,9 +24,6 @@ public class odabir_razreda_fragment extends Fragment implements NavigationItem 
 
     private int position;
     private String name = "Odaberi razred";
-
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
