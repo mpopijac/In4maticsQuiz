@@ -1,13 +1,13 @@
 package in4matics_team.in4maticsquiz;
 
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,10 +15,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import in4matics_team.in4maticsquiz.fragments.odabir_razreda_fragment;
-import in4matics_team.in4maticsquiz.fragments.odjava_fragment;
 
 public class odabirRazredaActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener {
 
@@ -43,17 +43,97 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
         mFm.addOnBackStackChangedListener(this);
         mToolbar.setNavigationOnClickListener(navigationClick);
 
-        odabir_razreda_fragment od=new odabir_razreda_fragment();
-        FragmentTransaction fm = getFragmentManager().beginTransaction();
-        fm.replace(R.id.fragment_container, od);
-        fm.commit();
+        // poruka sa imenom i prezimenom
+        CharSequence text;
+        text = PrijavljeniKorisnik.getInstance().getIme() +" "+ PrijavljeniKorisnik.getInstance().getPrezime();
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(this, text + getString(R.string.odabirRazredaUspjesnaPrijava), duration);
+        toast.show();
 
-        NavigationManager nm = NavigationManager.getInstance();
-        nm.setDependencies(this, mDrawer, (NavigationView) findViewById(R.id.nv_drawer));
 
-        odjava_fragment odjavi=new odjava_fragment();
-        nm.addItem(odjavi);
+        PrijavljeniKorisnik currentUser = PrijavljeniKorisnik.getInstance();
+        String struser = currentUser.getKorisnickoIme().toString();
+        TextView txtuser = (TextView)findViewById(R.id.imePrijavljenog);
+        txtuser.setText(getString(R.string.odabirRazredaPrijava) +" "+ struser );
 
+
+        Button peti = (Button)findViewById(R.id.peti_razred);
+
+        peti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                PrijavljeniKorisnik.getInstance().setOdabraniRazred(5);
+                Intent intent = new Intent(odabirRazredaActivity.this, menuActivity.class);
+                startActivity(intent);
+
+
+
+            }
+
+
+        });
+
+        Button sesti = (Button)findViewById(R.id.sesti_razred);
+
+        sesti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PrijavljeniKorisnik.getInstance().setOdabraniRazred(6);
+                Intent intentR = new Intent(odabirRazredaActivity.this,menuActivity.class);
+                startActivity(intentR);
+
+            }
+        });
+
+        Button sedmi = (Button)findViewById(R.id.sedmi_razred);
+
+        sedmi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PrijavljeniKorisnik.getInstance().setOdabraniRazred(7);
+                Intent intentR = new Intent(odabirRazredaActivity.this, menuActivity.class);
+                startActivity(intentR);
+
+            }
+        });
+
+        Button osmi = (Button)findViewById(R.id.osmi_razred);
+
+        osmi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PrijavljeniKorisnik.getInstance().setOdabraniRazred(8);
+                Intent intentR = new Intent(odabirRazredaActivity.this, menuActivity.class);
+                startActivity(intentR);
+
+            }
+        });
+
+
+    }
+
+    @Override
+
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        MenuItem actionViewItem = menu.findItem(R.id.miActionButton);
+        View v = MenuItemCompat.getActionView(actionViewItem);
+        ImageButton b = (ImageButton) v.findViewById(R.id.btnCustomAction);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences korisnickiPodaci = odabirRazredaActivity.this.getSharedPreferences("korisnickiPodaci", odabirRazredaActivity.this.MODE_PRIVATE);
+                SharedPreferences.Editor edit = korisnickiPodaci.edit();
+                edit.clear();
+                edit.commit();
+                Intent intent = new Intent(odabirRazredaActivity.this, MainActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
+            return super.onPrepareOptionsMenu(menu);
 
     }
     @Override

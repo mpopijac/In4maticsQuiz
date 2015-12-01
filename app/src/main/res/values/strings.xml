@@ -34,5 +34,7 @@
     <string name="search_dialog_text">Što tražite?</string>
     <string name="search_hint">Unesi željeni pojam</string>
     <string name="search_results_found"> rezultati</string>
+    <string name="btnProvjeri">Provjeri znanje</string>
+    <string name="btnRang">  Rang  liste </string>
 
 </resources>

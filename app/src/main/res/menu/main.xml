@@ -15,4 +15,14 @@
         app:showAsAction="never"
         android:title="@string/action_search"/>
 
+    <item
+
+        android:id="@+id/miActionButton"
+
+        app:showAsAction="ifRoom"
+
+        app:actionLayout="@layout/action_odjava_button"
+
+        android:title="Odjava" />
+
 </menu>

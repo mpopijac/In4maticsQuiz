@@ -1,12 +1,12 @@
 package in4matics_team.in4maticsquiz;
 
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,12 +15,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
-
-import in4matics_team.in4maticsquiz.fragments.menu_fragment;
-import in4matics_team.in4maticsquiz.fragments.odjava_fragment;
-import in4matics_team.in4maticsquiz.fragments.provjeraZnanja;
-import in4matics_team.in4maticsquiz.fragments.rangListe;
 
 public class menuActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener{
     private DrawerLayout mDrawer;
@@ -31,7 +28,7 @@ public class menuActivity extends AppCompatActivity implements FragmentManager.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_odabir_razreda);
+        setContentView(R.layout.activity_menu);
 
 
         mToolbar= (Toolbar) findViewById(R.id.toolbar);
@@ -43,23 +40,53 @@ public class menuActivity extends AppCompatActivity implements FragmentManager.O
         mFm.addOnBackStackChangedListener(this);
         mToolbar.setNavigationOnClickListener(navigationClick);
 
-        menu_fragment mf=new menu_fragment();
-        FragmentTransaction fm = getFragmentManager().beginTransaction();
-        fm.replace(R.id.fragment_container,mf);
-        fm.commit();
+        Button provjeri = (Button) findViewById(R.id.btnProvjeri);
 
-        NavigationManager nm = NavigationManager.getInstance();
-        nm.setDependencies(this, mDrawer, (NavigationView) findViewById(R.id.nv_drawer));
+        provjeri.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentR = new Intent(menuActivity.this, provjeriZnanje.class);
+                startActivity(intentR);
 
-        odjava_fragment odjavi=new odjava_fragment();
-        nm.addItem(odjavi);
+            }
+        });
 
-        rangListe rg=new rangListe();
-        nm.addItem(rg);
-        provjeraZnanja pz=new provjeraZnanja();
-        nm.addItem(pz);
+        Button lista = (Button)findViewById(R.id.btnLista);
+
+        lista.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentR = new Intent(menuActivity.this, rangListeActivity.class);
+                startActivity(intentR);
+
+            }
+        });
 
 
+
+    }
+
+    @Override
+
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        MenuItem actionViewItem = menu.findItem(R.id.miActionButton);
+        View v = MenuItemCompat.getActionView(actionViewItem);
+        ImageButton b = (ImageButton) v.findViewById(R.id.btnCustomAction);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences korisnickiPodaci = menuActivity.this.getSharedPreferences("korisnickiPodaci", menuActivity.this.MODE_PRIVATE);
+                SharedPreferences.Editor edit = korisnickiPodaci.edit();
+                edit.clear();
+                edit.commit();
+                Intent intent = new Intent(menuActivity.this, MainActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
+        return super.onPrepareOptionsMenu(menu);
 
     }
 
