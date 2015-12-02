@@ -28,4 +28,8 @@
         android:textStyle="normal|bold"
         android:paddingTop="20dp"
         android:textColor="#0e7511" />
+    
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="50px"></ListView>
 </RelativeLayout>

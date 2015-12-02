@@ -19,19 +19,23 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-public class menuActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener{
+import in4matics_team.in4maticsquiz.loaders.WebServiceDataLoader;
+
+public class menuActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener, View.OnClickListener {
     private DrawerLayout mDrawer;
     private Toolbar mToolbar;
     private ActionBarDrawerToggle mDrawerToggle;
     private FragmentManager mFm;
     private Context context;
+    private Button provjeri, lista;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
 
-        mToolbar= (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = setupDrawerToggle();
@@ -40,31 +44,33 @@ public class menuActivity extends AppCompatActivity implements FragmentManager.O
         mFm.addOnBackStackChangedListener(this);
         mToolbar.setNavigationOnClickListener(navigationClick);
 
-        Button provjeri = (Button) findViewById(R.id.btnProvjeri);
 
-        provjeri.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentR = new Intent(menuActivity.this, provjeriZnanje.class);
-                startActivity(intentR);
+        provjeri = (Button)findViewById(R.id.btnProvjeri);
+        provjeri.setOnClickListener(this);
 
-            }
-        });
-
-        Button lista = (Button)findViewById(R.id.btnLista);
-
-        lista.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentR = new Intent(menuActivity.this, rangListeActivity.class);
-                startActivity(intentR);
-
-            }
-        });
-
-
+        lista = (Button)findViewById(R.id.btnLista);
+        lista.setOnClickListener(this);
 
     }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()){
+            case R.id.btnProvjeri:
+                intent= new Intent(menuActivity.this, provjeriZnanje.class);
+                startActivity(intent);
+                break;
+
+            case R.id.btnLista:
+                intent=new Intent(menuActivity.this, rangListeActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
+
+
 
     @Override
 
@@ -164,7 +170,6 @@ public class menuActivity extends AppCompatActivity implements FragmentManager.O
             }
         }
     };
-
 
 
 

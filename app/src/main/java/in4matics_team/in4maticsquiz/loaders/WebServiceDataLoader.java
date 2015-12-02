@@ -1,6 +1,7 @@
 package in4matics_team.in4maticsquiz.loaders;
 
 import android.app.Activity;
+import android.util.Log;
 import android.widget.Toast;
 
 import in4matics_team.in4maticsquiz.DataLoader;
@@ -33,6 +34,7 @@ public class WebServiceDataLoader extends DataLoader{
 
 
     public void LoadData(Activity activity){
+        super.LoadData(activity);
         this.activity=activity;
 
         WebServiceAsyncTask atTip_korisnika= new WebServiceAsyncTask();
@@ -115,11 +117,13 @@ public class WebServiceDataLoader extends DataLoader{
     WebServiceResultHandler getAllTip_korisnikaHandler = new WebServiceResultHandler() {
         @Override
         public void handleResult(String result, boolean ok, long timestamp) {
+
             if(ok){
                 try {
                     tip_korisnikas = JsonAdapter.getTip_korisnika(result);
                     for (Tip_korisnika t : tip_korisnikas){
                         t.save();
+                        Log.i("test", t.getNaziv());
                     }
                     tip_korisnikaLoaded=true;
                     bindTables();
@@ -134,11 +138,13 @@ public class WebServiceDataLoader extends DataLoader{
     WebServiceResultHandler getAllKorisnikHandler = new WebServiceResultHandler() {
         @Override
         public void handleResult(String result, boolean ok, long timestamp) {
+
             if(ok){
                 try {
                     korisnici=JsonAdapter.getKorisnik(result);
                     for (Korisnik k : korisnici){
                         k.save();
+                        Log.i("test", k.getEmail());
                     }
                     korisnikLoaded=true;
                     bindTables();
@@ -153,11 +159,13 @@ public class WebServiceDataLoader extends DataLoader{
     WebServiceResultHandler getAllRezultatHandler = new WebServiceResultHandler() {
         @Override
         public void handleResult(String result, boolean ok, long timestamp) {
+
             if(ok){
                 try {
                     rezultati = JsonAdapter.getRezultat(result);
                     for (Rezultat r : rezultati){
                         r.save();
+                        Log.i("test", Long.toString(r.getBodovi()));
                     }
                     rezultatLoaded=true;
                     bindTables();
@@ -172,10 +180,12 @@ public class WebServiceDataLoader extends DataLoader{
     WebServiceResultHandler getAllRazredHandler = new WebServiceResultHandler() {
         @Override
         public void handleResult(String result, boolean ok, long timestamp) {
+            razredi = JsonAdapter.getRazred(result);
             if(ok){
                 try {
                     for (Razred raz : razredi){
                         raz.save();
+                        Log.i("test", raz.getNaziv());
                     }
                     razredLoaded=true;
                     bindTables();
@@ -190,10 +200,12 @@ public class WebServiceDataLoader extends DataLoader{
     WebServiceResultHandler getAllPitanjaHandler = new WebServiceResultHandler() {
         @Override
         public void handleResult(String result, boolean ok, long timestamp) {
+            pitanjas = JsonAdapter.getPitanja(result);
             if (ok){
                 try {
                     for (Pitanja p : pitanjas){
                         p.save();
+                        Log.i("test", p.getPitanje());
                     }
                     pitanjaLoaded=true;
                     bindTables();
@@ -208,10 +220,12 @@ public class WebServiceDataLoader extends DataLoader{
     WebServiceResultHandler getAllPoglavljeHandler = new WebServiceResultHandler() {
         @Override
         public void handleResult(String result, boolean ok, long timestamp) {
+            poglavlja = JsonAdapter.getPoglavlje(result);
             if (ok){
                 try {
                     for (Poglavlje po : poglavlja){
                         po.save();
+                        Log.i("test", po.getNaziv());
                     }
                     poglavljaLoaded=true;
                     bindTables();
@@ -225,13 +239,16 @@ public class WebServiceDataLoader extends DataLoader{
     WebServiceResultHandler getAllOdgovorHandler = new WebServiceResultHandler() {
         @Override
         public void handleResult(String result, boolean ok, long timestamp) {
+            odgovori=JsonAdapter.getOdgovor(result);
             if (ok){
                 try {
                     for (Odgovor o : odgovori){
                         o.save();
+                        Log.i("test", o.getNaziv());
                     }
                     odgovoriLoaded=true;
                     bindTables();
+
                 }catch (Exception e){
                     Toast.makeText(activity,R.string.data_error_odgovor, Toast.LENGTH_SHORT).show();
                 }
@@ -252,6 +269,7 @@ public class WebServiceDataLoader extends DataLoader{
                 }
             }
             tip_korisnikaLoaded = false;
+            //dataLoaded();
         }
 
         if (korisnikLoaded && rezultatLoaded) {
@@ -265,6 +283,7 @@ public class WebServiceDataLoader extends DataLoader{
                 }
             }
             korisnikLoaded = false;
+            //dataLoaded();
         }
 
         if(razredLoaded && rezultatLoaded && pitanjaLoaded) {
@@ -286,6 +305,7 @@ public class WebServiceDataLoader extends DataLoader{
             }
             rezultatLoaded = false;
             razredLoaded = false;
+            //dataLoaded();
         }
 
         if (poglavljaLoaded && pitanjaLoaded) {
@@ -299,6 +319,7 @@ public class WebServiceDataLoader extends DataLoader{
                 }
             }
             poglavljaLoaded = false;
+            //dataLoaded();
         }
 
         if(pitanjaLoaded && odgovoriLoaded) {
@@ -313,6 +334,7 @@ public class WebServiceDataLoader extends DataLoader{
             }
             pitanjaLoaded = false;
             odgovoriLoaded = false;
+            //dataLoaded();
         }
 
     }

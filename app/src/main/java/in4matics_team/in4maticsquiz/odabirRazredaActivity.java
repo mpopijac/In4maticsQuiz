@@ -20,13 +20,24 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class odabirRazredaActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener {
+import java.util.ArrayList;
+
+import in4matics_team.in4maticsquiz.loaders.WebServiceDataLoader;
+import in4matics_team_local.db.Korisnik;
+import in4matics_team_local.db.Odgovor;
+import in4matics_team_local.db.Pitanja;
+import in4matics_team_local.db.Poglavlje;
+import in4matics_team_local.db.Razred;
+import in4matics_team_local.db.Rezultat;
+import in4matics_team_local.db.Tip_korisnika;
+
+public class odabirRazredaActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener, View.OnClickListener, OnDataLoadedListener {
 
     private DrawerLayout mDrawer;
     private Toolbar mToolbar;
     private ActionBarDrawerToggle mDrawerToggle;
     private FragmentManager mFm;
-    private Context context;
+    private Button peti, sesti, sedmi, osmi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,67 +62,59 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
         toast.show();
 
 
-        PrijavljeniKorisnik currentUser = PrijavljeniKorisnik.getInstance();
-        String struser = currentUser.getKorisnickoIme().toString();
+        DataLoader dataLoader = new WebServiceDataLoader();
+        dataLoader.LoadData(this);
+
+
+        String struser = PrijavljeniKorisnik.getInstance().getKorisnickoIme().toString();
         TextView txtuser = (TextView)findViewById(R.id.imePrijavljenog);
-        txtuser.setText(getString(R.string.odabirRazredaPrijava) +" "+ struser );
+        txtuser.setText(getString(R.string.odabirRazredaPrijava) + " " + struser);
 
 
-        Button peti = (Button)findViewById(R.id.peti_razred);
+        peti = (Button)findViewById(R.id.peti_razred);
+        peti.setOnClickListener(this);
 
-        peti.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        sesti = (Button)findViewById(R.id.sesti_razred);
+        sesti.setOnClickListener(this);
 
-                PrijavljeniKorisnik.getInstance().setOdabraniRazred(5);
-                Intent intent = new Intent(odabirRazredaActivity.this, menuActivity.class);
-                startActivity(intent);
+        sedmi = (Button)findViewById(R.id.sedmi_razred);
+        sedmi.setOnClickListener(this);
 
-
-
-            }
-
-
-        });
-
-        Button sesti = (Button)findViewById(R.id.sesti_razred);
-
-        sesti.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PrijavljeniKorisnik.getInstance().setOdabraniRazred(6);
-                Intent intentR = new Intent(odabirRazredaActivity.this,menuActivity.class);
-                startActivity(intentR);
-
-            }
-        });
-
-        Button sedmi = (Button)findViewById(R.id.sedmi_razred);
-
-        sedmi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PrijavljeniKorisnik.getInstance().setOdabraniRazred(7);
-                Intent intentR = new Intent(odabirRazredaActivity.this, menuActivity.class);
-                startActivity(intentR);
-
-            }
-        });
-
-        Button osmi = (Button)findViewById(R.id.osmi_razred);
-
-        osmi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PrijavljeniKorisnik.getInstance().setOdabraniRazred(8);
-                Intent intentR = new Intent(odabirRazredaActivity.this, menuActivity.class);
-                startActivity(intentR);
-
-            }
-        });
-
+        osmi = (Button)findViewById(R.id.osmi_razred);
+        osmi.setOnClickListener(this);
 
     }
+
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()) {
+
+            case R.id.peti_razred:
+                PrijavljeniKorisnik.getInstance().setOdabraniRazred(5);
+                intent = new Intent(odabirRazredaActivity.this, menuActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.sesti_razred:
+                PrijavljeniKorisnik.getInstance().setOdabraniRazred(6);
+                intent = new Intent(odabirRazredaActivity.this,menuActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.sedmi_razred:
+                PrijavljeniKorisnik.getInstance().setOdabraniRazred(7);
+                intent = new Intent(odabirRazredaActivity.this,menuActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.osmi_razred:
+                PrijavljeniKorisnik.getInstance().setOdabraniRazred(8);
+                intent = new Intent(odabirRazredaActivity.this,menuActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
+
 
     @Override
 
@@ -133,15 +136,19 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
 
             }
         });
-            return super.onPrepareOptionsMenu(menu);
+        return super.onPrepareOptionsMenu(menu);
 
     }
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //Switch on item id.
@@ -163,6 +170,7 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
         return true;
 
     }
+
     @Override
     public void onBackPressed() {
         if (getFragmentManager().getBackStackEntryCount() != 0)
@@ -211,5 +219,8 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
     };
 
 
+    @Override
+    public void onDataLoaded(ArrayList<Tip_korisnika> tip_korisnikas, ArrayList<Korisnik> korisnici, ArrayList<Rezultat> rezultati, ArrayList<Razred> razredi, ArrayList<Pitanja> pitanjas, ArrayList<Poglavlje> poglavlja, ArrayList<Odgovor> odgovori) {
 
+    }
 }

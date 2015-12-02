@@ -24,5 +24,21 @@ public abstract class DataLoader {
     public ArrayList<Pitanja> pitanjas;
     public ArrayList<Poglavlje> poglavlja;
     public ArrayList<Odgovor> odgovori;
-    public abstract void LoadData(Activity activity);
+    OnDataLoadedListener dataLoadedListener;
+
+    public void LoadData(Activity activity){
+        if(dataLoadedListener == null){
+            dataLoadedListener = (OnDataLoadedListener) activity;
+        }
+    }
+
+    public boolean dataLoaded(){
+        if(tip_korisnikas==null || korisnici==null || rezultati==null || razredi==null || pitanjas==null || poglavlja==null || odgovori==null){
+            return false;
+        }
+        else {
+            dataLoadedListener.onDataLoaded(tip_korisnikas, korisnici, rezultati, razredi, pitanjas, poglavlja, odgovori);
+            return true;
+        }
+    }
 }
