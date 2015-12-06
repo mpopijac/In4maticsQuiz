@@ -61,10 +61,10 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
         Toast toast = Toast.makeText(this, text + getString(R.string.odabirRazredaUspjesnaPrijava), duration);
         toast.show();
 
-/*
+
         DataLoader dataLoader = new WebServiceDataLoader();
         dataLoader.LoadData(this);
-*/
+
 
         String struser = PrijavljeniKorisnik.getInstance().getKorisnickoIme().toString();
         TextView txtuser = (TextView)findViewById(R.id.imePrijavljenog);
