@@ -1,57 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:layout_below="@+id/textView2"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true">
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/rBroj"
+    />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/korisniko_ime"
+        />
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        >
-
-
-        <TableRow
-            android:layout_below="@+id/naslov"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:paddingBottom="0.1dp"
-            android:paddingTop="5dp">
-
-
-            <TextView
-                android:layout_width="100px"
-                android:layout_height="wrap_content"
-                android:text="proba"
-                android:id="@+id/rBroj"
-                android:layout_gravity="center_horizontal"
-                android:layout_column="0" />
-
-            <TextView
-                android:layout_width="400px"
-                android:layout_height="wrap_content"
-                android:text="proba"
-                android:id="@+id/korisniko_ime"
-                android:layout_column="2" />
-
-            <TextView
-                android:layout_width="200px"
-                android:layout_height="wrap_content"
-                android:text="proba"
-                android:id="@+id/brBodova"
-                android:layout_column="1" />
-
-        </TableRow>
-    </TableLayout>
-
-
-
-
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/brBodova"
+        />
 
 </LinearLayout>
