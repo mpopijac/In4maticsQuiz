@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/In4maticsQuiz.iml" filepath="$PROJECT_DIR$/In4maticsQuiz.iml" />
+=======
+<<<<<<< HEAD
+      <module fileurl="file://$PROJECT_DIR$/In4maticsQuiz3.iml" filepath="$PROJECT_DIR$/In4maticsQuiz3.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/In4maticsQuiz2.iml" filepath="$PROJECT_DIR$/In4maticsQuiz2.iml" />
+>>>>>>> origin/master
+>>>>>>> origin/master
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/db/db.iml" filepath="$PROJECT_DIR$/db/db.iml" />
       <module fileurl="file://$PROJECT_DIR$/ws/ws.iml" filepath="$PROJECT_DIR$/ws/ws.iml" />
