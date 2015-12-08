@@ -88,9 +88,9 @@ public class WebServiceAsyncTask extends AsyncTask <WebServiceParams, Void, Asyn
                     if (jsonObject.getInt("responseId") == 100) {
                         result = jsonObject.getString("responseText");
                         ok = true;
-                    } else {
-                        result = jsonObject.getString("responseText");
                         timestamp = jsonObject.getLong("timeStamp");
+                    } else {
+                        ok = false;
                     }
                 } else {
                     result = "Operation failed! Unknown problem!";
