@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import android.widget.ArrayAdapter;
 
+import in4matics_team.in4maticsquiz.RangListaAdapter;
 
 import in4matics_team_local.db.Korisnik;
 import in4matics_team_local.db.Rezultat;
@@ -27,7 +28,7 @@ public class rangListeActivity extends ListActivity {
 
         Integer odabraniRazred = PrijavljeniKorisnik.getInstance().getOdabraniRazred();
 
-        rezultatArrayList = new Select().from(Rezultat.class).where("razred==?", odabraniRazred).execute();
+        rezultatArrayList = new Select().from(Rezultat.class).where("IDrazred==?", odabraniRazred).execute();
 
         m_adapter = new RangListaAdapter(this, R.layout.rang_liste_fragment, rezultatArrayList);
 
