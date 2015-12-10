@@ -5,11 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.activeandroid.query.Select;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import in4matics_team_local.db.Korisnik;
@@ -54,6 +59,7 @@ public class RangListaAdapter extends ArrayAdapter<Rezultat> {
         String[] korisnici= new String[rezultatArrayList.size()];
         Integer[] brojaci= new Integer[rezultatArrayList.size()];
         Long[] bodovi2= new Long[rezultatArrayList.size()];
+       String[] datumi = new String[rezultatArrayList.size()];
 
 
         int z=0;
@@ -68,6 +74,7 @@ public class RangListaAdapter extends ArrayAdapter<Rezultat> {
             korisnici[z]=username;
             brojaci[z]=g;
             bodovi2[z]=rez.getBodovi();
+            datumi[z]=rez.getDatum();
 
 
             z++;
@@ -78,6 +85,7 @@ public class RangListaAdapter extends ArrayAdapter<Rezultat> {
         TextView rBroj = (TextView) v.findViewById(R.id.rBroj);
         TextView korIme = (TextView) v.findViewById(R.id.korisniko_ime);
         TextView bodovi = (TextView) v.findViewById(R.id.brBodova);
+        TextView datum = (TextView) v.findViewById(R.id.datum);
 
 
         //       System.out.println(Long.toString(brojac)+username+i.getBodovi()+"bla");
@@ -86,8 +94,9 @@ public class RangListaAdapter extends ArrayAdapter<Rezultat> {
         korIme.setText(korisnici[position]);
         bodovi.setText(bodovi2[position].toString());
 
+        datum.setText(datumi[position]);
 
-
+        
         // the view must be returned to our activity
         return v;
 

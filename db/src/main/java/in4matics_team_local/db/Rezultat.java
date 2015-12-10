@@ -26,7 +26,7 @@ public class Rezultat extends Model {
     private long bodovi;
 
     @Column(name = "datum")
-    private Date datum;
+    private String datum;
 
     @Column(name = "korisnik")
     private Korisnik korisnik;
@@ -40,7 +40,7 @@ public class Rezultat extends Model {
 
 
 
-     public Rezultat(long IDrezultat, long IDkorisnik, long IDrazred, long bodovi, Date datum) {
+     public Rezultat(long IDrezultat, long IDkorisnik, long IDrazred, long bodovi, String datum) {
         this.IDrezultat = IDrezultat;
         this.IDkorisnik = IDkorisnik;
         this.IDrazred = IDrazred;
@@ -89,11 +89,11 @@ public class Rezultat extends Model {
         this.bodovi = bodovi;
     }
 
-    public Date getDatum() {
+    public String getDatum() {
         return datum;
     }
 
-    public void setDatum(Date datum) {
+    public void setDatum(String datum) {
         this.datum = datum;
     }
 

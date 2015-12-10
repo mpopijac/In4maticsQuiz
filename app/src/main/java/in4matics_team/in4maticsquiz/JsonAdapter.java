@@ -86,14 +86,15 @@ public class JsonAdapter {
             for (int i=0; i<size; i++){
                 JSONObject jsonObject=jsonArray.getJSONObject(i);
 
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                //SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
                 Rezultat rezultat = new Rezultat(
                         jsonObject.getLong("IDrezultat"),
                         jsonObject.getLong("IDkorisnik"),
                         jsonObject.getLong("IDrazred"),
                         jsonObject.getLong("bodovi"),
-                        sdf.parse(jsonObject.getString("datum"))
+                        jsonObject.getString("datum")
+                       // sdf.parse(jsonObject.getString("datum"))
                 );
                 rezultati.add(rezultat);
             }
