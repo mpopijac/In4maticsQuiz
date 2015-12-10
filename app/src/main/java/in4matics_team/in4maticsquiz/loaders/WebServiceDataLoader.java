@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.activeandroid.query.Select;
+import com.activeandroid.query.Update;
 
 import in4matics_team.in4maticsquiz.DataLoader;
 import in4matics_team.in4maticsquiz.JsonAdapter;
@@ -38,6 +39,8 @@ public class WebServiceDataLoader extends DataLoader{
 
     private int brojRedova;
     private String json;
+
+    private int duplikat;
 
 
     public void LoadData(Activity activity){
@@ -137,15 +140,27 @@ public class WebServiceDataLoader extends DataLoader{
 
                     tip_korisnikas = JsonAdapter.getTip_korisnika(result);
                     for (Tip_korisnika t : tip_korisnikas){
-                        t.save();
+
+
+                        duplikat = new Select().from(Tip_korisnika.class).where("IDtip==?",t.getIDtip() ).count();
+                        if (duplikat==0){
+                            t.save();
+                            tip_korisnikaLoaded=true;
+                            bindTables();
+                        }else {
+                            Log.i("Ušo sam nutra:", Long.toString(t.getIDtip()));
+                            Log.i("Update - naziv:", t.getNaziv());
+
+                            new Update(Tip_korisnika.class).set("naziv=?",t.getNaziv()).where("IDtip=?",t.getIDtip()).execute();
+
+                        }
+
                         Log.i("test", t.getNaziv());
                     }
 
                     //postaviti vrijeme u xml dohvaćeno putem varijable timestamp
-                    setXmalAzuriranjeJsonTime("tip_korisnika",timestamp);
+                    setXmalAzuriranjeJsonTime("tip_korisnika", timestamp);
 
-                    tip_korisnikaLoaded=true;
-                    bindTables();
                 }catch (Exception e){
                     Toast.makeText(activity,R.string.data_error_tip_korisnika, Toast.LENGTH_SHORT).show();
                 }
@@ -157,23 +172,36 @@ public class WebServiceDataLoader extends DataLoader{
     WebServiceResultHandler getAllKorisnikHandler = new WebServiceResultHandler() {
         @Override
         public void handleResult(String result, boolean ok, long timestamp) {
-
             if(ok){
                 try {
-
                     //treba napraviti provjeru dali postoji već taj zapis u bazi ( slučaj ažuriranja )
 
                     korisnici=JsonAdapter.getKorisnik(result);
                     for (Korisnik k : korisnici){
-                        k.save();
-                        Log.i("test", k.getEmail());
+
+                        duplikat = new Select().from(Korisnik.class).where("IDkorisnik==?",k.getIDkorisnik()).count();
+
+                        if (duplikat==0){
+                            k.save();
+                            korisnikLoaded=true;
+                            bindTables();
+                        }else {
+
+                            new Update(Korisnik.class).set("ime=?",k.getIme()).where("IDkorisnik=?",k.getIDkorisnik()).execute();
+                            new Update(Korisnik.class).set("prezime=?",k.getPrezime()).where("IDkorisnik=?",k.getIDkorisnik()).execute();
+                            new Update(Korisnik.class).set("korisnickoIme=?",k.getKorisnickoIme()).where("IDkorisnik=?",k.getIDkorisnik()).execute();
+                            new Update(Korisnik.class).set("email=?",k.getEmail()).where("IDkorisnik=?",k.getIDkorisnik()).execute();
+                            new Update(Korisnik.class).set("IDtip=?",k.getIDtip()).where("IDkorisnik=?",k.getIDkorisnik()).execute();
+
+                            Log.i("Uspjelo?:", k.getKorisnickoIme());
+                        }
+
+                        Log.i("test", k.getKorisnickoIme());
                     }
 
                     //postaviti vrijeme u xml dohvaćeno putem varijable timestamp
                     setXmalAzuriranjeJsonTime("korisnik", timestamp);
 
-                    korisnikLoaded=true;
-                    bindTables();
                 }catch (Exception e){
                     Toast.makeText(activity,R.string.data_error_korisnik, Toast.LENGTH_SHORT).show();
                 }
@@ -193,16 +221,29 @@ public class WebServiceDataLoader extends DataLoader{
 
                     rezultati = JsonAdapter.getRezultat(result);
                     for (Rezultat r : rezultati){
-                        r.save();
+
+                        duplikat = new Select().from(Rezultat.class).where("IDrezultat==?",r.getIDrezultat()).count();
+                        if (duplikat==0){
+                            r.save();
+                            rezultatLoaded=true;
+                            bindTables();
+                        }else {
+
+                            new Update(Rezultat.class).set("IDkorisnik=?",r.getIDkorisnik()).where("IDrezultat=?",r.getIDrezultat()).execute();
+                            new Update(Rezultat.class).set("IDrazred=?",r.getIDrazred()).where("IDrezultat=?",r.getIDrezultat()).execute();
+                            new Update(Rezultat.class).set("bodovi=?",r.getBodovi()).where("IDrezultat=?",r.getIDrezultat()).execute();
+                            new Update(Rezultat.class).set("datum=?",r.getDatum()).where("IDrezultat=?",r.getIDrezultat()).execute();
+
+
+                            Log.i("Uspjelo?:", Long.toString(r.getBodovi()));
+                        }
+
                         Log.i("test", Long.toString(r.getBodovi()));
                     }
 
                     //postaviti vrijeme u xml dohvaćeno putem varijable timestamp
                     setXmalAzuriranjeJsonTime("rezultat", timestamp);
 
-
-                    rezultatLoaded=true;
-                    bindTables();
                 }catch (Exception e){
                     Toast.makeText(activity,R.string.data_error_rezultat, Toast.LENGTH_SHORT).show();
                 }
@@ -221,7 +262,20 @@ public class WebServiceDataLoader extends DataLoader{
                     //treba napraviti provjeru dali postoji već taj zapis u bazi ( slučaj ažuriranja )
 
                     for (Razred raz : razredi){
-                        raz.save();
+
+                        duplikat = new Select().from(Razred.class).where("IDrazred==?",raz.getIDrazred()).count();
+                        if (duplikat==0){
+                            raz.save();
+                            razredLoaded=true;
+                            bindTables();
+                        }else {
+
+                            new Update(Razred.class).set("IDkorisnik=?",raz.getNaziv()).where("IDrazred=?",raz.getIDrazred()).execute();
+
+                            Log.i("Uspjelo?:",raz.getNaziv());
+                        }
+
+
                         Log.i("test", raz.getNaziv());
                     }
 
@@ -230,7 +284,7 @@ public class WebServiceDataLoader extends DataLoader{
                     setXmalAzuriranjeJsonTime("razred", timestamp);
 
                     razredLoaded=true;
-                    bindTables();
+
                 }catch (Exception e){
                     Toast.makeText(activity,R.string.data_error_razred, Toast.LENGTH_SHORT).show();
                 }
@@ -249,7 +303,22 @@ public class WebServiceDataLoader extends DataLoader{
                     //treba napraviti provjeru dali postoji već taj zapis u bazi ( slučaj ažuriranja )
 
                     for (Pitanja p : pitanjas){
-                        p.save();
+
+                        duplikat = new Select().from(Pitanja.class).where("IDpitanja==?",p.getIDpitanja()).count();
+                        if (duplikat==0){
+                            p.save();
+                            pitanjaLoaded=true;
+                            bindTables();
+                        }else {
+
+                            new Update(Pitanja.class).set("pitanje=?",p.getPitanje()).where("IDpitanja=?",p.getIDpitanja()).execute();
+                            new Update(Pitanja.class).set("IDpoglavlje=?",p.getIDpoglavlje()).where("IDpitanja=?",p.getIDpitanja()).execute();
+                            new Update(Pitanja.class).set("IDrazred=?",p.getIDrazred()).where("IDpitanja=?",p.getIDpitanja()).execute();
+
+                            Log.i("Uspjelo?:",p.getPitanje());
+                        }
+
+
                         Log.i("test", p.getPitanje());
                     }
 
@@ -257,9 +326,6 @@ public class WebServiceDataLoader extends DataLoader{
                     //postaviti vrijeme u xml dohvaćeno putem varijable timestamp
                     setXmalAzuriranjeJsonTime("pitanja", timestamp);
 
-
-                    pitanjaLoaded=true;
-                    bindTables();
                 }catch (Exception e){
                     Toast.makeText(activity,R.string.data_error_pitanja, Toast.LENGTH_SHORT).show();
                 }
@@ -278,7 +344,19 @@ public class WebServiceDataLoader extends DataLoader{
                     //treba napraviti provjeru dali postoji već taj zapis u bazi ( slučaj ažuriranja )
 
                     for (Poglavlje po : poglavlja){
-                        po.save();
+                        duplikat = new Select().from(Poglavlje.class).where("IDpoglavlje==?",po.getIDpoglavlje()).count();
+                        if (duplikat==0){
+                            po.save();
+                            poglavljaLoaded=true;
+                            bindTables();
+                        }else {
+
+                            new Update(Poglavlje.class).set("naziv=?",po.getNaziv()).where("IDpoglavlje=?",po.getIDpoglavlje()).execute();
+                            new Update(Poglavlje.class).set("ukljuceno=?",po.getUkljuceno()).where("IDpoglavlje=?",po.getIDpoglavlje()).execute();
+
+                            Log.i("Uspjelo?:",po.getNaziv());
+                        }
+
                         Log.i("test", po.getNaziv());
                     }
 
@@ -286,9 +364,6 @@ public class WebServiceDataLoader extends DataLoader{
                     //postaviti vrijeme u xml dohvaćeno putem varijable timestamp
                     setXmalAzuriranjeJsonTime("poglavlje", timestamp);
 
-
-                    poglavljaLoaded=true;
-                    bindTables();
                 }catch (Exception e){
                     Toast.makeText(activity,R.string.data_error_poglavlja, Toast.LENGTH_SHORT).show();
                 }
@@ -306,17 +381,26 @@ public class WebServiceDataLoader extends DataLoader{
                     //treba napraviti provjeru dali postoji već taj zapis u bazi ( slučaj ažuriranja )
 
                     for (Odgovor o : odgovori){
-                        o.save();
+                        duplikat = new Select().from(Poglavlje.class).where("IDpoglavlje==?",o.getIDodgovor()).count();
+                        if (duplikat==0){
+                            o.save();
+                            odgovoriLoaded=true;
+                            bindTables();
+                        }else {
+
+                            new Update(Poglavlje.class).set("naziv=?",o.getNaziv()).where("IDodgovor=?",o.getIDodgovor()).execute();
+                            new Update(Poglavlje.class).set("tocan=?",o.getTocan()).where("IDodgovor=?",o.getIDodgovor()).execute();
+                            new Update(Poglavlje.class).set("IDpitanja=?",o.getIDpitanja()).where("IDodgovor=?",o.getIDodgovor()).execute();
+
+                            Log.i("Uspjelo?:",o.getNaziv());
+                        }
                         Log.i("test", o.getNaziv());
                     }
 
 
                     //postaviti vrijeme u xml dohvaćeno putem varijable timestamp
-                    setXmalAzuriranjeJsonTime("odgovor",timestamp);
+                    setXmalAzuriranjeJsonTime("odgovor", timestamp);
 
-
-                    odgovoriLoaded=true;
-                    bindTables();
 
                 }catch (Exception e){
                     Toast.makeText(activity,R.string.data_error_odgovor, Toast.LENGTH_SHORT).show();
