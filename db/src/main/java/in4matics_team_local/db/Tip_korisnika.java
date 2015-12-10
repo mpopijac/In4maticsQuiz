@@ -19,16 +19,20 @@ public class Tip_korisnika extends Model {
     @Column(name = "naziv")
     private String naziv;
 
+    @Column(name = "obrisano")
+    private Integer obrisano;
+
 
     public Tip_korisnika(){
 
         super();
     }
 
-    public Tip_korisnika(long IDtip, String naziv) {
+    public Tip_korisnika(long IDtip, String naziv, Integer obrisano) {
         super();
         this.IDtip = IDtip;
         this.naziv = naziv;
+        this.obrisano = obrisano;
     }
 
 
@@ -41,6 +45,7 @@ public class Tip_korisnika extends Model {
     public void updateTip_korisnika(Tip_korisnika updateTip_korisnika){
         this.IDtip=updateTip_korisnika.getIDtip();
         this.naziv=updateTip_korisnika.getNaziv();
+        this.obrisano=updateTip_korisnika.getObrisano();
         this.save();
     }
 
@@ -60,4 +65,11 @@ public class Tip_korisnika extends Model {
         this.naziv = naziv;
     }
 
+    public Integer getObrisano() {
+        return obrisano;
+    }
+
+    public void setObrisano(Integer obrisano) {
+        this.obrisano = obrisano;
+    }
 }

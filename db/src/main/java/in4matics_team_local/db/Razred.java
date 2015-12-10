@@ -18,14 +18,18 @@ public class Razred extends Model {
     @Column(name = "naziv")
     private String naziv;
 
+    @Column (name = "obrisano")
+    private Integer obrisano;
+
     public Razred(){
         super();
     }
 
-    public Razred(long IDrazred, String naziv) {
+    public Razred(long IDrazred, String naziv, Integer obrisano) {
         super();
         this.IDrazred = IDrazred;
         this.naziv = naziv;
+        this.obrisano = obrisano;
     }
 
     public List<Rezultat> rezultati(){
@@ -39,6 +43,7 @@ public class Razred extends Model {
     public void updateRazred(Razred updateRazred){
         this.IDrazred=updateRazred.getIDrazred();
         this.naziv=updateRazred.getNaziv();
+        this.obrisano=updateRazred.getObrisano();
         this.save();
     }
 
@@ -56,5 +61,13 @@ public class Razred extends Model {
 
     public void setNaziv(String naziv) {
         this.naziv = naziv;
+    }
+
+    public Integer getObrisano() {
+        return obrisano;
+    }
+
+    public void setObrisano(Integer obrisano) {
+        this.obrisano = obrisano;
     }
 }

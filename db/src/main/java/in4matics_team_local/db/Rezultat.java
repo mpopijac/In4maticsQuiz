@@ -31,6 +31,9 @@ public class Rezultat extends Model {
     @Column(name = "korisnik")
     private Korisnik korisnik;
 
+    @Column(name = "obrisano")
+    private  Integer obrisano;
+
     @Column(name = "razred")
     private Razred razred;
 
@@ -40,12 +43,13 @@ public class Rezultat extends Model {
 
 
 
-     public Rezultat(long IDrezultat, long IDkorisnik, long IDrazred, long bodovi, String datum) {
+     public Rezultat(long IDrezultat, long IDkorisnik, long IDrazred, long bodovi, String datum, Integer obrisano) {
         this.IDrezultat = IDrezultat;
         this.IDkorisnik = IDkorisnik;
         this.IDrazred = IDrazred;
         this.bodovi = bodovi;
         this.datum = datum;
+        this.obrisano = obrisano;
     }
 
     public void updateRezultat(Rezultat updateRezultat){
@@ -54,6 +58,7 @@ public class Rezultat extends Model {
         this.IDrazred=updateRezultat.getIDrezultat();
         this.bodovi=updateRezultat.getBodovi();
         this.datum=updateRezultat.getDatum();
+        this.obrisano=updateRezultat.getObrisano();
         this.save();
     }
 
@@ -111,5 +116,13 @@ public class Rezultat extends Model {
 
     public void setRazred(Razred razred) {
         this.razred = razred;
+    }
+
+    public Integer getObrisano() {
+        return obrisano;
+    }
+
+    public void setObrisano(Integer obrisano) {
+        this.obrisano = obrisano;
     }
 }

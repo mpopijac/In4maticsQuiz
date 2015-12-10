@@ -27,6 +27,9 @@ public class Pitanja extends Model {
     @Column(name = "razred")
     private Razred razred;
 
+    @Column (name = "obrisano")
+    private Integer obrisano;
+
     @Column(name = "poglavlje")
     private Poglavlje poglavlje;
 
@@ -37,12 +40,13 @@ public class Pitanja extends Model {
     }
 
 
-    public Pitanja(long IDpitanja, String pitanje, long IDpoglavlje, long IDrazred) {
+    public Pitanja(long IDpitanja, String pitanje, long IDpoglavlje, long IDrazred, Integer obrisano) {
         super();
         this.IDpitanja = IDpitanja;
         this.pitanje = pitanje;
         this.IDpoglavlje = IDpoglavlje;
         this.IDrazred = IDrazred;
+        this.obrisano = obrisano;
 
     }
 
@@ -52,6 +56,7 @@ public class Pitanja extends Model {
         this.pitanje=updatePitanja.getPitanje();
         this.IDpoglavlje=updatePitanja.getIDpoglavlje();
         this.IDrazred=updatePitanja.getIDrazred();
+        this.obrisano=updatePitanja.getObrisano();
         this.save();
     }
 
@@ -101,5 +106,13 @@ public class Pitanja extends Model {
 
     public void setPoglavlje(Poglavlje poglavlje) {
         this.poglavlje = poglavlje;
+    }
+
+    public Integer getObrisano() {
+        return obrisano;
+    }
+
+    public void setObrisano(Integer obrisano) {
+        this.obrisano = obrisano;
     }
 }

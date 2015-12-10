@@ -33,7 +33,8 @@ public class JsonAdapter {
                 JSONObject jsonObject=jsonArray.getJSONObject(i);
                 Tip_korisnika tip_korisnika = new Tip_korisnika(
                         jsonObject.getLong("IDtip"),
-                        jsonObject.getString("naziv")
+                        jsonObject.getString("naziv"),
+                        jsonObject.getInt("obrisano")
                 );
                 tip_korisnikas.add(tip_korisnika);
             }
@@ -61,9 +62,9 @@ public class JsonAdapter {
                         jsonObject.getString("ime"),
                         jsonObject.getString("prezime"),
                         jsonObject.getString("korisnickoIme"),
-                        jsonObject.getString("lozinka"),
                         jsonObject.getString("email"),
-                        jsonObject.getLong("IDtip")
+                        jsonObject.getLong("IDtip"),
+                        jsonObject.getInt("obrisano")
                 );
                 korisnici.add(korisnik);
             }
@@ -93,7 +94,8 @@ public class JsonAdapter {
                         jsonObject.getLong("IDkorisnik"),
                         jsonObject.getLong("IDrazred"),
                         jsonObject.getLong("bodovi"),
-                        jsonObject.getString("datum")
+                        jsonObject.getString("datum"),
+                        jsonObject.getInt("obrisano")
                        // sdf.parse(jsonObject.getString("datum"))
                 );
                 rezultati.add(rezultat);
@@ -122,7 +124,8 @@ public class JsonAdapter {
                         jsonObject.getLong("IDodgovor"),
                         jsonObject.getString("naziv"),
                         jsonObject.getInt("tocan"),
-                        jsonObject.getLong("IDpitanja")
+                        jsonObject.getLong("IDpitanja"),
+                        jsonObject.getInt("obrisano")
 
                 );
                 odgovori.add(odgovor);
@@ -151,7 +154,8 @@ public class JsonAdapter {
                         jsonObject.getLong("IDpitanja"),
                         jsonObject.getString("pitanje"),
                         jsonObject.getLong("IDpoglavlje"),
-                        jsonObject.getLong("IDrazred")
+                        jsonObject.getLong("IDrazred"),
+                        jsonObject.getInt("obrisano")
                 );
                 pitanja.add(pitanje);
             }
@@ -178,7 +182,8 @@ public class JsonAdapter {
                 Poglavlje poglavlje = new Poglavlje(
                         jsonObject.getLong("IDpoglavlje"),
                         jsonObject.getString("naziv"),
-                        jsonObject.getInt("ukljuceno")
+                        jsonObject.getInt("ukljuceno"),
+                        jsonObject.getInt("obrisano")
 
                 );
                 poglavlja.add(poglavlje);
@@ -205,7 +210,8 @@ public class JsonAdapter {
                 JSONObject jsonObject=jsonArray.getJSONObject(i);
                 Razred razred = new Razred(
                         jsonObject.getLong("IDrazred"),
-                        jsonObject.getString("naziv")
+                        jsonObject.getString("naziv"),
+                        jsonObject.getInt("obrisano")
 
                 );
                 razredi.add(razred);

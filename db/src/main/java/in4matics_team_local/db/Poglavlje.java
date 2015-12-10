@@ -20,17 +20,21 @@ public class Poglavlje extends Model {
     private String naziv;
 
     @Column(name = "ukljuceno")
-    private int ukljuceno;
+    private Integer ukljuceno;
+
+    @Column (name = "obrisano")
+    private Integer obrisano;
 
     public Poglavlje(){
         super();
     }
 
-    public Poglavlje(long IDpoglavlje, String naziv, int ukljuceno) {
+    public Poglavlje(long IDpoglavlje, String naziv, Integer ukljuceno, Integer obrisano) {
         super();
         this.IDpoglavlje = IDpoglavlje;
         this.naziv = naziv;
         this.ukljuceno = ukljuceno;
+        this.obrisano = obrisano;
     }
 
     public List<Pitanja> pitanjas(){
@@ -41,6 +45,7 @@ public class Poglavlje extends Model {
         this.IDpoglavlje=updatePoglavlje.getIDpoglavlje();
         this.naziv=updatePoglavlje.getNaziv();
         this.ukljuceno=updatePoglavlje.getUkljuceno();
+        this.obrisano=updatePoglavlje.getObrisano();
         this.save();
     }
 
@@ -61,11 +66,19 @@ public class Poglavlje extends Model {
         this.naziv = naziv;
     }
 
-    public int getUkljuceno() {
+    public Integer getUkljuceno() {
         return ukljuceno;
     }
 
-    public void setUkljuceno(int ukljuceno) {
+    public void setUkljuceno(Integer ukljuceno) {
         this.ukljuceno = ukljuceno;
+    }
+
+    public Integer getObrisano() {
+        return obrisano;
+    }
+
+    public void setObrisano(Integer obrisano) {
+        this.obrisano = obrisano;
     }
 }

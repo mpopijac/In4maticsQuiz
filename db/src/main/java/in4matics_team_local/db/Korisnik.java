@@ -24,14 +24,14 @@ public class Korisnik extends Model {
     @Column(name = "korisnickoIme")
     private String korisnickoIme;
 
-    @Column(name = "lozinka")
-    private String lozinka;
-
     @Column(name = "email")
     private String email;
 
     @Column(name = "IDtip")
     private long IDtip;
+
+    @Column(name = "obrisano")
+    private  Integer obrisano;
 
     @Column(name = "tip_korisnika")
     private Tip_korisnika tip_korisnika;
@@ -44,15 +44,16 @@ public class Korisnik extends Model {
 
 
 
-    public Korisnik(long IDkorisnik, String ime, String prezime, String korisnickoIme, String lozinka, String email, long IDtip) {
+    public Korisnik(long IDkorisnik, String ime, String prezime, String korisnickoIme, String email, long IDtip, Integer obrisano) {
         super();
         this.IDkorisnik = IDkorisnik;
         this.ime = ime;
         this.prezime = prezime;
         this.korisnickoIme = korisnickoIme;
-        this.lozinka = lozinka;
+
         this.email = email;
         this.IDtip = IDtip;
+        this.obrisano = obrisano;
     }
 
     public List<Rezultat> rezultati(){
@@ -65,9 +66,9 @@ public class Korisnik extends Model {
         this.ime=updatedKorisnik.getIme();
         this.prezime=updatedKorisnik.getPrezime();
         this.korisnickoIme=updatedKorisnik.getKorisnickoIme();
-        this.lozinka=updatedKorisnik.getLozinka();
         this.email=updatedKorisnik.getEmail();
         this.IDtip=updatedKorisnik.getIDtip();
+        this.obrisano=updatedKorisnik.getObrisano();
         this.save();
     }
 
@@ -103,13 +104,6 @@ public class Korisnik extends Model {
         this.korisnickoIme = korisnickoIme;
     }
 
-    public String getLozinka() {
-        return lozinka;
-    }
-
-    public void setLozinka(String lozinka) {
-        this.lozinka = lozinka;
-    }
 
     public String getEmail() {
         return email;
@@ -135,4 +129,11 @@ public class Korisnik extends Model {
         this.tip_korisnika = tip_korisnika;
     }
 
+    public Integer getObrisano() {
+        return obrisano;
+    }
+
+    public void setObrisano(Integer obrisano) {
+        this.obrisano = obrisano;
+    }
 }

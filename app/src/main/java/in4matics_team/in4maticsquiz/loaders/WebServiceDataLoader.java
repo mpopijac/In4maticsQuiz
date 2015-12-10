@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 import com.activeandroid.query.Update;
 
@@ -132,27 +133,30 @@ public class WebServiceDataLoader extends DataLoader{
     WebServiceResultHandler getAllTip_korisnikaHandler = new WebServiceResultHandler() {
         @Override
         public void handleResult(String result, boolean ok, long timestamp) {
-
             if(ok){
                 try {
-
-                    //treba napraviti provjeru dali postoji već taj zapis u bazi ( slučaj ažuriranja )
 
                     tip_korisnikas = JsonAdapter.getTip_korisnika(result);
                     for (Tip_korisnika t : tip_korisnikas){
 
-
+                        // provjera duplikata
                         duplikat = new Select().from(Tip_korisnika.class).where("IDtip==?",t.getIDtip() ).count();
+                        //ako nije
                         if (duplikat==0){
                             t.save();
                             tip_korisnikaLoaded=true;
                             bindTables();
                         }else {
-                            Log.i("Ušo sam nutra:", Long.toString(t.getIDtip()));
-                            Log.i("Update - naziv:", t.getNaziv());
-
-                            new Update(Tip_korisnika.class).set("naziv=?",t.getNaziv()).where("IDtip=?",t.getIDtip()).execute();
-
+                            //provjera dali je duplikat obrisani, obrisani unos
+                            if(t.getObrisano()==1){
+                                new Delete().from(Tip_korisnika.class).where("IDtip=?", t.getIDtip()).execute();
+                                Log.i("Obrisano: ", t.getNaziv());
+                            }else {
+                                //ako nije, ažuriraj
+                                Log.i("Ušo sam nutra:", Long.toString(t.getIDtip()));
+                                Log.i("Update - naziv:", t.getNaziv());
+                                new Update(Tip_korisnika.class).set("naziv=?", t.getNaziv()).where("IDtip=?", t.getIDtip()).execute();
+                            }
                         }
 
                         Log.i("test", t.getNaziv());
@@ -187,13 +191,19 @@ public class WebServiceDataLoader extends DataLoader{
                             bindTables();
                         }else {
 
-                            new Update(Korisnik.class).set("ime=?",k.getIme()).where("IDkorisnik=?",k.getIDkorisnik()).execute();
-                            new Update(Korisnik.class).set("prezime=?",k.getPrezime()).where("IDkorisnik=?",k.getIDkorisnik()).execute();
-                            new Update(Korisnik.class).set("korisnickoIme=?",k.getKorisnickoIme()).where("IDkorisnik=?",k.getIDkorisnik()).execute();
-                            new Update(Korisnik.class).set("email=?",k.getEmail()).where("IDkorisnik=?",k.getIDkorisnik()).execute();
-                            new Update(Korisnik.class).set("IDtip=?",k.getIDtip()).where("IDkorisnik=?",k.getIDkorisnik()).execute();
+                            if(k.getObrisano()==1){
+                                new Delete().from(Korisnik.class).where("IDkorisnik=?", k.getIDkorisnik()).execute();
+                                Log.i("Obrisano: ", k.getKorisnickoIme());
+                            }else{
+                                new Update(Korisnik.class).set("ime=?",k.getIme()).where("IDkorisnik=?",k.getIDkorisnik()).execute();
+                                new Update(Korisnik.class).set("prezime=?",k.getPrezime()).where("IDkorisnik=?",k.getIDkorisnik()).execute();
+                                new Update(Korisnik.class).set("korisnickoIme=?",k.getKorisnickoIme()).where("IDkorisnik=?",k.getIDkorisnik()).execute();
+                                new Update(Korisnik.class).set("email=?",k.getEmail()).where("IDkorisnik=?",k.getIDkorisnik()).execute();
+                                new Update(Korisnik.class).set("IDtip=?",k.getIDtip()).where("IDkorisnik=?",k.getIDkorisnik()).execute();
 
-                            Log.i("Uspjelo?:", k.getKorisnickoIme());
+                                Log.i("Uspjelo?:", k.getKorisnickoIme());
+                            }
+
                         }
 
                         Log.i("test", k.getKorisnickoIme());
@@ -213,10 +223,8 @@ public class WebServiceDataLoader extends DataLoader{
     WebServiceResultHandler getAllRezultatHandler = new WebServiceResultHandler() {
         @Override
         public void handleResult(String result, boolean ok, long timestamp) {
-
             if(ok){
                 try {
-
                     //treba napraviti provjeru dali postoji već taj zapis u bazi ( slučaj ažuriranja )
 
                     rezultati = JsonAdapter.getRezultat(result);
@@ -228,22 +236,22 @@ public class WebServiceDataLoader extends DataLoader{
                             rezultatLoaded=true;
                             bindTables();
                         }else {
-
-                            new Update(Rezultat.class).set("IDkorisnik=?",r.getIDkorisnik()).where("IDrezultat=?",r.getIDrezultat()).execute();
-                            new Update(Rezultat.class).set("IDrazred=?",r.getIDrazred()).where("IDrezultat=?",r.getIDrezultat()).execute();
-                            new Update(Rezultat.class).set("bodovi=?",r.getBodovi()).where("IDrezultat=?",r.getIDrezultat()).execute();
-                            new Update(Rezultat.class).set("datum=?",r.getDatum()).where("IDrezultat=?",r.getIDrezultat()).execute();
-
+                            if(r.getObrisano()==1){
+                                new Delete().from(Rezultat.class).where("IDrezultat=?", r.getIDrezultat()).execute();
+                                Log.i("Obrisano: ", Long.toString(r.getBodovi()));
+                            }else {
+                                new Update(Rezultat.class).set("IDkorisnik=?", r.getIDkorisnik()).where("IDrezultat=?", r.getIDrezultat()).execute();
+                                new Update(Rezultat.class).set("IDrazred=?", r.getIDrazred()).where("IDrezultat=?", r.getIDrezultat()).execute();
+                                new Update(Rezultat.class).set("bodovi=?", r.getBodovi()).where("IDrezultat=?", r.getIDrezultat()).execute();
+                                new Update(Rezultat.class).set("datum=?", r.getDatum()).where("IDrezultat=?", r.getIDrezultat()).execute();
+                            }
 
                             Log.i("Uspjelo?:", Long.toString(r.getBodovi()));
                         }
-
                         Log.i("test", Long.toString(r.getBodovi()));
                     }
-
                     //postaviti vrijeme u xml dohvaćeno putem varijable timestamp
                     setXmalAzuriranjeJsonTime("rezultat", timestamp);
-
                 }catch (Exception e){
                     Toast.makeText(activity,R.string.data_error_rezultat, Toast.LENGTH_SHORT).show();
                 }
@@ -269,12 +277,14 @@ public class WebServiceDataLoader extends DataLoader{
                             razredLoaded=true;
                             bindTables();
                         }else {
-
-                            new Update(Razred.class).set("IDkorisnik=?",raz.getNaziv()).where("IDrazred=?",raz.getIDrazred()).execute();
-
+                            if(raz.getObrisano()==1){
+                                new Delete().from(Razred.class).where("IDrazred=?", raz.getIDrazred()).execute();
+                                Log.i("Obrisano: ", raz.getNaziv());
+                            }else {
+                                new Update(Razred.class).set("naziv=?", raz.getNaziv()).where("IDrazred=?", raz.getIDrazred()).execute();
+                            }
                             Log.i("Uspjelo?:",raz.getNaziv());
                         }
-
 
                         Log.i("test", raz.getNaziv());
                     }
@@ -299,7 +309,6 @@ public class WebServiceDataLoader extends DataLoader{
             pitanjas = JsonAdapter.getPitanja(result);
             if (ok){
                 try {
-
                     //treba napraviti provjeru dali postoji već taj zapis u bazi ( slučaj ažuriranja )
 
                     for (Pitanja p : pitanjas){
@@ -310,19 +319,18 @@ public class WebServiceDataLoader extends DataLoader{
                             pitanjaLoaded=true;
                             bindTables();
                         }else {
-
-                            new Update(Pitanja.class).set("pitanje=?",p.getPitanje()).where("IDpitanja=?",p.getIDpitanja()).execute();
-                            new Update(Pitanja.class).set("IDpoglavlje=?",p.getIDpoglavlje()).where("IDpitanja=?",p.getIDpitanja()).execute();
-                            new Update(Pitanja.class).set("IDrazred=?",p.getIDrazred()).where("IDpitanja=?",p.getIDpitanja()).execute();
-
+                            if(p.getObrisano()==1){
+                                new Delete().from(Pitanja.class).where("IDpitanja=?", p.getIDpitanja()).execute();
+                                Log.i("Obrisano: ", p.getPitanje());
+                            }else {
+                                new Update(Pitanja.class).set("pitanje=?", p.getPitanje()).where("IDpitanja=?", p.getIDpitanja()).execute();
+                                new Update(Pitanja.class).set("IDpoglavlje=?", p.getIDpoglavlje()).where("IDpitanja=?", p.getIDpitanja()).execute();
+                                new Update(Pitanja.class).set("IDrazred=?", p.getIDrazred()).where("IDpitanja=?", p.getIDpitanja()).execute();
+                            }
                             Log.i("Uspjelo?:",p.getPitanje());
                         }
-
-
                         Log.i("test", p.getPitanje());
                     }
-
-
                     //postaviti vrijeme u xml dohvaćeno putem varijable timestamp
                     setXmalAzuriranjeJsonTime("pitanja", timestamp);
 
@@ -340,9 +348,7 @@ public class WebServiceDataLoader extends DataLoader{
             poglavlja = JsonAdapter.getPoglavlje(result);
             if (ok){
                 try {
-
                     //treba napraviti provjeru dali postoji već taj zapis u bazi ( slučaj ažuriranja )
-
                     for (Poglavlje po : poglavlja){
                         duplikat = new Select().from(Poglavlje.class).where("IDpoglavlje==?",po.getIDpoglavlje()).count();
                         if (duplikat==0){
@@ -350,17 +356,17 @@ public class WebServiceDataLoader extends DataLoader{
                             poglavljaLoaded=true;
                             bindTables();
                         }else {
-
-                            new Update(Poglavlje.class).set("naziv=?",po.getNaziv()).where("IDpoglavlje=?",po.getIDpoglavlje()).execute();
-                            new Update(Poglavlje.class).set("ukljuceno=?",po.getUkljuceno()).where("IDpoglavlje=?",po.getIDpoglavlje()).execute();
-
+                            if(po.getObrisano()==1){
+                                new Delete().from(Poglavlje.class).where("IDpoglavlje=?", po.getIDpoglavlje()).execute();
+                                Log.i("Obrisano: ", po.getNaziv());
+                            }else {
+                                new Update(Poglavlje.class).set("naziv=?", po.getNaziv()).where("IDpoglavlje=?", po.getIDpoglavlje()).execute();
+                                new Update(Poglavlje.class).set("ukljuceno=?", po.getUkljuceno()).where("IDpoglavlje=?", po.getIDpoglavlje()).execute();
+                            }
                             Log.i("Uspjelo?:",po.getNaziv());
                         }
-
                         Log.i("test", po.getNaziv());
                     }
-
-
                     //postaviti vrijeme u xml dohvaćeno putem varijable timestamp
                     setXmalAzuriranjeJsonTime("poglavlje", timestamp);
 
@@ -377,31 +383,29 @@ public class WebServiceDataLoader extends DataLoader{
             odgovori=JsonAdapter.getOdgovor(result);
             if (ok){
                 try {
-
                     //treba napraviti provjeru dali postoji već taj zapis u bazi ( slučaj ažuriranja )
 
                     for (Odgovor o : odgovori){
-                        duplikat = new Select().from(Poglavlje.class).where("IDpoglavlje==?",o.getIDodgovor()).count();
+                        duplikat = new Select().from(Odgovor.class).where("IDodgovor==?",o.getIDodgovor()).count();
                         if (duplikat==0){
                             o.save();
                             odgovoriLoaded=true;
                             bindTables();
                         }else {
-
-                            new Update(Poglavlje.class).set("naziv=?",o.getNaziv()).where("IDodgovor=?",o.getIDodgovor()).execute();
-                            new Update(Poglavlje.class).set("tocan=?",o.getTocan()).where("IDodgovor=?",o.getIDodgovor()).execute();
-                            new Update(Poglavlje.class).set("IDpitanja=?",o.getIDpitanja()).where("IDodgovor=?",o.getIDodgovor()).execute();
-
+                            if(o.getObrisano()==1){
+                                new Delete().from(Odgovor.class).where("IDodgovor=?", o.getIDodgovor()).execute();
+                                Log.i("Obrisano: ", o.getNaziv());
+                            }else {
+                                new Update(Odgovor.class).set("naziv=?", o.getNaziv()).where("IDodgovor=?", o.getIDodgovor()).execute();
+                                new Update(Odgovor.class).set("tocan=?", o.getTocan()).where("IDodgovor=?", o.getIDodgovor()).execute();
+                                new Update(Odgovor.class).set("IDpitanja=?", o.getIDpitanja()).where("IDodgovor=?", o.getIDodgovor()).execute();
+                            }
                             Log.i("Uspjelo?:",o.getNaziv());
                         }
                         Log.i("test", o.getNaziv());
                     }
-
-
                     //postaviti vrijeme u xml dohvaćeno putem varijable timestamp
                     setXmalAzuriranjeJsonTime("odgovor", timestamp);
-
-
                 }catch (Exception e){
                     Toast.makeText(activity,R.string.data_error_odgovor, Toast.LENGTH_SHORT).show();
                 }
