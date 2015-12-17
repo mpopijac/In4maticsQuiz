@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.activeandroid.query.Select;
@@ -12,7 +13,9 @@ import com.activeandroid.query.Select;
 import java.util.ArrayList;
 import java.util.List;
 
+import in4matics_team.in4maticsquiz.CheckboxAdapterOdgovori;
 import in4matics_team.in4maticsquiz.R;
+import in4matics_team_local.db.Odgovor;
 import in4matics_team_local.db.Pitanja;
 
 /**
@@ -20,8 +23,10 @@ import in4matics_team_local.db.Pitanja;
  */
 public class VisePonudenihOdgovora_fragment extends Fragment {
     private List<Pitanja> pitanja=new ArrayList<Pitanja>();
+    private List<Odgovor> odgovori=new ArrayList<Odgovor>();
     TextView txtP;
     Pitanja trenutno;
+    private ListView lv;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -44,5 +49,9 @@ public class VisePonudenihOdgovora_fragment extends Fragment {
         txtP=(TextView)getView().findViewById(R.id.txtViseodg);
         txtP.setText(trenutno.getPitanje());
 
+        odgovori=new Select().all().from(Odgovor.class).where("IDpitanja==?", id).execute();
+        lv = (ListView)getView().findViewById(R.id.listView1);
+        CheckboxAdapterOdgovori adapter = new CheckboxAdapterOdgovori(this.getActivity(), odgovori);
+        lv.setAdapter(adapter);
     }
 }

@@ -2,7 +2,10 @@ package in4matics_team.in4maticsquiz;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.CountDownTimer;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +29,7 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
     private List<Pitanja> pitanja=new ArrayList<Pitanja>();
     private List<Odgovor> odgovoriTrenutno=new ArrayList<Odgovor>();
     private Pitanja trenutno;
+    private int brojPitanja=10,idPit,zadnjePitanje=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +37,12 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_provjeri_znanje);
         Integer odabraniRazred = PrijavljeniKorisnik.getInstance().getOdabraniRazred();
 
-        pitanja=new Select().all().from(Pitanja.class).where("IDrazred==?", odabraniRazred).execute();
-        trenutno=pitanja.get(new Random().nextInt(pitanja.size()));
+        pitanja=new Select().from(Pitanja.class).where("IDrazred==?", odabraniRazred).orderBy("RANDOM()").limit(brojPitanja).execute();
+        idPit=new Random().nextInt(pitanja.size());
+        trenutno=pitanja.get(idPit);
         vrstaPitanja(trenutno);
+        zadnjePitanje++;
+        pitanja.remove(idPit);
 
         btnSljedece=(Button)findViewById(R.id.btnSljedeceP);
         btnSljedece.setOnClickListener(this);
@@ -60,27 +67,36 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
     public void vrstaPitanja(Pitanja p){
 
         odgovoriTrenutno=new Select().all().from(Odgovor.class).where("IDpitanja==?", p.getIDpitanja()).execute();
-        if(odgovoriTrenutno.size()==2) postaviPit(1);
-        else if(odgovoriTrenutno.size()>2) postaviPit(2);
-        else if (odgovoriTrenutno.size()==1) postaviPit(3);
+        if(odgovoriTrenutno.size()==2) prikaziFragment(new TocnoNetocno_fragment());
+        else if(odgovoriTrenutno.size()>2) prikaziFragment(new VisePonudenihOdgovora_fragment());
+        else if (odgovoriTrenutno.size()==1) prikaziFragment(new UnesiTocanPojam_fragment());
 
     }
-    public void postaviPit(int v){
-
-        if(v==1){
-            prikaziFragment(new TocnoNetocno_fragment());
-        }
-        else if(v==2){
-            prikaziFragment(new VisePonudenihOdgovora_fragment());
-        }
-        else prikaziFragment(new UnesiTocanPojam_fragment());
-
-    }
-
     @Override
     public void onClick(View v) {
-            trenutno=pitanja.get(new Random().nextInt(pitanja.size()));
+        if(pitanja.size()>0) {
+            idPit = new Random().nextInt(pitanja.size());
+            trenutno = pitanja.get(idPit);
             vrstaPitanja(trenutno);
+            if(zadnjePitanje==(brojPitanja-1)){
+                btnSljedece.setText("Završi test");
+            }
+            zadnjePitanje++;
+            pitanja.remove(idPit);
+        }
+        else {
 
+            new AlertDialog.Builder(provjeriZnanje.this)
+                    .setTitle("Kviz je završio")
+                    .setCancelable(false)
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                           // Intent intent = new Intent(provjeriZnanje.this, menuActivity.class);
+                           // startActivity(intent);
+                            provjeriZnanje.this.finish();
+                        }
+                    }).create().show();
+        }
     }
 }
