@@ -17,12 +17,14 @@ import java.util.Random;
 import in4matics_team.in4maticsquiz.fragments.TocnoNetocno_fragment;
 import in4matics_team.in4maticsquiz.fragments.UnesiTocanPojam_fragment;
 import in4matics_team.in4maticsquiz.fragments.VisePonudenihOdgovora_fragment;
+import in4matics_team_local.db.Odgovor;
 import in4matics_team_local.db.Pitanja;
 
 public class provjeriZnanje extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnSljedece;
     private List<Pitanja> pitanja=new ArrayList<Pitanja>();
+    private List<Odgovor> odgovoriTrenutno=new ArrayList<Odgovor>();
     private Pitanja trenutno;
 
     @Override
@@ -57,10 +59,10 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
     }
     public void vrstaPitanja(Pitanja p){
 
-        Random r=new Random();
-        int v=(r.nextInt(3)+1);
-
-        postaviPit(v);
+        odgovoriTrenutno=new Select().all().from(Odgovor.class).where("IDpitanja==?", p.getIDpitanja()).execute();
+        if(odgovoriTrenutno.size()==2) postaviPit(1);
+        else if(odgovoriTrenutno.size()>2) postaviPit(2);
+        else if (odgovoriTrenutno.size()==1) postaviPit(3);
 
     }
     public void postaviPit(int v){
@@ -69,9 +71,9 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
             prikaziFragment(new TocnoNetocno_fragment());
         }
         else if(v==2){
-            prikaziFragment(new UnesiTocanPojam_fragment());
+            prikaziFragment(new VisePonudenihOdgovora_fragment());
         }
-        else prikaziFragment(new VisePonudenihOdgovora_fragment());
+        else prikaziFragment(new UnesiTocanPojam_fragment());
 
     }
 
