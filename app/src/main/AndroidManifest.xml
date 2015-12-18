@@ -19,6 +19,7 @@
             android:name=".odabirRazredaActivity"
             android:label="@string/title_activity_odabir_razreda"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".registracijaActivity"
             android:label="@string/title_activity_registracija"
@@ -28,7 +29,7 @@
             android:label="@string/title_activity_registracija"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".provjeriZnanje" />
-        <activity android:name=".rangListeActivity" />
+        <activity android:name=".rangListeActivity"/>
         <activity
             android:name=".AppPreferenceActivity"
             android:label="@string/title_activity_app_preference"
