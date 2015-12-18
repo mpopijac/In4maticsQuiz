@@ -35,8 +35,8 @@
         android:layout_margin="30dp" />
 
     <ImageView
-        android:layout_width="165dp"
-        android:layout_height="155dp"
+        android:layout_width="113dp"
+        android:layout_height="106dp"
         android:src="@drawable/pitanje"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"

@@ -10,12 +10,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.activeandroid.query.Select;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import in4matics_team.in4maticsquiz.fragments.TocnoNetocno_fragment;
 import in4matics_team.in4maticsquiz.fragments.UnesiTocanPojam_fragment;
@@ -30,6 +34,9 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
     private List<Odgovor> odgovoriTrenutno=new ArrayList<Odgovor>();
     private Pitanja trenutno;
     private int brojPitanja=10,idPit,zadnjePitanje=0;
+    TextView prikazTimer;
+    private static final String FORMAT = "%02d:%02d";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +53,27 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
 
         btnSljedece=(Button)findViewById(R.id.btnSljedeceP);
         btnSljedece.setOnClickListener(this);
+
+
+        prikazTimer=(TextView)findViewById(R.id.vrijemeTimer);
+
+        new CountDownTimer(600000, 1000) { // adjust the milli seconds here
+
+            public void onTick(long millisUntilFinished) {
+
+                prikazTimer.setText(""+String.format(FORMAT,
+                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
+                                TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
+                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+                                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+            }
+
+            public void onFinish() {
+                prikazTimer.setText("done!");
+            }
+        }.start();
+
+
     }
 
     public void prikaziFragment(Fragment f){
@@ -99,4 +127,6 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
                     }).create().show();
         }
     }
+
+
 }
