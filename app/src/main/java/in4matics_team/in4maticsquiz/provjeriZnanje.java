@@ -65,6 +65,7 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
         trenutno=pitanja.get(idPit);
         vrstaPitanja(trenutno);
         zadnjePitanje++;
+        pitanja.remove(idPit);
 
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
