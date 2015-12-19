@@ -1,49 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1">
 
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+            android:id="@+id/textTocnoNetocno"
+            android:layout_gravity="center_horizontal"
+            android:textSize="30dp"
+            android:layout_marginTop="20dp" />
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:id="@+id/rdgroup"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Točno"
+                android:id="@+id/radioButtonTocno"
+                android:layout_margin="20dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/textTocnoNetocno"
-        android:layout_gravity="center_horizontal"
-        android:textSize="30dp"
-        android:layout_marginTop="20dp" />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Netočno"
+                android:id="@+id/radioButtonNetocno"
+                android:layout_margin="20dp" />
+        </RadioGroup>
 
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Točno"
-        android:id="@+id/radioButton"
-        android:layout_margin="20dp" />
+        <ImageView
+            android:layout_width="185dp"
+            android:layout_height="137dp"
 
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Netočno"
-        android:id="@+id/radioButton2"
-        android:layout_margin="10dp" />
+            android:src="@drawable/pitanje"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center" />
 
-    <ImageView
-        android:layout_width="110dp"
-        android:layout_height="80dp"
-
-        android:src="@drawable/pitanje"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="center" />
-
-</LinearLayout>
-    </ScrollView>
+    </LinearLayout>

@@ -2,14 +2,19 @@ package in4matics_team.in4maticsquiz;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CheckedTextView;
+import android.widget.CompoundButton;
 
 import java.util.List;
 
+import in4matics_team.in4maticsquiz.fragments.VisePonudenihOdgovora_fragment;
 import in4matics_team_local.db.Odgovor;
 
 /**
@@ -18,24 +23,28 @@ import in4matics_team_local.db.Odgovor;
 public class CheckboxAdapterOdgovori extends ArrayAdapter<Odgovor> {
     private List<Odgovor> odgovorArrayList;
     Context context;
-    public CheckboxAdapterOdgovori(Context context, List<Odgovor> resource) {
-        super(context,R.layout.checkbox_layout,resource);
+    int layoutResourceId;
+    public CheckboxAdapterOdgovori(Context context,int layoutResourceId, List<Odgovor> resource) {
+        super(context,layoutResourceId,resource);
+        this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.odgovorArrayList = resource;
     }
-    @Override
+
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-        convertView = inflater.inflate(R.layout.checkbox_layout, parent, false);
-        CheckBox cb = (CheckBox) convertView.findViewById(R.id.checkBox1);
+        View row = convertView;
+        LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+        row = inflater.inflate(layoutResourceId, parent, false);
+        CheckBox  check= (CheckBox) row.findViewById(R.id.checkBoxOdg);
 
-        String[] odgovori= new String[odgovorArrayList.size()];
-        for(int i=0;i<odgovorArrayList.size();i++){
-            Odgovor tr=odgovorArrayList.get(i);
-            odgovori[i]=tr.getNaziv();
+
+        final String[] odgovori = new String[odgovorArrayList.size()];
+        for (int i = 0; i < odgovorArrayList.size(); i++) {
+            Odgovor tr = odgovorArrayList.get(i);
+            odgovori[i] = tr.getNaziv();
         }
-        cb.setText(odgovori[position]);
-        return convertView;
-    }
+        check.setText(odgovori[position]);
+        return row;
 
+    }
 }

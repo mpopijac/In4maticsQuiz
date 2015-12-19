@@ -1,11 +1,17 @@
 package in4matics_team.in4maticsquiz.fragments;
 
 import android.app.Fragment;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.activeandroid.query.Select;
 
@@ -25,6 +31,10 @@ public class TocnoNetocno_fragment extends Fragment {
     private List<Odgovor> odgovori=new ArrayList<Odgovor>();
     TextView txtP;
     Pitanja trenutno;
+    RadioButton rdTocno,rdNetocno;
+    RadioGroup rg;
+    private boolean tocno;
+    Odgovor tocan=null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,6 +59,47 @@ public class TocnoNetocno_fragment extends Fragment {
         txtP.setText(trenutno.getPitanje());
 
     }
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+
+        super.onViewCreated(view, savedInstanceState);
+        rdTocno=(RadioButton)getView().findViewById(R.id.radioButtonTocno);
+        rdNetocno=(RadioButton)getView().findViewById(R.id.radioButtonNetocno);
+        final Bundle data = getArguments();
+        long id = data.getLong("pitanje_key");
+        odgovori=new Select().all().from(Odgovor.class).where("IDpitanja==?", id).execute();
+        for(Odgovor odg:odgovori){
+            if(odg.getTocan()==1){
+                tocan=odg;
+                rdTocno.setText(odg.getNaziv());
+            }
+            else {
+                rdNetocno.setText(odg.getNaziv());
+            }
+        }
+        rg = (RadioGroup)getView(). findViewById(R.id.rdgroup);
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                rdTocno = (RadioButton) group.findViewById(R.id.radioButtonTocno);
+                rdNetocno = (RadioButton) group.findViewById(R.id.radioButtonNetocno);
+                tocno = false;
+                if (rdNetocno.isChecked()) {
+                    if (tocan.getNaziv().equals(rdNetocno.getText())) {
+                        tocno = true;
+                    }
+
+                }
+                if (rdTocno.isChecked()) {
+                    if (tocan.getNaziv().equals(rdTocno.getText())) {
+                        tocno = true;
+                    }
+                }
+
+                data.putBoolean("tocnost", tocno);
+            }
+
+        });
+    }
 }
-
-

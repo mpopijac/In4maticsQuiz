@@ -15,6 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +36,7 @@ import java.util.concurrent.TimeUnit;
 import in4matics_team.in4maticsquiz.fragments.TocnoNetocno_fragment;
 import in4matics_team.in4maticsquiz.fragments.UnesiTocanPojam_fragment;
 import in4matics_team.in4maticsquiz.fragments.VisePonudenihOdgovora_fragment;
+import in4matics_team_local.db.Korisnik;
 import in4matics_team_local.db.Odgovor;
 import in4matics_team_local.db.Pitanja;
 
@@ -44,8 +46,9 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
     private List<Pitanja> pitanja=new ArrayList<Pitanja>();
     private List<Odgovor> odgovoriTrenutno=new ArrayList<Odgovor>();
     private Pitanja trenutno;
-    private int brojPitanja=10,idPit,zadnjePitanje=0;
+    private int brojPitanja=10,idPit,zadnjePitanje=0,ukupnoBodova;;
     TextView prikazTimer;
+    CountDownTimer mCountDownTimer;
     private static final String FORMAT = "%02d:%02d";
 
 
@@ -78,7 +81,7 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
 
         prikazTimer=(TextView)findViewById(R.id.vrijemeTimer);
 
-        new CountDownTimer(600000, 1000) { // adjust the milli seconds here
+        mCountDownTimer=new CountDownTimer(30000, 1000) { // adjust the milli seconds here
 
             public void onTick(long millisUntilFinished) {
 
@@ -91,6 +94,7 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
 
             public void onFinish() {
                 prikazTimer.setText("done!");
+                gotovKviz();
             }
         }.start();
 
@@ -175,30 +179,46 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
     }
     @Override
     public void onClick(View v) {
-        if(pitanja.size()>0) {
+        Fragment currentFragment = getFragmentManager().findFragmentById(R.id.your_placeholder);
+        Bundle dat=new Bundle();
+        dat = currentFragment.getArguments();
+
+        boolean tocOdg = dat.getBoolean("tocnost");
+        Log.i("Primljeno: ", Boolean.toString(tocOdg));
+        if(tocOdg==true){
+            ukupnoBodova++;
+        }
+        if (pitanja.size() > 0) {
             idPit = new Random().nextInt(pitanja.size());
             trenutno = pitanja.get(idPit);
+
             vrstaPitanja(trenutno);
-            if(zadnjePitanje==(brojPitanja-1)){
+            if (zadnjePitanje == (brojPitanja - 1)) {
                 btnSljedece.setText("Završi test");
             }
             zadnjePitanje++;
             pitanja.remove(idPit);
+        } else {
+            mCountDownTimer.cancel();
+            gotovKviz();
         }
-        else {
 
-            new AlertDialog.Builder(provjeriZnanje.this)
-                    .setTitle("Kviz je završio")
-                    .setCancelable(false)
-                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                           // Intent intent = new Intent(provjeriZnanje.this, menuActivity.class);
-                           // startActivity(intent);
-                            provjeriZnanje.this.finish();
-                        }
-                    }).create().show();
-        }
+    }
+
+    private void gotovKviz(){
+
+        new AlertDialog.Builder(provjeriZnanje.this)
+                .setTitle("Kviz je završio")
+                .setMessage("Broj bodova: "+ukupnoBodova)
+                .setCancelable(false)
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        provjeriZnanje.this.finish();
+                    }
+                }).create().show();
+
     }
 
 
