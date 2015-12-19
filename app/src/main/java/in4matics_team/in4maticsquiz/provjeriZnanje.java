@@ -4,13 +4,24 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.CountDownTimer;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.activeandroid.query.Select;
 
@@ -38,6 +49,11 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
     private static final String FORMAT = "%02d:%02d";
 
 
+
+    private Toolbar mToolbar;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +65,11 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
         trenutno=pitanja.get(idPit);
         vrstaPitanja(trenutno);
         zadnjePitanje++;
-        pitanja.remove(idPit);
+
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+
 
         btnSljedece=(Button)findViewById(R.id.btnSljedeceP);
         btnSljedece.setOnClickListener(this);
@@ -75,6 +95,58 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
 
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //Switch on item id.
+        int id = item.getItemId();
+        switch (id) {
+
+            case R.id.action_search:
+                SearchDialog sd = new SearchDialog(this);
+                sd.show();
+                break;
+            case R.id.action_settings:
+                Intent intent = new Intent(this, AppPreferenceActivity.class);
+                startActivity(intent);
+                break;
+        }
+        Toast.makeText(this, "Menu item " + item.getTitle() + " clicked!", Toast.LENGTH_SHORT).show();
+        return true;
+
+    }
+
+    @Override
+
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        MenuItem actionViewItem = menu.findItem(R.id.miActionButton);
+        View v = MenuItemCompat.getActionView(actionViewItem);
+        ImageButton b = (ImageButton) v.findViewById(R.id.btnCustomAction);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences korisnickiPodaci = provjeriZnanje.this.getSharedPreferences("korisnickiPodaci", provjeriZnanje.this.MODE_PRIVATE);
+                SharedPreferences.Editor edit = korisnickiPodaci.edit();
+                edit.clear();
+                edit.commit();
+                Intent intent = new Intent(provjeriZnanje.this, MainActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
+        return super.onPrepareOptionsMenu(menu);
+
+    }
+
+
 
     public void prikaziFragment(Fragment f){
 
