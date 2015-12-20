@@ -14,12 +14,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
         android:id="@+id/txtPitanjeodg"
-        android:textSize="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"
+        android:layout_margin="15dp" />
 
     <EditText
         android:layout_width="263dp"
@@ -35,8 +35,8 @@
         android:layout_margin="30dp" />
 
     <ImageView
-        android:layout_width="113dp"
-        android:layout_height="106dp"
+        android:layout_width="87dp"
+        android:layout_height="81dp"
         android:src="@drawable/pitanje"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"

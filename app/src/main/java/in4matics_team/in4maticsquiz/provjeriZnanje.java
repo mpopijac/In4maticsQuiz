@@ -36,9 +36,11 @@ import java.util.concurrent.TimeUnit;
 import in4matics_team.in4maticsquiz.fragments.TocnoNetocno_fragment;
 import in4matics_team.in4maticsquiz.fragments.UnesiTocanPojam_fragment;
 import in4matics_team.in4maticsquiz.fragments.VisePonudenihOdgovora_fragment;
+import in4matics_team.in4maticsquiz.loaders.WebServiceDataLoader;
 import in4matics_team_local.db.Korisnik;
 import in4matics_team_local.db.Odgovor;
 import in4matics_team_local.db.Pitanja;
+import in4matics_team_local.db.Rezultat;
 
 public class provjeriZnanje extends AppCompatActivity implements View.OnClickListener {
 
@@ -206,6 +208,7 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
     }
 
     private void gotovKviz(){
+        new RezultatActivity(this, "", "").execute(String.valueOf(ukupnoBodova), String.valueOf(PrijavljeniKorisnik.getInstance().getIDkorisnik()), String.valueOf(PrijavljeniKorisnik.getInstance().getOdabraniRazred()));
 
         new AlertDialog.Builder(provjeriZnanje.this)
                 .setTitle("Kviz je završio")
@@ -216,6 +219,7 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
                     public void onClick(DialogInterface dialog, int which) {
 
                         provjeriZnanje.this.finish();
+
                     }
                 }).create().show();
 
