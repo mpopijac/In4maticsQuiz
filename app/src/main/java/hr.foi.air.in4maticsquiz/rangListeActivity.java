@@ -10,15 +10,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import android.widget.ArrayAdapter;
+import hr.foi.air.in4maticsquiz.adapters.RangListaAdapter;
 
-import hr.foi.air.in4maticsquiz.RangListaAdapter;
-
-import hr.foi.air.in4maticsquiz.loaders.WebServiceDataLoader;
 import hr.foi.air.in4maticsquiz.db.Korisnik;
 import hr.foi.air.in4maticsquiz.db.Rezultat;
+import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;
 
-public class rangListeActivity extends ListActivity {
+public class RangListeActivity extends ListActivity {
 
     private List<Rezultat> rezultatArrayList = new ArrayList<Rezultat>();
     private RangListaAdapter m_adapter;

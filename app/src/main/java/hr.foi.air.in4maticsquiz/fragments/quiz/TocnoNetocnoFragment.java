@@ -1,4 +1,4 @@
-package hr.foi.air.in4maticsquiz.fragments;
+package hr.foi.air.in4maticsquiz.fragments.quiz;
 
 import android.app.Fragment;
 import android.content.SharedPreferences;
@@ -25,7 +25,7 @@ import hr.foi.air.in4maticsquiz.db.Pitanja;
 /**
  * Created by Dario on 15.12.2015..
  */
-public class TocnoNetocno_fragment extends Fragment {
+public class TocnoNetocnoFragment extends Fragment {
 
     private List<Pitanja> pitanja=new ArrayList<Pitanja>();
     private List<Odgovor> odgovori=new ArrayList<Odgovor>();

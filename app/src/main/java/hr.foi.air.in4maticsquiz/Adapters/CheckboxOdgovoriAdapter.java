@@ -1,30 +1,26 @@
-package hr.foi.air.in4maticsquiz;
+package hr.foi.air.in4maticsquiz.adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.CheckedTextView;
-import android.widget.CompoundButton;
 
 import java.util.List;
 
-import hr.foi.air.in4maticsquiz.fragments.VisePonudenihOdgovora_fragment;
+import hr.foi.air.in4maticsquiz.R;
 import hr.foi.air.in4maticsquiz.db.Odgovor;
 
 /**
  * Created by Dario on 17.12.2015..
  */
-public class CheckboxAdapterOdgovori extends ArrayAdapter<Odgovor> {
+public class CheckboxOdgovoriAdapter extends ArrayAdapter<Odgovor> {
     private List<Odgovor> odgovorArrayList;
     Context context;
     int layoutResourceId;
-    public CheckboxAdapterOdgovori(Context context,int layoutResourceId, List<Odgovor> resource) {
+    public CheckboxOdgovoriAdapter(Context context, int layoutResourceId, List<Odgovor> resource) {
         super(context,layoutResourceId,resource);
         this.layoutResourceId = layoutResourceId;
         this.context = context;

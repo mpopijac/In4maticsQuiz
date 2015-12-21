@@ -7,12 +7,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import hr.foi.air.in4maticsquiz.MainActivity;
-import hr.foi.air.in4maticsquiz.NavigationItem;
+import hr.foi.air.in4maticsquiz.core.NavigationItem;
 
 /**
  * Created by Dario on 29.11.2015..
  */
-public class odjava_fragment extends Fragment implements NavigationItem {
+public class OdjavaFragment extends Fragment implements NavigationItem {
 
     private int position;
     private String name = "Odjavi se";
@@ -23,11 +23,11 @@ public class odjava_fragment extends Fragment implements NavigationItem {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences korisnickiPodaci =odjava_fragment.this.getActivity().getSharedPreferences("korisnickiPodaci", odjava_fragment.this.getActivity().MODE_PRIVATE);
+        SharedPreferences korisnickiPodaci =OdjavaFragment.this.getActivity().getSharedPreferences("korisnickiPodaci", OdjavaFragment.this.getActivity().MODE_PRIVATE);
         SharedPreferences.Editor edit = korisnickiPodaci.edit();
         edit.clear();
         edit.commit();
-        Intent intent = new Intent(odjava_fragment.this.getActivity(), MainActivity.class);
+        Intent intent = new Intent(OdjavaFragment.this.getActivity(), MainActivity.class);
         startActivity(intent);
 
     }

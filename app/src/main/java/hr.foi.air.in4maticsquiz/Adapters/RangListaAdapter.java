@@ -1,38 +1,29 @@
-package hr.foi.air.in4maticsquiz;
+package hr.foi.air.in4maticsquiz.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.activeandroid.query.Select;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
+import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;
+import hr.foi.air.in4maticsquiz.R;
 import hr.foi.air.in4maticsquiz.db.Korisnik;
-import hr.foi.air.in4maticsquiz.db.Rezultat;
+import hr.foi.air.in4maticsquiz.RangListeActivity;
 
 /**
  * Created by Matija Popijač on 3.12.2015..
  */
-public class RangListaAdapter extends ArrayAdapter<rangListeActivity.rangLista> {
-    private List<rangListeActivity.rangLista> rezultatArrayList;
+public class RangListaAdapter extends ArrayAdapter<RangListeActivity.rangLista> {
+    private List<RangListeActivity.rangLista> rezultatArrayList;
     private int brojac=0;
     Korisnik korisnickoIme;
 
 
-    public RangListaAdapter(Context context, int textViewResourceId, List<rangListeActivity.rangLista> objects) {
+    public RangListaAdapter(Context context, int textViewResourceId, List<RangListeActivity.rangLista> objects) {
         super(context, textViewResourceId, objects);
         this.rezultatArrayList = objects;
 
@@ -69,7 +60,7 @@ public class RangListaAdapter extends ArrayAdapter<rangListeActivity.rangLista> 
         int z=0;
         int g=1;
 
-        for (rangListeActivity.rangLista pojedinac : rezultatArrayList) {
+        for (RangListeActivity.rangLista pojedinac : rezultatArrayList) {
             korisnici[z]=pojedinac.getKorisnici();
             brojaci[z]=g;
             bodovi2[z]=pojedinac.getBodovi2();

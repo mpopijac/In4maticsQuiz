@@ -1,4 +1,4 @@
-package hr.foi.air.in4maticsquiz;
+package hr.foi.air.in4maticsquiz.core;
 
 /**
  * Created by Anabel Li on 14.11.2015..

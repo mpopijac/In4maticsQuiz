@@ -5,12 +5,8 @@ import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.CountDownTimer;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,20 +25,17 @@ import com.activeandroid.query.Select;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
-import hr.foi.air.in4maticsquiz.fragments.TocnoNetocno_fragment;
-import hr.foi.air.in4maticsquiz.fragments.UnesiTocanPojam_fragment;
-import hr.foi.air.in4maticsquiz.fragments.VisePonudenihOdgovora_fragment;
-import hr.foi.air.in4maticsquiz.loaders.WebServiceDataLoader;
-import hr.foi.air.in4maticsquiz.db.Korisnik;
+import hr.foi.air.in4maticsquiz.AsyncTaskClass.UserQuizResultPushOnWebService;
+import hr.foi.air.in4maticsquiz.fragments.quiz.TocnoNetocnoFragment;
+import hr.foi.air.in4maticsquiz.fragments.quiz.UnesiTocanPojamFragment;
+import hr.foi.air.in4maticsquiz.fragments.quiz.VisePonudenihOdgovoraFragment;
 import hr.foi.air.in4maticsquiz.db.Odgovor;
 import hr.foi.air.in4maticsquiz.db.Pitanja;
-import hr.foi.air.in4maticsquiz.db.Rezultat;
+import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;
 
-public class provjeriZnanje extends AppCompatActivity implements View.OnClickListener {
+public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnSljedece;
     private List<Pitanja> pitanja=new ArrayList<Pitanja>();
@@ -139,11 +132,11 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences korisnickiPodaci = provjeriZnanje.this.getSharedPreferences("korisnickiPodaci", provjeriZnanje.this.MODE_PRIVATE);
+                SharedPreferences korisnickiPodaci = ProvjeriZnanjeActivity.this.getSharedPreferences("korisnickiPodaci", ProvjeriZnanjeActivity.this.MODE_PRIVATE);
                 SharedPreferences.Editor edit = korisnickiPodaci.edit();
                 edit.clear();
                 edit.commit();
-                Intent intent = new Intent(provjeriZnanje.this, MainActivity.class);
+                Intent intent = new Intent(ProvjeriZnanjeActivity.this, MainActivity.class);
                 startActivity(intent);
 
 
@@ -174,9 +167,9 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
     public void vrstaPitanja(Pitanja p){
 
         odgovoriTrenutno=new Select().all().from(Odgovor.class).where("IDpitanja==?", p.getIDpitanja()).execute();
-        if(odgovoriTrenutno.size()==2) prikaziFragment(new TocnoNetocno_fragment());
-        else if(odgovoriTrenutno.size()>2) prikaziFragment(new VisePonudenihOdgovora_fragment());
-        else if (odgovoriTrenutno.size()==1) prikaziFragment(new UnesiTocanPojam_fragment());
+        if(odgovoriTrenutno.size()==2) prikaziFragment(new TocnoNetocnoFragment());
+        else if(odgovoriTrenutno.size()>2) prikaziFragment(new VisePonudenihOdgovoraFragment());
+        else if (odgovoriTrenutno.size()==1) prikaziFragment(new UnesiTocanPojamFragment());
 
     }
     @Override
@@ -208,9 +201,9 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
     }
 
     private void gotovKviz(){
-        new RezultatActivity(this, "", "").execute(String.valueOf(ukupnoBodova), String.valueOf(PrijavljeniKorisnik.getInstance().getIDkorisnik()), String.valueOf(PrijavljeniKorisnik.getInstance().getOdabraniRazred()));
+        new UserQuizResultPushOnWebService(this, "", "").execute(String.valueOf(ukupnoBodova), String.valueOf(PrijavljeniKorisnik.getInstance().getIDkorisnik()), String.valueOf(PrijavljeniKorisnik.getInstance().getOdabraniRazred()));
 
-        new AlertDialog.Builder(provjeriZnanje.this)
+        new AlertDialog.Builder(ProvjeriZnanjeActivity.this)
                 .setTitle("Kviz je završio")
                 .setMessage("Broj bodova: "+ukupnoBodova)
                 .setCancelable(false)
@@ -218,7 +211,7 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        provjeriZnanje.this.finish();
+                        ProvjeriZnanjeActivity.this.finish();
 
                     }
                 }).create().show();

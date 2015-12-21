@@ -1,7 +1,6 @@
 package hr.foi.air.in4maticsquiz;
 
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -22,6 +21,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import hr.foi.air.in4maticsquiz.core.DataLoader;
+import hr.foi.air.in4maticsquiz.core.OnDataLoadedListener;
 import hr.foi.air.in4maticsquiz.loaders.WebServiceDataLoader;
 import hr.foi.air.in4maticsquiz.db.Korisnik;
 import hr.foi.air.in4maticsquiz.db.Odgovor;
@@ -30,8 +31,9 @@ import hr.foi.air.in4maticsquiz.db.Poglavlje;
 import hr.foi.air.in4maticsquiz.db.Razred;
 import hr.foi.air.in4maticsquiz.db.Rezultat;
 import hr.foi.air.in4maticsquiz.db.Tip_korisnika;
+import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;
 
-public class odabirRazredaActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener, View.OnClickListener, OnDataLoadedListener {
+public class OdabirRazredaActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener, View.OnClickListener, OnDataLoadedListener {
 
     private DrawerLayout mDrawer;
     private Toolbar mToolbar;
@@ -91,24 +93,24 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
 
             case R.id.peti_razred:
                 PrijavljeniKorisnik.getInstance().setOdabraniRazred(5);
-                intent = new Intent(odabirRazredaActivity.this, menuActivity.class);
+                intent = new Intent(OdabirRazredaActivity.this, MenuActivity.class);
                 startActivity(intent);
                 break;
 
             case R.id.sesti_razred:
                 PrijavljeniKorisnik.getInstance().setOdabraniRazred(6);
-                intent = new Intent(odabirRazredaActivity.this,menuActivity.class);
+                intent = new Intent(OdabirRazredaActivity.this,MenuActivity.class);
                 startActivity(intent);
                 break;
 
             case R.id.sedmi_razred:
                 PrijavljeniKorisnik.getInstance().setOdabraniRazred(7);
-                intent = new Intent(odabirRazredaActivity.this,menuActivity.class);
+                intent = new Intent(OdabirRazredaActivity.this,MenuActivity.class);
                 startActivity(intent);
                 break;
             case R.id.osmi_razred:
                 PrijavljeniKorisnik.getInstance().setOdabraniRazred(8);
-                intent = new Intent(odabirRazredaActivity.this,menuActivity.class);
+                intent = new Intent(OdabirRazredaActivity.this,MenuActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -126,11 +128,11 @@ public class odabirRazredaActivity extends AppCompatActivity implements Fragment
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences korisnickiPodaci = odabirRazredaActivity.this.getSharedPreferences("korisnickiPodaci", odabirRazredaActivity.this.MODE_PRIVATE);
+                SharedPreferences korisnickiPodaci = OdabirRazredaActivity.this.getSharedPreferences("korisnickiPodaci", OdabirRazredaActivity.this.MODE_PRIVATE);
                 SharedPreferences.Editor edit = korisnickiPodaci.edit();
                 edit.clear();
                 edit.commit();
-                Intent intent = new Intent(odabirRazredaActivity.this, MainActivity.class);
+                Intent intent = new Intent(OdabirRazredaActivity.this, MainActivity.class);
                 startActivity(intent);
 
 

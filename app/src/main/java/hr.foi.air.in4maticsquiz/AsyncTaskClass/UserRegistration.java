@@ -1,4 +1,4 @@
-package hr.foi.air.in4maticsquiz;
+package hr.foi.air.in4maticsquiz.AsyncTaskClass;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,16 +12,19 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
+import hr.foi.air.in4maticsquiz.MainActivity;
+import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;
+
 /**
  * Created by Matija Popijač on 15.11.2015..
  */
-public class RegistrationActivity extends AsyncTask<String, String, String> {
+public class UserRegistration extends AsyncTask<String, String, String> {
 
         private Context context;
         private String ime, prezime, korisnickoIme, email, lozinka, link, data;
 
 
-        public RegistrationActivity(Context context, String dfs, String dfsfsd){
+        public UserRegistration(Context context, String dfs, String dfsfsd){
             this.context=context;
         }
 

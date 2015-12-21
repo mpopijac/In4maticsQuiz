@@ -10,6 +10,8 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 
+import hr.foi.air.in4maticsquiz.core.NavigationItem;
+
 /**
  * Created by Anabel Li on 14.11.2015..
  */

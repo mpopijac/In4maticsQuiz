@@ -19,9 +19,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import hr.foi.air.in4maticsquiz.loaders.WebServiceDataLoader;
-
-public class menuActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener, View.OnClickListener {
+public class MenuActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener, View.OnClickListener {
     private DrawerLayout mDrawer;
     private Toolbar mToolbar;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -58,12 +56,12 @@ public class menuActivity extends AppCompatActivity implements FragmentManager.O
         Intent intent;
         switch (v.getId()){
             case R.id.btnProvjeri:
-                intent= new Intent(menuActivity.this, provjeriZnanje.class);
+                intent= new Intent(MenuActivity.this, ProvjeriZnanjeActivity.class);
                 startActivity(intent);
                 break;
 
             case R.id.btnLista:
-                intent=new Intent(menuActivity.this, rangListeActivity.class);
+                intent=new Intent(MenuActivity.this, RangListeActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -82,11 +80,11 @@ public class menuActivity extends AppCompatActivity implements FragmentManager.O
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences korisnickiPodaci = menuActivity.this.getSharedPreferences("korisnickiPodaci", menuActivity.this.MODE_PRIVATE);
+                SharedPreferences korisnickiPodaci = MenuActivity.this.getSharedPreferences("korisnickiPodaci", MenuActivity.this.MODE_PRIVATE);
                 SharedPreferences.Editor edit = korisnickiPodaci.edit();
                 edit.clear();
                 edit.commit();
-                Intent intent = new Intent(menuActivity.this, MainActivity.class);
+                Intent intent = new Intent(MenuActivity.this, MainActivity.class);
                 startActivity(intent);
 
 

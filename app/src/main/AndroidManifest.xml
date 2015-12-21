@@ -16,20 +16,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".odabirRazredaActivity"
+            android:name=".OdabirRazredaActivity"
             android:label="@string/title_activity_odabir_razreda"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".registracijaActivity"
+            android:name=".RegistracijaActivity"
             android:label="@string/title_activity_registracija"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".menuActivity"
+            android:name=".MenuActivity"
             android:label="@string/title_activity_registracija"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".provjeriZnanje" />
-        <activity android:name=".rangListeActivity"/>
+        <activity android:name=".ProvjeriZnanjeActivity" />
+        <activity android:name=".RangListeActivity"/>
         <activity
             android:name=".AppPreferenceActivity"
             android:label="@string/title_activity_app_preference"

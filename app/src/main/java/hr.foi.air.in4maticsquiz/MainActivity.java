@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.activeandroid.ActiveAndroid;
 
+import hr.foi.air.in4maticsquiz.AsyncTaskClass.UserSignIn;
+import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText korisnickoIme, lozinka;
@@ -48,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             PrijavljeniKorisnik.getInstance().setEmail(korisnickiPodaci.getString("email", ""));
             PrijavljeniKorisnik.getInstance().setIDtip(korisnickiPodaci.getLong("IDtip",0));
 
-            Intent intent = new Intent(this,odabirRazredaActivity.class);
+            Intent intent = new Intent(this,OdabirRazredaActivity.class);
             this.startActivity(intent);
         }
     }
@@ -65,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     lozinkaSt = lozinka.getText().toString();
                     z = String.valueOf(zapamti.isChecked());
 
-                    new SigninActivity(this, clicked, z).execute(korisnickoImeSt, lozinkaSt, z);
+                    new UserSignIn(this, clicked, z).execute(korisnickoImeSt, lozinkaSt, z);
 
                     if (zapamti.isChecked() == true) {
 
@@ -90,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btnRegistriraj:
 
-                Intent intentR = new Intent(MainActivity.this,registracijaActivity.class);
+                Intent intentR = new Intent(MainActivity.this,RegistracijaActivity.class);
                 startActivity(intentR);
 
                 break;

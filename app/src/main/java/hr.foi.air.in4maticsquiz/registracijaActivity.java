@@ -10,7 +10,10 @@ import android.widget.Toast;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class registracijaActivity extends AppCompatActivity implements View.OnClickListener{
+import hr.foi.air.in4maticsquiz.AsyncTaskClass.UserRegistration;
+import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;
+
+public class RegistracijaActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText etIme, etPrezime, etKorisnickoIme, etEmail, etLozinka, etPotvrdaLozinke;
     private Button btRegistrairaj;
@@ -75,7 +78,7 @@ public class registracijaActivity extends AppCompatActivity implements View.OnCl
 
                             if (PrijavljeniKorisnik.getInstance().isClicked() == false) {
                                 Toast.makeText(this, getString(R.string.registracijaUspjesna), Toast.LENGTH_LONG).show();
-                                new RegistrationActivity(this, "", "").execute(etIme.getText().toString(), etPrezime.getText().toString(), etKorisnickoIme.getText().toString(), etEmail.getText().toString(), etLozinka.getText().toString());
+                                new UserRegistration(this, "", "").execute(etIme.getText().toString(), etPrezime.getText().toString(), etKorisnickoIme.getText().toString(), etEmail.getText().toString(), etLozinka.getText().toString());
                                 PrijavljeniKorisnik.getInstance().setClicked(true);
 
                             }

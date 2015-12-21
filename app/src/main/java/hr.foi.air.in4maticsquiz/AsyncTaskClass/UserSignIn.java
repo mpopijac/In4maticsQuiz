@@ -1,4 +1,4 @@
-package hr.foi.air.in4maticsquiz;
+package hr.foi.air.in4maticsquiz.AsyncTaskClass;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,16 +16,19 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
+import hr.foi.air.in4maticsquiz.OdabirRazredaActivity;
+import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;
+
 /**
  * Created by Matija Popijač on 10.11.2015..
  */
-public class SigninActivity extends AsyncTask<String, String, String> {
+public class UserSignIn extends AsyncTask<String, String, String> {
 
     private Context context;
     private boolean clicked;
     private String z;
 
-    public SigninActivity(Context context, boolean clicked, String zapamti){
+    public UserSignIn(Context context, boolean clicked, String zapamti){
         this.context=context;
         this.clicked=clicked;
         this.z=zapamti;
@@ -114,7 +117,7 @@ public class SigninActivity extends AsyncTask<String, String, String> {
 
                 }
                 PrijavljeniKorisnik.getInstance().setClicked(false);
-                Intent intent = new Intent(context,odabirRazredaActivity.class);
+                Intent intent = new Intent(context,OdabirRazredaActivity.class);
                 context.startActivity(intent);
 
             }catch (Exception e){

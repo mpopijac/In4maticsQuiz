@@ -1,4 +1,4 @@
-package hr.foi.air.in4maticsquiz;
+package hr.foi.air.in4maticsquiz.AsyncTaskClass;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,14 +22,14 @@ import hr.foi.air.in4maticsquiz.db.Rezultat;
 /**
  * Created by Anabel Li on 20.12.2015..
  */
-public class RezultatActivity extends AsyncTask<String, String, String> {
+public class UserQuizResultPushOnWebService extends AsyncTask<String, String, String> {
 
     private Context context;
     private String  link,  data, bodovi,IDkorisnik, IDrazred;
    // private int bodovi,IDkorisnik, IDrazred;
 
 
-    public RezultatActivity(Context context, String dfs, String dfsfsd){
+    public UserQuizResultPushOnWebService(Context context, String dfs, String dfsfsd){
         this.context=context;
     }
 

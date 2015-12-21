@@ -1,4 +1,4 @@
-package hr.foi.air.in4maticsquiz;
+package hr.foi.air.in4maticsquiz.singletons;
 
 /**
  * Created by Matija Popijač on 11.11.2015..

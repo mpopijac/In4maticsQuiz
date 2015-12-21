@@ -9,8 +9,8 @@ import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 import com.activeandroid.query.Update;
 
-import hr.foi.air.in4maticsquiz.DataLoader;
-import hr.foi.air.in4maticsquiz.JsonAdapter;
+import hr.foi.air.in4maticsquiz.core.DataLoader;
+import hr.foi.air.in4maticsquiz.core.JsonAdapter;
 import hr.foi.air.in4maticsquiz.R;
 import hr.foi.air.in4maticsquiz.db.Korisnik;
 import hr.foi.air.in4maticsquiz.db.Odgovor;

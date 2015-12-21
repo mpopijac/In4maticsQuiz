@@ -1,4 +1,4 @@
-package hr.foi.air.in4maticsquiz;
+package hr.foi.air.in4maticsquiz.core;
 
 import org.json.JSONArray;
 import org.json.JSONException;
