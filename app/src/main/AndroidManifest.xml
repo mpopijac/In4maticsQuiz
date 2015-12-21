@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="in4matics_team.in4maticsquiz">
+    package="hr.foi.air.in4maticsquiz">
 
     <application
         android:allowBackup="true"
