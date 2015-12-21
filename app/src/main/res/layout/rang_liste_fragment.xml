@@ -26,33 +26,36 @@
 
 
             <TextView
-                android:layout_width="100px"
+                android:layout_width="50dp"
+                android:paddingLeft="5dp"
                 android:layout_height="wrap_content"
                 android:text="proba"
                 android:id="@+id/rBroj"
                 android:layout_gravity="center_horizontal"
-                android:layout_column="0" />
+                android:layout_column="0"/>
 
             <TextView
-                android:layout_width="200px"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:text="proba"
                 android:id="@+id/korisniko_ime"
-                android:layout_column="2" />
+                android:layout_column="1"/>
 
             <TextView
-                android:layout_width="200px"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:text="proba"
                 android:id="@+id/brBodova"
-                android:layout_column="1" />
+                android:layout_column="2"
+                android:gravity="right" />
 
             <TextView
-                android:layout_width="250px"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="proba"
                 android:id="@+id/datum"
-                android:layout_column="4" />
+                android:layout_column="3"
+                android:gravity="right" />
 
 
         </TableRow>
