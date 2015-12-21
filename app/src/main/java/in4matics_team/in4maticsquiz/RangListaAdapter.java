@@ -14,8 +14,11 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import in4matics_team_local.db.Korisnik;
 import in4matics_team_local.db.Rezultat;
@@ -23,15 +26,16 @@ import in4matics_team_local.db.Rezultat;
 /**
  * Created by Matija Popijač on 3.12.2015..
  */
-public class RangListaAdapter extends ArrayAdapter<Rezultat> {
-    private List<Rezultat> rezultatArrayList;
+public class RangListaAdapter extends ArrayAdapter<rangListeActivity.rangLista> {
+    private List<rangListeActivity.rangLista> rezultatArrayList;
     private int brojac=0;
     Korisnik korisnickoIme;
 
 
-    public RangListaAdapter(Context context, int textViewResourceId, List<Rezultat> objects) {
+    public RangListaAdapter(Context context, int textViewResourceId, List<rangListeActivity.rangLista> objects) {
         super(context, textViewResourceId, objects);
         this.rezultatArrayList = objects;
+
     }
 
 
@@ -56,31 +60,26 @@ public class RangListaAdapter extends ArrayAdapter<Rezultat> {
 
         //     txtuser.setText(Integer.toString(odabraniRazred)+". razred");
 
+
         String[] korisnici= new String[rezultatArrayList.size()];
         Integer[] brojaci= new Integer[rezultatArrayList.size()];
         Long[] bodovi2= new Long[rezultatArrayList.size()];
-       String[] datumi = new String[rezultatArrayList.size()];
-
+        String[] datumi = new String[rezultatArrayList.size()];
 
         int z=0;
         int g=1;
 
-        for (Rezultat rez: rezultatArrayList) {
-
-            Korisnik korisnickoIme;
-            korisnickoIme = new Select().from(Korisnik.class).where("IDkorisnik==?", rez.getIDkorisnik()).executeSingle();
-            String username = korisnickoIme.getKorisnickoIme();
-
-            korisnici[z]=username;
+        for (rangListeActivity.rangLista pojedinac : rezultatArrayList) {
+            korisnici[z]=pojedinac.getKorisnici();
             brojaci[z]=g;
-            bodovi2[z]=rez.getBodovi();
-            datumi[z]=rez.getDatum();
-
+            bodovi2[z]=pojedinac.getBodovi2();
+            datumi[z]=pojedinac.getDatumi();
 
             z++;
             g++;
 
         }
+
 
         TextView rBroj = (TextView) v.findViewById(R.id.rBroj);
         TextView korIme = (TextView) v.findViewById(R.id.korisniko_ime);
@@ -91,17 +90,26 @@ public class RangListaAdapter extends ArrayAdapter<Rezultat> {
         //       System.out.println(Long.toString(brojac)+username+i.getBodovi()+"bla");
 
         rBroj.setText(Integer.toString(brojaci[position])+". ");
+
         korIme.setText(korisnici[position]);
+
         bodovi.setText(bodovi2[position].toString());
 
         datum.setText(datumi[position]);
 
-        
+
+
+
+
         // the view must be returned to our activity
         return v;
+
+
 
     }
 
 
 
+
 }
+
