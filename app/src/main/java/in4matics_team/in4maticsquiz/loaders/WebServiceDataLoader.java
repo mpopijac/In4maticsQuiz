@@ -137,7 +137,7 @@ public class WebServiceDataLoader extends DataLoader {
                         // provjera duplikata
                         duplikat = new Select().from(Tip_korisnika.class).where("IDtip==?", t.getIDtip()).count();
                         //ako nije
-                        if (duplikat == 0) {
+                        if (duplikat == 0 && t.getObrisano()==0) {
                             t.save();
                             tip_korisnikaLoaded = true;
                             bindTables();
@@ -180,7 +180,7 @@ public class WebServiceDataLoader extends DataLoader {
 
                         duplikat = new Select().from(Korisnik.class).where("IDkorisnik==?", k.getIDkorisnik()).count();
 
-                        if (duplikat == 0) {
+                        if (duplikat == 0 && k.getObrisano()==0) {
                             k.save();
                             korisnikLoaded = true;
                             bindTables();
@@ -226,7 +226,7 @@ public class WebServiceDataLoader extends DataLoader {
                     for (Rezultat r : rezultati) {
 
                         duplikat = new Select().from(Rezultat.class).where("IDrezultat==?", r.getIDrezultat()).count();
-                        if (duplikat == 0) {
+                        if (duplikat == 0 && r.getObrisano()==0) {
                             r.save();
                             rezultatLoaded = true;
                             bindTables();
@@ -267,7 +267,7 @@ public class WebServiceDataLoader extends DataLoader {
                     for (Razred raz : razredi) {
 
                         duplikat = new Select().from(Razred.class).where("IDrazred==?", raz.getIDrazred()).count();
-                        if (duplikat == 0) {
+                        if (duplikat == 0 && raz.getObrisano()==0) {
                             raz.save();
                             razredLoaded = true;
                             bindTables();
@@ -309,7 +309,7 @@ public class WebServiceDataLoader extends DataLoader {
                     for (Pitanja p : pitanjas) {
 
                         duplikat = new Select().from(Pitanja.class).where("IDpitanja==?", p.getIDpitanja()).count();
-                        if (duplikat == 0) {
+                        if (duplikat == 0 && p.getObrisano()==0) {
                             p.save();
                             pitanjaLoaded = true;
                             bindTables();
@@ -346,7 +346,7 @@ public class WebServiceDataLoader extends DataLoader {
                     //treba napraviti provjeru dali postoji već taj zapis u bazi ( slučaj ažuriranja )
                     for (Poglavlje po : poglavlja) {
                         duplikat = new Select().from(Poglavlje.class).where("IDpoglavlje==?", po.getIDpoglavlje()).count();
-                        if (duplikat == 0) {
+                        if (duplikat == 0 && po.getObrisano()==0) {
                             po.save();
                             poglavljaLoaded = true;
                             bindTables();
@@ -382,7 +382,7 @@ public class WebServiceDataLoader extends DataLoader {
 
                     for (Odgovor o : odgovori) {
                         duplikat = new Select().from(Odgovor.class).where("IDodgovor==?", o.getIDodgovor()).count();
-                        if (duplikat == 0) {
+                        if (duplikat == 0 && o.getObrisano()==0) {
                             o.save();
                             odgovoriLoaded = true;
                             bindTables();

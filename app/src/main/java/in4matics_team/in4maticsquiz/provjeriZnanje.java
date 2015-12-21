@@ -83,7 +83,7 @@ public class provjeriZnanje extends AppCompatActivity implements View.OnClickLis
 
         prikazTimer=(TextView)findViewById(R.id.vrijemeTimer);
 
-        mCountDownTimer=new CountDownTimer(30000, 1000) { // adjust the milli seconds here
+        mCountDownTimer=new CountDownTimer(600000, 1000) { // adjust the milli seconds here
 
             public void onTick(long millisUntilFinished) {
 

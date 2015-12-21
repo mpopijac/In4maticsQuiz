@@ -3,6 +3,8 @@ package in4matics_team.in4maticsquiz;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -11,8 +13,11 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import in4matics_team.in4maticsquiz.loaders.WebServiceDataLoader;
+import in4matics_team_local.db.Rezultat;
 
 /**
  * Created by Anabel Li on 20.12.2015..
@@ -83,6 +88,27 @@ public class RezultatActivity extends AsyncTask<String, String, String> {
             Toast toast = Toast.makeText(context, "Došlo je do greške. Pokušajte ponovo.", Toast.LENGTH_SHORT);
             toast.show();
 
+        }else{
+            Log.i("Uspješno:", result);
+            //tu dodaj u lokalnu bazu -> pokrenuti sinkronizaciju
+
+            Date date = new Date();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd");
+            String dan = simpleDateFormat.format(date).toUpperCase();
+
+            simpleDateFormat = new SimpleDateFormat("MM");
+            String mjesec = simpleDateFormat.format(date).toUpperCase();
+
+            simpleDateFormat = new SimpleDateFormat("yyyy");
+            String godina = simpleDateFormat.format(date).toUpperCase();
+
+            Rezultat rezultat = new Rezultat();
+            rezultat.setIDrezultat(Long.valueOf(result).longValue());
+            rezultat.setIDkorisnik(Long.valueOf(IDkorisnik).longValue());
+            rezultat.setIDrazred(Long.valueOf(IDrazred).longValue());
+            rezultat.setBodovi(Long.valueOf(bodovi).longValue());
+            rezultat.setDatum(dan + "." + mjesec + "." + godina);
+            rezultat.save();
 
         }
     }
