@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">In4maticsQuiz</string>
+    <string name="action_search">Search</string>
+    <string name="action_settings">Settings</string>
+    <string name="data_loaded_tip_korisnika">Uspješno dohvaćeni tipovi korisnika.</string>
+    <string name="data_error_tip_korisnika">Došlo je do greške kod dohvaćanja tipova korisnika.</string>
+    <string name="data_error_korisnik">Došlo je do greške kod dohvaćanja korisnika.</string>
+    <string name="data_error_rezultat">Došlo je do greške kod dohvaćanja rezultata.</string>
+    <string name="data_error_razred">Došlo je do greške kod dohvaćanja razreda.</string>
+    <string name="data_error_pitanja">Došlo je do greške kod dohvaćanja pitanja.</string>
+    <string name="data_error_poglavlja">Došlo je do greške kod dohvaćanja poglavlja.</string>
+    <string name="data_error_odgovor">Došlo je do greške kod dohvaćanja odgovora.</string>
+    <string name="title_activity_odabir_razreda">In4maticsQuiz</string>
+    <string name="title_activity_registracija">In4maticsQuiz</string>
+    <string name="title_activity_logout">In4matichQuiz</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="Unesi_rezred">Odaberi razred</string>
+    <string name="odjava">Odjavi se</string>
+    <string name="imePrijavljenog">sc</string>
+    <string name="registracijaLozinke">Lozinke nisu jednake!</string>
+    <string name="registracijaLozinkaPrekratka">Lozinka je prekratka! Minimalno 6 znakova.</string>
+    <string name="registracijaEmailGreska">Upišite točnu e-mail adresu.</string>
+    <string name="registracijaNijePopunjeno">Niste popunili sva polja!</string>
+    <string name="odabirRazredaPrijava">Prijavili ste se kao: </string>
+    <string name="odabirRazredaUspjesnaPrijava">, uspješna prijava.</string>
+    <string name="registrationActivityLink">http://www.in4maticsquiz.16mb.com/post_registracija.php</string>
+    <string name="registrationActivityGreska">Došlo je do greške. Pokušajte ponovo.</string>
+    <string name="registracijaUspjesna">Uspješno ste se registrirali.</string>
+    <string name="title_activity_app_preference">AppPreferenceActivity</string>
+    <string name="title_activity_search_dialog">SearchDialog</string>
+    <string name="search">Pretraži</string>
+    <string name="search_dialog_title">Pretraži</string>
+    <string name="search_dialog_text">Što tražite?</string>
+    <string name="search_hint">Unesi željeni pojam</string>
+    <string name="search_results_found"> rezultati</string>
+    <string name="btnProvjeri">Provjeri znanje</string>
+    <string name="btnRang">  Rang  liste </string>
+
+</resources>
