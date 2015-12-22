@@ -30,10 +30,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ProvjeriZnanjeActivity" />
         <activity android:name=".RangListeActivity"/>
-        <activity
-            android:name=".AppPreferenceActivity"
-            android:label="@string/title_activity_app_preference"
-            android:theme="@style/AppTheme" />
 
     </application>
 
