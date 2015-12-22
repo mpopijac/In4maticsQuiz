@@ -35,7 +35,7 @@ public class VisePonudenihOdgovoraFragment extends ListFragment{
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View myFragmentView = inflater.inflate(R.layout.activity_pitanje_vise_odaberi, container, false);
+        View myFragmentView = inflater.inflate(R.layout.fragment_pitanje_vise_odaberi, container, false);
         Bundle data = getArguments();
 
         long id = data.getLong("pitanje_key");
@@ -56,7 +56,7 @@ public class VisePonudenihOdgovoraFragment extends ListFragment{
         final Bundle da=getArguments();
         long id = da.getLong("pitanje_key");
         odgovori=new Select().all().from(Odgovor.class).where("IDpitanja==?", id).execute();
-        CheckboxOdgovoriAdapter adapter = new CheckboxOdgovoriAdapter(getActivity(),R.layout.checkbox_layout, odgovori);
+        CheckboxOdgovoriAdapter adapter = new CheckboxOdgovoriAdapter(getActivity(),R.layout.fragment_checkbox_layout, odgovori);
         brOz=0;
         setListAdapter(adapter);
         getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {

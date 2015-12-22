@@ -72,7 +72,7 @@ public class RangListeActivity extends ListActivity {
 
 
 
-        m_adapter = new RangListaAdapter(this, R.layout.rang_liste_fragment, sortRangLista2);
+        m_adapter = new RangListaAdapter(this, R.layout.fragment_rang_lista, sortRangLista2);
 
         setListAdapter(m_adapter);
 

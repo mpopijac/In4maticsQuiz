@@ -44,7 +44,7 @@ public class RangListaAdapter extends ArrayAdapter<RangListeActivity.rangLista> 
         // to inflate it basically means to render, or show, the view.
         if (v == null) {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inflater.inflate(R.layout.rang_liste_fragment, parent, false);
+            v = inflater.inflate(R.layout.fragment_rang_lista, parent, false);
         }
 
         //   TextView txtuser = (TextView) v.findViewById(R.id.naslov);

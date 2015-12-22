@@ -1,17 +1,13 @@
 package hr.foi.air.in4maticsquiz.fragments.quiz;
 
 import android.app.Fragment;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.activeandroid.query.Select;
 
@@ -39,7 +35,7 @@ public class TocnoNetocnoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.activity_pitanje_t_n, container, false);
+        View view = inflater.inflate(R.layout.fragment_pitanje_t_n, container, false);
 
         return view;
 
