@@ -1,13 +1,18 @@
-package hr.foi.air.in4maticsquiz;
+package hr.foi.air.in4maticsquiz.core;
 
 /**
  * Created by Tea on 22.12.2015..
  */
-public class BodovanjeRezultata {
+
+/**
+ * funkcija služi za računanje ostvarenih bodova u kvizu
+ prvi parametar koji prima je broj točnih odgovora, a drugi je vrijeme koje je preostalo za rješavanje kviza
+ */
+public class IzracunBodovaKviza {
     private String vrijeme;
     private String bodovi;
 
-    public BodovanjeRezultata(String vrijeme, String bodovi) {
+    public IzracunBodovaKviza(String vrijeme, String bodovi) {
         this.vrijeme = vrijeme;
         this.bodovi = bodovi;
     }

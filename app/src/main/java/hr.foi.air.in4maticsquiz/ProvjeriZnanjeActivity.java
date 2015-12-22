@@ -18,7 +18,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.activeandroid.query.Select;
 
@@ -28,6 +27,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import hr.foi.air.in4maticsquiz.AsyncTaskClass.UserQuizResultPushOnWebService;
+import hr.foi.air.in4maticsquiz.core.IzracunBodovaKviza;
 import hr.foi.air.in4maticsquiz.fragments.quiz.TocnoNetocnoFragment;
 import hr.foi.air.in4maticsquiz.fragments.quiz.UnesiTocanPojamFragment;
 import hr.foi.air.in4maticsquiz.fragments.quiz.VisePonudenihOdgovoraFragment;
@@ -191,7 +191,7 @@ public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.On
 
     private void gotovKviz(){
 
-        BodovanjeRezultata bod= new BodovanjeRezultata(vrijeme, String.valueOf(ukupnoBodova));
+        IzracunBodovaKviza bod= new IzracunBodovaKviza(vrijeme, String.valueOf(ukupnoBodova));
         int bodovi2= bod.bodoviFormula();
 
         new UserQuizResultPushOnWebService(this, "", "").execute(String.valueOf(bodovi2), String.valueOf(PrijavljeniKorisnik.getInstance().getIDkorisnik()), String.valueOf(PrijavljeniKorisnik.getInstance().getOdabraniRazred()));
