@@ -64,6 +64,7 @@ public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.On
         trenutno=pitanja.get(idPit);
         vrstaPitanja(trenutno);
         zadnjePitanje++;
+        //maknuti trenutno pitanje da se ne bi ponavljalo.
         pitanja.remove(idPit);
 
 
@@ -109,25 +110,6 @@ public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.On
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        //Switch on item id.
-        int id = item.getItemId();
-        switch (id) {
-
-            case R.id.action_search:
-                SearchDialog sd = new SearchDialog(this);
-                sd.show();
-                break;
-            case R.id.action_settings:
-                Intent intent = new Intent(this, AppPreferenceActivity.class);
-                startActivity(intent);
-                break;
-        }
-        Toast.makeText(this, "Menu item " + item.getTitle() + " clicked!", Toast.LENGTH_SHORT).show();
-        return true;
-
-    }
 
     @Override
 
@@ -153,14 +135,11 @@ public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.On
 
     }
 
-
-
     public void prikaziFragment(Fragment f){
-
 
         Bundle bundle = new Bundle();
         long id=trenutno.getIDpitanja();
-
+        //prosljedivanje id pitanja fragmentu.
         bundle.putLong("pitanje_key", id);
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         f.setArguments(bundle);
@@ -174,6 +153,7 @@ public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.On
     public void vrstaPitanja(Pitanja p){
 
         odgovoriTrenutno=new Select().all().from(Odgovor.class).where("IDpitanja==?", p.getIDpitanja()).execute();
+
         if(odgovoriTrenutno.size()==2) prikaziFragment(new TocnoNetocnoFragment());
         else if(odgovoriTrenutno.size()>2) prikaziFragment(new VisePonudenihOdgovoraFragment());
         else if (odgovoriTrenutno.size()==1) prikaziFragment(new UnesiTocanPojamFragment());
@@ -181,10 +161,11 @@ public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.On
     }
     @Override
     public void onClick(View v) {
+        // vrijednost trenutnog fragmenta.
         Fragment currentFragment = getFragmentManager().findFragmentById(R.id.your_placeholder);
         Bundle dat=new Bundle();
         dat = currentFragment.getArguments();
-
+        //primljeni podaci od trenutnog fragmenta.
         boolean tocOdg = dat.getBoolean("tocnost");
         Log.i("Primljeno: ", Boolean.toString(tocOdg));
         if(tocOdg==true){
@@ -195,6 +176,7 @@ public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.On
             trenutno = pitanja.get(idPit);
 
             vrstaPitanja(trenutno);
+            //promjena teksta buttona sljedece ukoliko je sljedece zadnje pitanje
             if (zadnjePitanje == (brojPitanja - 1)) {
                 btnSljedece.setText("Završi test");
             }

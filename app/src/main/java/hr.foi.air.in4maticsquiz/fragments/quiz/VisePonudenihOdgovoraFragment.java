@@ -76,6 +76,7 @@ public class VisePonudenihOdgovoraFragment extends ListFragment{
 
                     if (checkBox.isChecked()) {
                         brOz++;
+                        //provjera broja oznacenih checkboxa
                         Log.i("Broj označenih: ", Long.toString(brOz));
                     } else {
                         if (brOz > 0) brOz--;

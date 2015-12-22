@@ -39,6 +39,7 @@ public class CheckboxOdgovoriAdapter extends ArrayAdapter<Odgovor> {
             Odgovor tr = odgovorArrayList.get(i);
             odgovori[i] = tr.getNaziv();
         }
+        //postavi text odgovora u checkbox
         check.setText(odgovori[position]);
         return row;
 
