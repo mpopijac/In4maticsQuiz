@@ -41,6 +41,7 @@ public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.On
     private List<Pitanja> pitanja=new ArrayList<Pitanja>();
     private List<Odgovor> odgovoriTrenutno=new ArrayList<Odgovor>();
     private Pitanja trenutno;
+    String vrijeme="";
     private int brojPitanja=10,idPit,zadnjePitanje=0,ukupnoBodova;;
     TextView prikazTimer;
     CountDownTimer mCountDownTimer;
@@ -81,6 +82,12 @@ public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.On
             public void onTick(long millisUntilFinished) {
 
                 prikazTimer.setText(""+String.format(FORMAT,
+                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
+                                TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
+                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+                                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+
+                vrijeme=(""+String.format(FORMAT,
                         TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
                                 TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
                         TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
@@ -201,11 +208,16 @@ public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.On
     }
 
     private void gotovKviz(){
-        new UserQuizResultPushOnWebService(this, "", "").execute(String.valueOf(ukupnoBodova), String.valueOf(PrijavljeniKorisnik.getInstance().getIDkorisnik()), String.valueOf(PrijavljeniKorisnik.getInstance().getOdabraniRazred()));
+
+        BodovanjeRezultata bod= new BodovanjeRezultata(vrijeme, String.valueOf(ukupnoBodova));
+        int bodovi2= bod.bodoviFormula();
+
+        new UserQuizResultPushOnWebService(this, "", "").execute(String.valueOf(bodovi2), String.valueOf(PrijavljeniKorisnik.getInstance().getIDkorisnik()), String.valueOf(PrijavljeniKorisnik.getInstance().getOdabraniRazred()));
+
 
         new AlertDialog.Builder(ProvjeriZnanjeActivity.this)
                 .setTitle("Kviz je završio")
-                .setMessage("Broj bodova: "+ukupnoBodova)
+                .setMessage("Broj bodova: "+bodovi2 + "\nTočni: "+ukupnoBodova)
                 .setCancelable(false)
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
