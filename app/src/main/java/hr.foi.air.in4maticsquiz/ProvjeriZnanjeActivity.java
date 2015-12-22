@@ -28,9 +28,9 @@ import java.util.concurrent.TimeUnit;
 
 import hr.foi.air.in4maticsquiz.AsyncTaskClass.UserQuizResultPushOnWebService;
 import hr.foi.air.in4maticsquiz.core.IzracunBodovaKviza;
-import hr.foi.air.in4maticsquiz.fragments.quiz.TocnoNetocnoFragment;
-import hr.foi.air.in4maticsquiz.fragments.quiz.UnesiTocanPojamFragment;
-import hr.foi.air.in4maticsquiz.fragments.quiz.VisePonudenihOdgovoraFragment;
+import hr.foi.air.in4maticsquiz.fragments.TocnoNetocnoFragment;
+import hr.foi.air.in4maticsquiz.fragments.UnesiTocanPojamFragment;
+import hr.foi.air.in4maticsquiz.fragments.VisePonudenihOdgovoraFragment;
 import hr.foi.air.in4maticsquiz.db.Odgovor;
 import hr.foi.air.in4maticsquiz.db.Pitanja;
 import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;

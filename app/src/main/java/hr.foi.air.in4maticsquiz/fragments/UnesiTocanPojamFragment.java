@@ -1,4 +1,4 @@
-package hr.foi.air.in4maticsquiz.fragments.quiz;
+package hr.foi.air.in4maticsquiz.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
