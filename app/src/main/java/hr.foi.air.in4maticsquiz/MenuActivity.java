@@ -1,14 +1,8 @@
 package hr.foi.air.in4maticsquiz;
 
-import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -17,12 +11,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
+
+/*
+    Aktivnost odabira akcija za odabrani razred
+    akcije: pregled rang liste, provjere znanja
+ */
 
 public class MenuActivity extends AppCompatActivity implements  View.OnClickListener {
 
     private Toolbar mToolbar;
-    private Context context;
     private Button provjeri, lista;
 
     @Override
@@ -59,10 +56,7 @@ public class MenuActivity extends AppCompatActivity implements  View.OnClickList
     }
 
 
-
-
     @Override
-
     public boolean onPrepareOptionsMenu(Menu menu) {
 
         MenuItem actionViewItem = menu.findItem(R.id.miActionButton);
@@ -77,7 +71,6 @@ public class MenuActivity extends AppCompatActivity implements  View.OnClickList
                 edit.commit();
                 Intent intent = new Intent(MenuActivity.this, MainActivity.class);
                 startActivity(intent);
-
 
             }
         });

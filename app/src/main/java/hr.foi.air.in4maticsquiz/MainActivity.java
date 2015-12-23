@@ -14,6 +14,10 @@ import com.activeandroid.ActiveAndroid;
 import hr.foi.air.in4maticsquiz.AsyncTaskClass.UserSignIn;
 import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;
 
+/*
+    Aktivnost Prijava -> prvi ekran
+ */
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText korisnickoIme, lozinka;
@@ -27,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         ActiveAndroid.initialize(this);
         setContentView(R.layout.activity_main);
 
@@ -39,11 +44,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         bLogin.setOnClickListener(this);
         bRegistriraj.setOnClickListener(this);
-
+        /*
+        *dohvaćanje podataka spremljenih u korisnickiPodaci.xml
+        *u privatnom modu, što znači da su dostupni sam ovoj aplikaciji
+        */
         SharedPreferences korisnickiPodaci = this.getSharedPreferences("korisnickiPodaci", MODE_PRIVATE);
 
+        /*
+        *dohvati ID od korisnika, ako ne postoji vrati nulu
+        *provjerava dali su zapamčeni podaci za prijavu u aplikaciju, te ako jesu nije potrebno ponovo vršiti prijavu
+        */
         if(korisnickiPodaci.getLong("IDkorisnik", 0)!=0){
-
+            /*
+            *ako su podaci zapamčeni, dohvati zapamčene podatke i spremi ih u singleton PrijavljeniKorisnik kako bi smo ih mogli dohvatiti
+            *bilo gdje u aplikaciji
+            */
             PrijavljeniKorisnik.getInstance().setIDkorisnik(korisnickiPodaci.getLong("IDkorisnik", 0));
             PrijavljeniKorisnik.getInstance().setIme(korisnickiPodaci.getString("ime", ""));
             PrijavljeniKorisnik.getInstance().setPrezime(korisnickiPodaci.getString("prezime", ""));
@@ -51,11 +66,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             PrijavljeniKorisnik.getInstance().setEmail(korisnickiPodaci.getString("email", ""));
             PrijavljeniKorisnik.getInstance().setIDtip(korisnickiPodaci.getLong("IDtip",0));
 
+            /*
+            *nakon dohvaćanja podatka prelazi se na sljedeću aktivnost odabri razreda
+            */
             Intent intent = new Intent(this,OdabirRazredaActivity.class);
             this.startActivity(intent);
         }
     }
 
+    /*
+     *metoda koja se pokreće prilikom klika na ekranu, te ovisno na što je kliknuto obavlja
+     *operacije(prijave, ili prebacivanje na aktivnost registracije)
+     * varijabla clicked - spriječava višestruko slanje zahtjeva prijave
+    */
     @Override
     public void onClick(View v){
         switch (v.getId()){
@@ -68,10 +91,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     lozinkaSt = lozinka.getText().toString();
                     z = String.valueOf(zapamti.isChecked());
 
+                    /*
+                        poziv AsyncTask klase za provjeru ispravnosti podataka za prijavu
+                     */
                     new UserSignIn(this, clicked, z).execute(korisnickoImeSt, lozinkaSt, z);
 
                     if (zapamti.isChecked() == true) {
 
+                        /*
+                            ako je korisnik odabrao da mu zapamti podatke, spremaju se podaci u korisnickiPodaci.xml
+                            kako bi prilikom ponovnog pokretanja aplikacije izbjegao prijavljivanje
+                         */
                         SharedPreferences korisnickiPodaci = this.getSharedPreferences("korisnickiPodaci", MODE_PRIVATE);
                         SharedPreferences.Editor edit = korisnickiPodaci.edit();
                         edit.clear();
@@ -84,6 +114,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         edit.commit();
 
                     }
+
+                    /*
+                        clicked je postavljeni na true kako korisnik ne bi mogao poslati više zahtjeva za prijavom od jednom,
+                        nego tek kada se prethodni završi
+                     */
                     clicked=true;
                     PrijavljeniKorisnik.getInstance().setClicked(true);
                 }

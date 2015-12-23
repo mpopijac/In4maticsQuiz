@@ -8,6 +8,13 @@ import java.util.List;
 
 /**
  * Created by Matija Popijač on 29.10.2015..
+ *
+ * Entitet klase Pitanja predstavlja pitanje
+ * pitanju pripada jedan ili više odgovor, pitanje ima jedno i samo jedno poglavlje, pitanje pripada samo jednom razredu
+ * povezano sa Odgovor
+ * povezano sa Poglavnje
+ * povezano sa Razred
+ *
  */
 
 @Table(name ="pitanja")
@@ -50,7 +57,10 @@ public class Pitanja extends Model {
 
     }
 
-
+    /**
+     * Method changes data in current object and updates it in database as well.
+     * @param updatePitanja An instance of object with updated data.
+     */
     public void updatePitanja(Pitanja updatePitanja){
         this.IDpitanja=updatePitanja.getIDpitanja();
         this.pitanje=updatePitanja.getPitanje();

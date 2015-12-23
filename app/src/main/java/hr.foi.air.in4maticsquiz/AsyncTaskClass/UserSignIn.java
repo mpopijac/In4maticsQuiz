@@ -19,8 +19,12 @@ import java.net.URLEncoder;
 import hr.foi.air.in4maticsquiz.OdabirRazredaActivity;
 import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;
 
-/**
+/*
  * Created by Matija Popijač on 10.11.2015..
+ *
+  * Funkcija za prijavu korisnika u aplikaciju
+  * u slučaju uspješne prijave prebacuje se na aktivnost odabira razreda
+  *
  */
 public class UserSignIn extends AsyncTask<String, String, String> {
 
@@ -41,28 +45,55 @@ public class UserSignIn extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String... arg0){
         try{
+
+            /*
+                dohvaćanje argumenata poziva funkcije
+             */
             String username = (String)arg0[0];
             String password = (String)arg0[1];
 
+            /*
+                Slanje zahtjeva na web servis putem POST metode
+             */
             String link="http://www.in4maticsquiz.16mb.com/post_prijava.php";
             String data  = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
             data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
 
+            /*
+                stvaranje istance URL sa navedenim linkom te otvaranje veze prema web servisu
+             */
             URL url = new URL(link);
             URLConnection conn = url.openConnection();
 
+            /*
+                otvaranje Stream-a za slanje podataka na web servis
+             */
             conn.setDoOutput(true);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-
+            /*
+                slanje podataka
+             */
             wr.write( data );
+            /*
+                čiščenje, pražnjenje veze prema web servisu
+             */
             wr.flush();
 
+            /*
+                Definiranje buffera za spremanje vračenih podataka sa web servisa
+                Reads text from a character-input stream, buffering characters so as to provide for the efficient reading of characters, arrays, and lines.
+             */
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
+            /*
+                Constructs a string builder with no characters in it and an initial capacity of 16 characters.
+             */
             StringBuilder sb = new StringBuilder();
             String line = null;
 
-            // Read Server Response
+            /*
+             Read Server Response
+             */
             while((line = reader.readLine()) != null)
             {
                 sb.append(line);
@@ -75,19 +106,35 @@ public class UserSignIn extends AsyncTask<String, String, String> {
         }
     }
 
+    /*
+        metoda koja se poziva nakon pozadinskog izvršavanja(doInBackground) metode koja ovoj metodi proslijeđuje
+        vrijednost koju vraća web servis
+     */
     @Override
     protected void onPostExecute(String result){
 
+        /*
+            ako vraća 0 tada ne postoji korisnik sa navedenim podacima
+            inače postoji korisnik sa navedenim podacima
+         */
         if(result.equals("0")){
 
+            /*
+                prikaz poruke na ekranu o grešci
+             */
             Toast toast = Toast.makeText(context, "Pogrešno uneseni podaci. Pokušajte ponovo.", Toast.LENGTH_SHORT);
             toast.show();
+            /*
+                postavljanje setClicked varijable na false kako bi korisnik ponovo mogao poslati zahtjev na web servis, kliknuti gumb Prijava
+             */
             PrijavljeniKorisnik.getInstance().setClicked(false);
 
         }else{
 
             try {
-
+                /*
+                    dekodiranje (JsonDecoding) vračenih podataka od web servisa te spremanje u singleton PrijavljeniKorisnik
+                 */
                 JSONArray jsonArray = new JSONArray(result);
 
                 for (int i=0; i<jsonArray.length();i++){
@@ -101,7 +148,9 @@ public class UserSignIn extends AsyncTask<String, String, String> {
                     PrijavljeniKorisnik.getInstance().setIDtip(json_data.getLong("IDtip"));
 
                 }
-
+                /*
+                    ako je označeno zapamti prijavu tada se podaci dobiveni podaci spremaju u korisnickiPodaci.xml
+                 */
                 if(z.equals("true")){
 
                     SharedPreferences korisnickiPodaci = context.getSharedPreferences("korisnickiPodaci", context.MODE_PRIVATE);
@@ -116,15 +165,23 @@ public class UserSignIn extends AsyncTask<String, String, String> {
                     edit.commit();
 
                 }
+                 /*
+                postavljanje setClicked varijable na false kako bi korisnik ponovo mogao poslati zahtjev na web servis, kliknuti gumb Prijava
+                te prebacivanje na aktivnost odaberi razred
+                */
                 PrijavljeniKorisnik.getInstance().setClicked(false);
                 Intent intent = new Intent(context,OdabirRazredaActivity.class);
                 context.startActivity(intent);
 
             }catch (Exception e){
-                CharSequence text = "Došlo je do greške. Pokušajte ponovo.";
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, text, duration);
+                /*
+                    U sluačju da je došlo do greške u json parsiranju(jsonDecoding-u) ispisuje se poruka da je došlo do greške
+                 */
+                Toast toast = Toast.makeText(context, "Došlo je do greške. Pokušajte ponovo.", Toast.LENGTH_SHORT);
                 toast.show();
+                /*
+                    postavljanje setClicked varijable na false kako bi korisnik ponovo mogao poslati zahtjev na web servis, kliknuti gumb Prijava
+                */
                 PrijavljeniKorisnik.getInstance().setClicked(false);
             }
 

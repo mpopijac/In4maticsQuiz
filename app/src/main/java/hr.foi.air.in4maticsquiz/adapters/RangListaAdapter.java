@@ -16,6 +16,10 @@ import hr.foi.air.in4maticsquiz.RangListeActivity;
 
 /**
  * Created by Matija Popijač on 3.12.2015..
+ *
+ * Adapter koji služi za prikaz korisnika i njihovih najboljih rezultata pomoću fragmenata
+ * koja prima parametre: context, fragment kojeg punimo s podacima i listu koju treba prikazati
+ *
  */
 public class RangListaAdapter extends ArrayAdapter<RangListeActivity.rangLista> {
     private List<RangListeActivity.rangLista> rezultatArrayList;
@@ -89,18 +93,10 @@ public class RangListaAdapter extends ArrayAdapter<RangListeActivity.rangLista> 
         datum.setText(datumi[position]);
 
 
-
-
-
         // the view must be returned to our activity
         return v;
 
-
-
     }
-
-
-
 
 }
 

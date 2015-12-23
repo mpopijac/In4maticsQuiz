@@ -26,17 +26,16 @@ public abstract class DataLoader {
     public ArrayList<Odgovor> odgovori;
     OnDataLoadedListener dataLoadedListener;
 
-    public void LoadData(Activity activity){
-        if(dataLoadedListener == null){
+    public void LoadData(Activity activity) {
+        if (dataLoadedListener == null) {
             dataLoadedListener = (OnDataLoadedListener) activity;
         }
     }
 
-    public boolean dataLoaded(){
-        if(tip_korisnikas==null || korisnici==null || rezultati==null || razredi==null || pitanjas==null || poglavlja==null || odgovori==null){
+    public boolean dataLoaded() {
+        if (tip_korisnikas == null || korisnici == null || rezultati == null || razredi == null || pitanjas == null || poglavlja == null || odgovori == null) {
             return false;
-        }
-        else {
+        } else {
             dataLoadedListener.onDataLoaded(tip_korisnikas, korisnici, rezultati, razredi, pitanjas, poglavlja, odgovori);
             return true;
         }

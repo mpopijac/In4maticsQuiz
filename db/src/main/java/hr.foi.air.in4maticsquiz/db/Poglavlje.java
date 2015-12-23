@@ -9,6 +9,11 @@ import java.util.List;
 
 /**
  * Created by Matija Popijač on 29.10.2015..
+ *
+ * Entitet kalse Poglavnje predstavlja poglavlje
+ * jedno poglavlje može imati 0 ili više pitanja
+ * povezano sa klasom Pitanja
+ *
  */
 
 @Table(name = "poglavlje")
@@ -37,10 +42,19 @@ public class Poglavlje extends Model {
         this.obrisano = obrisano;
     }
 
+
+    /**
+     * Using an existing relationship, we can easily get list of instances in related Model class.
+     * @return List of pitanjas for this Poglavlje.
+     */
     public List<Pitanja> pitanjas(){
         return getMany(Pitanja.class,"Pitanja");
     }
 
+    /**
+     * Method changes data in current object and updates it in database as well.
+     * @param updatePoglavlje An instance of object with updated data.
+     */
     public void updatePoglavlje(Poglavlje updatePoglavlje){
         this.IDpoglavlje=updatePoglavlje.getIDpoglavlje();
         this.naziv=updatePoglavlje.getNaziv();

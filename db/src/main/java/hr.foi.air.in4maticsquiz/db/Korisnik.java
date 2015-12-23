@@ -9,6 +9,10 @@ import java.util.List;
 
 /**
  * Created by Matija Popijač on 29.10.2015..
+ *
+ * Entitet klasa predstavlja korisnika
+ * Svaki korisnik može imati jedan tip i svaki korisnik može imati nula ili više rezultata testova
+ * povezana sa Tip_korisnika i Rezultat
  */
 @Table(name="korisnik")
 public class Korisnik extends Model {
@@ -56,11 +60,20 @@ public class Korisnik extends Model {
         this.obrisano = obrisano;
     }
 
+    /**
+     * Using an existing relationship, we can easily get list of instances in related Model class.
+     * @return List of rezultati for this Korisnik.
+     */
     public List<Rezultat> rezultati(){
         return getMany(Rezultat.class,"Rezultat");
 
     }
 
+
+    /**
+     * Method changes data in current object and updates it in database as well.
+     * @param updatedKorisnik An instance of object with updated data.
+     */
     public void updateKorisnik(Korisnik updatedKorisnik){
         this.IDkorisnik=updatedKorisnik.getIDkorisnik();
         this.ime=updatedKorisnik.getIme();

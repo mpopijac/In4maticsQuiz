@@ -8,6 +8,11 @@ import java.util.List;
 
 /**
  * Created by Matija Popijač on 29.10.2015..
+ *
+ * Entitet klase Tip_korisnika predstavlja tip korisnika sustava
+ * jedan tip_korisnika pripada 0 ili više Korisnika
+ * povezano sa Korisnik
+ *
  */
 
 
@@ -35,13 +40,19 @@ public class Tip_korisnika extends Model {
         this.obrisano = obrisano;
     }
 
-
+    /**
+     * Using an existing relationship, we can easily get list of instances in related Model class.
+     * @return List of korisnici for this Tip_korisnika.
+     */
     public List<Korisnik> korisnici(){
         return getMany(Korisnik.class,"Tip_korisnika");
 
     }
 
-
+    /**
+     * Method changes data in current object and updates it in database as well.
+     * @param updateTip_korisnika An instance of object with updated data.
+     */
     public void updateTip_korisnika(Tip_korisnika updateTip_korisnika){
         this.IDtip=updateTip_korisnika.getIDtip();
         this.naziv=updateTip_korisnika.getNaziv();

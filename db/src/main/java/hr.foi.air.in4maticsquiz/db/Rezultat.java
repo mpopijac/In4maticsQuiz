@@ -9,6 +9,12 @@ import java.util.Date;
 
 /**
  * Created by Matija Popijač on 29.10.2015..
+ *
+ * Entitet klase Rezultat predstavlja rezultat testa(kviza)
+ * jedanom rezultatu pripada jedan i samo jedan Korisnik i svaki rezultat pripada jedan i samo jedan Razred
+ * povezano sa Korisnik
+ * povezano sa Razred
+ *
  */
 
 @Table(name = "rezultat")
@@ -52,6 +58,10 @@ public class Rezultat extends Model {
         this.obrisano = obrisano;
     }
 
+    /**
+     * Method changes data in current object and updates it in database as well.
+     * @param updateRezultat An instance of object with updated data.
+     */
     public void updateRezultat(Rezultat updateRezultat){
         this.IDrezultat=updateRezultat.getIDrezultat();
         this.IDkorisnik=updateRezultat.getIDkorisnik();

@@ -2,6 +2,8 @@ package hr.foi.air.in4maticsquiz.singletons;
 
 /**
  * Created by Matija Popijač on 11.11.2015..
+ *
+ * Singleton klasa PrijavljeniKorisnik služi za spremanje podataka o korisniku i njegovi akcijama
  */
 public class PrijavljeniKorisnik {
     private static PrijavljeniKorisnik ourInstance = null;

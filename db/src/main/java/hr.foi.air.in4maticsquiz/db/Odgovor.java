@@ -8,6 +8,11 @@ import java.util.List;
 
 /**
  * Created by Matija Popijač on 29.10.2015..
+ *
+ * Entitet klase predstavlja jedan od odgovora na pitanje
+ * Odgovoru pripada samo jedno pitanje
+ * povezan sa Pitanja
+ *
  */
 
 @Table(name="odgovor")
@@ -43,7 +48,10 @@ public class Odgovor extends Model{
         this.obrisano = obrisano;
     }
 
-
+    /**
+     * Method changes data in current object and updates it in database as well.
+     * @param updateOdgovor An instance of object with updated data.
+     */
     public void updateOdgovor(Odgovor updateOdgovor){
         this.IDodgovor=updateOdgovor.getIDodgovor();
         this.naziv=updateOdgovor.getNaziv();
