@@ -94,8 +94,6 @@ public class VisePonudenihOdgovoraFragment extends ListFragment{
             }
         });
 
-
     }
-
 
 }

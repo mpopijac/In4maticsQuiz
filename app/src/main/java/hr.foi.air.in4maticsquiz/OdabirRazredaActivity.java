@@ -190,4 +190,28 @@ public class OdabirRazredaActivity extends AppCompatActivity implements View.OnC
     public void onDataLoaded(ArrayList<Tip_korisnika> tip_korisnikas, ArrayList<Korisnik> korisnici, ArrayList<Rezultat> rezultati, ArrayList<Razred> razredi, ArrayList<Pitanja> pitanjas, ArrayList<Poglavlje> poglavlja, ArrayList<Odgovor> odgovori) {
 
     }
+
+    /*
+        metoda koja se pokreće prilikom pritiska Back gumba.
+     */
+    @Override
+    public void onBackPressed(){
+        /*
+            promjenjauje trenutnu aktivnost na home aktivnost uređaja
+         */
+        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+        homeIntent.addCategory(Intent.CATEGORY_HOME);
+        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(homeIntent);
+
+        /*
+            zatvara aplikaciju i vraća signal 1 os-u
+         */
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(1);
+
+    }
+
+
+
 }

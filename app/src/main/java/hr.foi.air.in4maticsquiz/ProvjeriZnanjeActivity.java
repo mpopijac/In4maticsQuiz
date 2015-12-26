@@ -19,7 +19,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.activeandroid.query.Select;
 
@@ -278,5 +277,14 @@ public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.On
 
         }
     }
+
+    /*
+       metoda koja se pokreće prilikom pritiska Back gumba.
+    */
+    @Override
+    public void onBackPressed(){
+
+    }
+
 
 }

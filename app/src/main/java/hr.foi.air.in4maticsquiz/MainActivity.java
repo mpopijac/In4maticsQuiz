@@ -135,4 +135,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+
+    /*
+       metoda koja se pokreće prilikom pritiska Back gumba.
+    */
+    @Override
+    public void onBackPressed(){
+        /*
+            promjenjauje trenutnu aktivnost na home aktivnost uređaja
+         */
+        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+        homeIntent.addCategory( Intent.CATEGORY_HOME );
+        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(homeIntent);
+        /*
+            super.finish(); zatvara aplikaciju;
+         */
+        super.finish();
+
+    }
+
 }
