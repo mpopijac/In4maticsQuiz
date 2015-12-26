@@ -172,8 +172,21 @@ public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.On
     public void vrstaPitanja(Pitanja p) {
 
         odgovoriTrenutno = new Select().all().from(Odgovor.class).where("IDpitanja==?", p.getIDpitanja()).execute();
-
-        if (odgovoriTrenutno.size() == 2) prikaziFragment(new TocnoNetocnoFragment());
+        /*
+            ako su samo dva odgovora ponuđena
+         */
+        if (odgovoriTrenutno.size() == 2) {
+            /*
+                ako su oba ponuđena dva odgovora i oba su točna, stavi checkbox-ove,
+                inače stavi radio btn
+             */
+            if (odgovoriTrenutno.get(0).getTocan() == 1 && odgovoriTrenutno.get(1).getTocan() == 1) {
+                prikaziFragment(new VisePonudenihOdgovoraFragment());
+            }
+            else {
+                prikaziFragment(new TocnoNetocnoFragment());
+            }
+        }
         else if (odgovoriTrenutno.size() > 2) prikaziFragment(new VisePonudenihOdgovoraFragment());
         else if (odgovoriTrenutno.size() == 1) prikaziFragment(new UnesiTocanPojamFragment());
 
