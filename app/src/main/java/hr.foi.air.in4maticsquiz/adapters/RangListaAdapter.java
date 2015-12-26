@@ -34,26 +34,17 @@ public class RangListaAdapter extends ArrayAdapter<RangListeActivity.rangLista> 
     }
 
 
-    //ViewGroup parent -> viška
 
     public View getView(int position, View convertView, ViewGroup parent){
 
-        // assign the view we are converting to a local variable
         View v = convertView;
         Integer odabraniRazred = PrijavljeniKorisnik.getInstance().getOdabraniRazred();
 
 
-
-        // first check to see if the view is null. if so, we have to inflate it.
-        // to inflate it basically means to render, or show, the view.
         if (v == null) {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.fragment_rang_lista, parent, false);
         }
-
-        //   TextView txtuser = (TextView) v.findViewById(R.id.naslov);
-
-        //     txtuser.setText(Integer.toString(odabraniRazred)+". razred");
 
 
         String[] korisnici= new String[rezultatArrayList.size()];
@@ -63,6 +54,8 @@ public class RangListaAdapter extends ArrayAdapter<RangListeActivity.rangLista> 
 
         int z=0;
         int g=1;
+
+        // punjenjenje polja korisnici, brojaci, bodovi2 i datumi iz liste koja je proslijeđena
 
         for (RangListeActivity.rangLista pojedinac : rezultatArrayList) {
             korisnici[z]=pojedinac.getKorisnici();
@@ -82,7 +75,6 @@ public class RangListaAdapter extends ArrayAdapter<RangListeActivity.rangLista> 
         TextView datum = (TextView) v.findViewById(R.id.datum);
 
 
-        //       System.out.println(Long.toString(brojac)+username+i.getBodovi()+"bla");
 
         rBroj.setText(Integer.toString(brojaci[position])+". ");
 
@@ -93,7 +85,6 @@ public class RangListaAdapter extends ArrayAdapter<RangListeActivity.rangLista> 
         datum.setText(datumi[position]);
 
 
-        // the view must be returned to our activity
         return v;
 
     }

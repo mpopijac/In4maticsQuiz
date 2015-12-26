@@ -16,6 +16,17 @@ import hr.foi.air.in4maticsquiz.db.Korisnik;
 import hr.foi.air.in4maticsquiz.db.Rezultat;
 import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;
 
+/**
+ * Created by Tea on 3.12.2015..
+ *
+ * ListActivity koji puni klasu rangLista sa svim rezultatima za određeni
+ * razred te za određeni id korisnika zamjenjuje za njegovo korisničko ime.
+ * Zatim briše sve rezultate za pojedinog korisnika koji nisu najbolji.
+ * Na kraju sortira te podatke po broju bodova i prosljeđuje tu klasu njegovom
+ * adapteru.
+ *
+ */
+
 public class RangListeActivity extends ListActivity {
 
     private List<Rezultat> rezultatArrayList = new ArrayList<Rezultat>();
@@ -75,6 +86,13 @@ public class RangListeActivity extends ListActivity {
 
 
     }
+
+
+
+    /**
+     * klasa koja služi za spajanje imena korisnika s njegovim brojem bodova
+     * i njihovo sortiranje
+     */
 
 
     public class rangLista implements Comparable {
