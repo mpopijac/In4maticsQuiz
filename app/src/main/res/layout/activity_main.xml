@@ -1,85 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context=".MainActivity">
 
 
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="@android:dimen/thumbnail_height"
-        android:id="@+id/imageView"
-        android:src="@drawable/logo"
-        android:layout_centerHorizontal="true" />
-
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="@android:dimen/thumbnail_height"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/logo" />
 
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="@android:dimen/notification_large_icon_height"
-        android:id="@+id/korisnickoIme"
-        android:hint="Unesite korisničko ime"
-        android:focusable="true"
-        android:textColorHighlight="#a0a899"
-        android:textColorHint="#0d0d0d"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/imageView" />
+        <EditText
+            android:id="@+id/korisnickoIme"
+            android:layout_width="wrap_content"
+            android:layout_height="@android:dimen/notification_large_icon_height"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:focusable="true"
+            android:hint="Unesite korisničko ime"
+            android:textColorHighlight="#a0a899"
+            android:textColorHint="#0d0d0d" />
 
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:id="@+id/lozinka"
-        android:layout_below="@+id/korisnickoIme"
-        android:layout_alignRight="@+id/korisnickoIme"
-        android:layout_alignLeft="@+id/korisnickoIme"
-        android:layout_alignStart="@+id/korisnickoIme"
-        android:layout_alignEnd="@+id/korisnickoIme"
-        android:textColorHint="#272526"
-        android:hint="Unesite lozinku"
-        android:layout_centerHorizontal="true" />
+        <EditText
+            android:id="@+id/lozinka"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/korisnickoIme"
+            android:layout_alignLeft="@+id/korisnickoIme"
+            android:layout_alignRight="@+id/korisnickoIme"
+            android:layout_alignStart="@+id/korisnickoIme"
+            android:layout_below="@+id/korisnickoIme"
+            android:layout_centerHorizontal="true"
+            android:hint="Unesite lozinku"
+            android:inputType="textPassword"
+            android:textColorHint="#272526" />
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="prijava"
-        android:id="@+id/btnPrijava"
-        android:layout_below="@+id/checkboxZapamti"
-        android:layout_centerHorizontal="true"
-        android:onClick="login"
-        android:layout_marginBottom="0.2dp" />
+        <Button
+            android:id="@+id/btnPrijava"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/checkboxZapamti"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="0.2dp"
+            android:onClick="login"
+            android:text="prijava" />
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Zapamti me"
-        android:id="@+id/checkboxZapamti"
-        android:layout_below="@+id/lozinka"
-        android:layout_centerHorizontal="true" />
+        <CheckBox
+            android:id="@+id/checkboxZapamti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lozinka"
+            android:layout_centerHorizontal="true"
+            android:text="Zapamti me" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Registriraj se"
-        android:id="@+id/btnRegistriraj"
+        <TextView
+            android:id="@+id/btnRegistriraj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnPrijava"
 
-        android:textStyle="bold"
-        android:layout_below="@+id/btnPrijava"
-        android:layout_centerHorizontal="true"
-        android:paddingTop="0.5dp" />
+            android:layout_centerHorizontal="true"
+            android:paddingTop="0.5dp"
+            android:text="Registriraj se"
+            android:textStyle="bold" />
 
 
-</RelativeLayout>
-    </ScrollView>
+    </RelativeLayout>
+</ScrollView>

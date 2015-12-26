@@ -27,6 +27,7 @@ import hr.foi.air.in4maticsquiz.db.Razred;
 import hr.foi.air.in4maticsquiz.db.Rezultat;
 import hr.foi.air.in4maticsquiz.db.Tip_korisnika;
 import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;
+import hr.foi.air.in4maticsquiz.singletons.QuizSaveState;
 
 /*
  *   Aktivnost odaberi razred u kojoj korisnik mora odabrati razred za koji želi riješavati test
@@ -49,20 +50,26 @@ public class OdabirRazredaActivity extends AppCompatActivity implements View.OnC
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-        /*
-            poruka sa imenom i prezimenom
-         */
-        CharSequence text;
-        text = PrijavljeniKorisnik.getInstance().getIme() + " " + PrijavljeniKorisnik.getInstance().getPrezime();
-        Toast toast = Toast.makeText(this, text + getString(R.string.odabirRazredaUspjesnaPrijava), Toast.LENGTH_SHORT);
-        toast.show();
 
         /*
-            Pozivanje funkcije za dohvačanje podataka u bazu sa web servisa ( udaljene baze )
+            pokreni ovo samo prilikom prvog pokretanja
          */
-        DataLoader dataLoader = new WebServiceDataLoader();
-        dataLoader.LoadData(this);
+        if(savedInstanceState == null) {
 
+            /*
+                poruka sa imenom i prezimenom
+            */
+            CharSequence text;
+            text = PrijavljeniKorisnik.getInstance().getIme() + " " + PrijavljeniKorisnik.getInstance().getPrezime();
+            Toast toast = Toast.makeText(this, text + getString(R.string.odabirRazredaUspjesnaPrijava), Toast.LENGTH_SHORT);
+            toast.show();
+
+            /*
+                Pozivanje funkcije za dohvačanje podataka u bazu sa web servisa ( udaljene baze )
+            */
+            DataLoader dataLoader = new WebServiceDataLoader();
+            dataLoader.LoadData(this);
+        }
         /*
             Poruka na ekranu o prijavljenom korisniku: "Prijavljeni ste kao : [korisničko ime]".
          */

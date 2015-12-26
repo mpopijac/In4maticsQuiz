@@ -22,8 +22,7 @@ public class RangListeActivity extends ListActivity {
     private RangListaAdapter m_adapter;
     private String[] polja;
     private String[] polja1;
-    List<rangLista> sortRangLista= new CopyOnWriteArrayList<>();
-
+    List<rangLista> sortRangLista = new CopyOnWriteArrayList<>();
 
 
     @Override
@@ -31,19 +30,18 @@ public class RangListeActivity extends ListActivity {
         super.onCreate(savedInstanceState);
 
 
-
         Integer odabraniRazred = PrijavljeniKorisnik.getInstance().getOdabraniRazred();
 
         rezultatArrayList = new Select().from(Rezultat.class).where("IDrazred==?", odabraniRazred).execute();
 
-        for (Rezultat rez: rezultatArrayList) {
+        for (Rezultat rez : rezultatArrayList) {
 
             Korisnik korisnickoIme;
             korisnickoIme = new Select().from(Korisnik.class).where("IDkorisnik==?", rez.getIDkorisnik()).executeSingle();
             String username = korisnickoIme.getKorisnickoIme();
 
 
-            rangLista pojedinac= new rangLista();
+            rangLista pojedinac = new rangLista();
             pojedinac.setBodovi2(rez.getBodovi());
             pojedinac.setKorisnici(username);
             pojedinac.setDatumi(rez.getDatum());
@@ -54,7 +52,7 @@ public class RangListeActivity extends ListActivity {
 
         for (rangLista pojedinac : sortRangLista) {
             for (rangLista pojedinac2 : sortRangLista) {
-                if(!pojedinac.equals(pojedinac2)){
+                if (!pojedinac.equals(pojedinac2)) {
                     if (pojedinac2.getKorisnici().equals(pojedinac.getKorisnici())) {
                         if (pojedinac2.getBodovi2() >= pojedinac.getBodovi2()) {
                             sortRangLista.remove(pojedinac);
@@ -67,16 +65,13 @@ public class RangListeActivity extends ListActivity {
 
             }
         }
-        List<rangLista> sortRangLista2= new ArrayList<>(sortRangLista);
+        List<rangLista> sortRangLista2 = new ArrayList<>(sortRangLista);
         Collections.sort(sortRangLista2);
-
 
 
         m_adapter = new RangListaAdapter(this, R.layout.fragment_rang_lista, sortRangLista2);
 
         setListAdapter(m_adapter);
-
-
 
 
     }
