@@ -25,6 +25,7 @@ import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;
  * Na kraju sortira te podatke po broju bodova i prosljeđuje tu klasu njegovom
  * adapteru.
  *
+ *
  */
 
 public class RangListeActivity extends ListActivity {
@@ -87,11 +88,9 @@ public class RangListeActivity extends ListActivity {
 
     }
 
-
-
     /**
      * klasa koja služi za spajanje imena korisnika s njegovim brojem bodova
-     * i njihovo sortiranje
+     * i njihovo sortiranje.
      */
 
 

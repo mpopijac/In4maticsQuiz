@@ -55,7 +55,7 @@ public class RangListaAdapter extends ArrayAdapter<RangListeActivity.rangLista> 
         int z=0;
         int g=1;
 
-        // punjenjenje polja korisnici, brojaci, bodovi2 i datumi iz liste koja je proslijeđena
+        // Punjenjenje polja korisnici, brojaci, bodovi2 i datumi iz liste koja je proslijeđena.
 
         for (RangListeActivity.rangLista pojedinac : rezultatArrayList) {
             korisnici[z]=pojedinac.getKorisnici();
