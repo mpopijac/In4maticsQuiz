@@ -32,6 +32,7 @@
             android:layout_centerHorizontal="true"
             android:focusable="true"
             android:hint="Unesite korisničko ime"
+            android:text="ucitelj"
             android:textColorHighlight="#a0a899"
             android:textColorHint="#0d0d0d" />
 
@@ -47,6 +48,7 @@
             android:layout_below="@+id/korisnickoIme"
             android:layout_centerHorizontal="true"
             android:hint="Unesite lozinku"
+            android:text="ucitelj"
             android:inputType="textPassword"
             android:textColorHint="#272526" />
 
