@@ -15,6 +15,7 @@ import hr.foi.air.in4maticsquiz.db.Odgovor;
 
 /**
  * Created by Dario on 17.12.2015..
+ * Adapter koji služi za prikaz odgovora kod pitanja s više ponuđenihodgovora
  */
 public class CheckboxOdgovoriAdapter extends ArrayAdapter<Odgovor> {
     private List<Odgovor> odgovorArrayList;

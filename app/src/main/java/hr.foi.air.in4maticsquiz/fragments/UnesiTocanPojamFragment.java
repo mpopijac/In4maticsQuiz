@@ -21,6 +21,7 @@ import hr.foi.air.in4maticsquiz.db.Pitanja;
 
 /**
  * Created by Dario on 15.12.2015..
+ * Fragment koji prikazuje vrstu pitanja u kojem treba upisati točan pojam kao odgovor.
  */
 public class UnesiTocanPojamFragment extends Fragment {
 
@@ -67,7 +68,10 @@ public class UnesiTocanPojamFragment extends Fragment {
 
         odgnaPitanje=(EditText)getView().findViewById(R.id.odgovorNaPitanje);
         odgnaPitanje.addTextChangedListener(new TextWatcher() {
-
+            /*
+            Provjera da li je upsiani pojam točan,
+            te se aktivnosti iz koje je pozvan fragment šalje rezultat(true ili false).
+             */
             public void afterTextChanged(Editable s) {
                 Odgovor tocan = null;
                 for (Odgovor odg : odgovori) {

@@ -20,6 +20,7 @@ import hr.foi.air.in4maticsquiz.db.Pitanja;
 
 /**
  * Created by Dario on 15.12.2015..
+ * Fragment na kojem se pojavljuje pitanje vrste točno netočno
  */
 public class TocnoNetocnoFragment extends Fragment {
 
@@ -40,6 +41,7 @@ public class TocnoNetocnoFragment extends Fragment {
         return view;
 
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -61,7 +63,7 @@ public class TocnoNetocnoFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         rdTocno=(RadioButton)getView().findViewById(R.id.radioButtonTocno);
         rdNetocno=(RadioButton)getView().findViewById(R.id.radioButtonNetocno);
-        //podaci trenutnog pitanja
+
         final Bundle data = getArguments();
         long id = data.getLong("pitanje_key");
         odgovori=new Select().all().from(Odgovor.class).where("IDpitanja==?", id).execute();
@@ -75,7 +77,10 @@ public class TocnoNetocnoFragment extends Fragment {
             }
         }
         rg = (RadioGroup)getView(). findViewById(R.id.rdgroup);
-        //provjera odgovora
+        /*Provjerava se da li je označeni radio button točan odgovor,
+         te se aktvnosti iz koje je pozvan fragment šalje rezultat(true ili false).
+
+         */
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
             @Override

@@ -95,6 +95,10 @@ public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.On
 
         prikazTimer = (TextView) findViewById(R.id.vrijemeTimer);
 
+        /*
+        Prikaz vremena
+         */
+
         mCountDownTimer = new CountDownTimer(trajanjeTesta, 1000) { // adjust the milli seconds here ( prvi paramterat trajanje u milisekundama, drugi parametar korak odbrojavanja)
 
             public void onTick(long millisUntilFinished) {
@@ -112,6 +116,9 @@ public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.On
                                 TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
             }
 
+            /*
+            Dok istekne vrijeme testa, zamjeni  tekst timera sa odgovarajućim tekstom i završi test.
+             */
             public void onFinish() {
                 prikazTimer.setText("done!");
                 gotovKviz();
@@ -135,6 +142,9 @@ public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.On
         MenuItem actionViewItem = menu.findItem(R.id.miActionButton);
         View v = MenuItemCompat.getActionView(actionViewItem);
         ImageButton b = (ImageButton) v.findViewById(R.id.btnCustomAction);
+        /*
+        Klikom na sliku odjavi na toolbaru, brišu se korisnički podaci i vraća nas na početnu aktivnost.
+         */
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,12 +161,15 @@ public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.On
         return super.onPrepareOptionsMenu(menu);
 
     }
+    /*
+    Zamjeni frame layout(your_placeholder) sa fragmentom određene vrste pitanja, te proslijedi tom fragmentu id pitanja.
+     */
 
     public void prikaziFragment(Fragment f) {
 
         Bundle bundle = new Bundle();
         long id = trenutno.getIDpitanja();
-        //prosljedivanje id pitanja fragmentu.
+
         bundle.putLong("pitanje_key", id);
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         f.setArguments(bundle);
@@ -167,6 +180,9 @@ public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.On
 
 
     }
+    /*
+    Provjeri koliko pitanje ima odgovora, te ovisno o tome prikazi fragment za odgovarajuće pitanje.
+     */
 
     public void vrstaPitanja(Pitanja p) {
 
@@ -193,11 +209,12 @@ public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View v) {
-        // vrijednost trenutnog fragmenta.
+        /*
+        Klik na sljedeće pitanje vrati točnost odgovora trenutnog fragmenta, te postavi iduće pitanje.
+         */
         Fragment currentFragment = getFragmentManager().findFragmentById(R.id.your_placeholder);
         Bundle dat = new Bundle();
         dat = currentFragment.getArguments();
-        //primljeni podaci od trenutnog fragmenta.
         boolean tocOdg = dat.getBoolean("tocnost");
         Log.i("Primljeno: ", Boolean.toString(tocOdg));
 
@@ -232,6 +249,10 @@ public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.On
 
     }
 
+    /*
+    Funkcija koja se poziva kad završi test. Ona zbroji bodove testa, spremi rezultate te prikaže poruku korisniku s brojem bodova
+    i brojem točnih odgovora
+     */
     private void gotovKviz() {
 
         IzracunBodovaKviza bod = new IzracunBodovaKviza(vrijeme, String.valueOf(ukupnoBodova));
