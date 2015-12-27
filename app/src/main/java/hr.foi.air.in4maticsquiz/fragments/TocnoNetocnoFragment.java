@@ -71,10 +71,15 @@ public class TocnoNetocnoFragment extends Fragment {
         for(Odgovor odg:odgovori){
             brojac++;
             if(brojac==1){
-                tocan=odg;
+                if(odg.getTocan()==1){
+                    tocan=odg;
+                }
                 rdTocno.setText(odg.getNaziv());
             }
             else {
+                if(odg.getTocan()==1){
+                    tocan=odg;
+                }
                 rdNetocno.setText(odg.getNaziv());
             }
         }
