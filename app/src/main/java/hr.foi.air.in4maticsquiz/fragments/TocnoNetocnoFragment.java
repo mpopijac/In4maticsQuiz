@@ -63,12 +63,14 @@ public class TocnoNetocnoFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         rdTocno=(RadioButton)getView().findViewById(R.id.radioButtonTocno);
         rdNetocno=(RadioButton)getView().findViewById(R.id.radioButtonNetocno);
+        Integer brojac = 0;
 
         final Bundle data = getArguments();
         long id = data.getLong("pitanje_key");
         odgovori=new Select().all().from(Odgovor.class).where("IDpitanja==?", id).execute();
         for(Odgovor odg:odgovori){
-            if(odg.getTocan()==1){
+            brojac++;
+            if(brojac==1){
                 tocan=odg;
                 rdTocno.setText(odg.getNaziv());
             }
