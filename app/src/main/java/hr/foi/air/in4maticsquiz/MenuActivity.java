@@ -22,7 +22,7 @@ import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;
 public class MenuActivity extends AppCompatActivity implements  View.OnClickListener {
 
     private Toolbar mToolbar;
-    private Button provjeri, lista;
+    private Button provjeri, lista, poglavlja, pitanja;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +38,19 @@ public class MenuActivity extends AppCompatActivity implements  View.OnClickList
 
         lista = (Button)findViewById(R.id.btnLista);
         lista.setOnClickListener(this);
-        //ako se prijavio učitelj tada omoguci da se vidi gumb
+
+        poglavlja = (Button) findViewById(R.id.poglavlja);
+        pitanja = (Button) findViewById(R.id.pitanja);
+
+        //za tipa korisnika ucitelj prikaži gumbove za ažuriranje
         if(PrijavljeniKorisnik.getInstance().getIDtip()==1) {
-            Button btn = (Button) findViewById(R.id.btnAdmin);
-            btn.setVisibility(View.VISIBLE);
-            btn.setOnClickListener(this);
+
+            poglavlja.setVisibility(View.VISIBLE);
+            poglavlja.setOnClickListener(this);
+
+            pitanja.setVisibility(View.VISIBLE);
+            pitanja.setOnClickListener(this);
+
         }
 
     }
@@ -60,12 +68,16 @@ public class MenuActivity extends AppCompatActivity implements  View.OnClickList
                 intent=new Intent(MenuActivity.this, RangListeActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.btnAdmin:
-
-                    intent = new Intent(MenuActivity.this, CRUDAdminActivity.class);
-                    startActivity(intent);
-
+            case R.id.poglavlja:
+                intent = new Intent(MenuActivity.this, PoglavljaActivity.class);
+                startActivity(intent);
                 break;
+
+            case R.id.pitanja:
+                intent = new Intent(MenuActivity.this, PoglavljaActivity.class);
+                startActivity(intent);
+                break;
+
 
         }
     }
