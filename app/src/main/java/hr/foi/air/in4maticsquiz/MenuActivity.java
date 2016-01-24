@@ -74,7 +74,7 @@ public class MenuActivity extends AppCompatActivity implements  View.OnClickList
                 break;
 
             case R.id.pitanja:
-                intent = new Intent(MenuActivity.this, PoglavljaActivity.class);
+                intent = new Intent(MenuActivity.this, PitanjaActivity.class);
                 startActivity(intent);
                 break;
 

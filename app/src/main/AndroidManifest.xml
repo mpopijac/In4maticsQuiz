@@ -31,7 +31,9 @@
             android:name=".ProvjeriZnanjeActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
         <activity android:name=".RangListeActivity" />
-        <activity android:name=".PoglavljaActivity" />
+        <activity
+            android:name=".PoglavljaActivity"
+            android:label="Ažuriranje poglavlja"></activity>
         <activity
             android:name=".PitanjaActivity"
             android:label="@string/title_activity_pitanja"
