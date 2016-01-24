@@ -36,5 +36,6 @@
     <string name="search_results_found"> rezultati</string>
     <string name="btnProvjeri">Provjeri znanje</string>
     <string name="btnRang">  Rang  liste </string>
+    <string name="title_activity_crudadmin">CRUDAdminActivity</string>
 
 </resources>

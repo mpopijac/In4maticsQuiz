@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;
+
 /*
     Aktivnost odabira akcija za odabrani razred
     akcije: pregled rang liste, provjere znanja
@@ -36,6 +38,12 @@ public class MenuActivity extends AppCompatActivity implements  View.OnClickList
 
         lista = (Button)findViewById(R.id.btnLista);
         lista.setOnClickListener(this);
+        //ako se prijavio učitelj tada omoguci da se vidi gumb
+        if(PrijavljeniKorisnik.getInstance().getIDtip()==1) {
+            Button btn = (Button) findViewById(R.id.btnAdmin);
+            btn.setVisibility(View.VISIBLE);
+            btn.setOnClickListener(this);
+        }
 
     }
 
@@ -52,6 +60,13 @@ public class MenuActivity extends AppCompatActivity implements  View.OnClickList
                 intent=new Intent(MenuActivity.this, RangListeActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.btnAdmin:
+
+                    intent = new Intent(MenuActivity.this, CRUDAdminActivity.class);
+                    startActivity(intent);
+
+                break;
+
         }
     }
 

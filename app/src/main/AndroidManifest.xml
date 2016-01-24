@@ -19,7 +19,6 @@
             android:name=".OdabirRazredaActivity"
             android:label="@string/title_activity_odabir_razreda"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".RegistracijaActivity"
             android:label="@string/title_activity_registracija"
@@ -28,10 +27,11 @@
             android:name=".MenuActivity"
             android:label="@string/title_activity_registracija"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ProvjeriZnanjeActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
-        <activity android:name=".RangListeActivity"/>
-
+        <activity
+            android:name=".ProvjeriZnanjeActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+        <activity android:name=".RangListeActivity" />
+        <activity android:name=".CRUDAdminActivity"></activity>
     </application>
 
 </manifest>
