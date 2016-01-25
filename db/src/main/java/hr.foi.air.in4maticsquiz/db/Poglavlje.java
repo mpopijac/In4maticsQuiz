@@ -95,4 +95,5 @@ public class Poglavlje extends Model {
     public void setObrisano(Integer obrisano) {
         this.obrisano = obrisano;
     }
+
 }
