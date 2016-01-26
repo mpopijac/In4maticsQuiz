@@ -16,6 +16,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ import hr.foi.air.in4maticsquiz.PoglavljaActivity;
 import hr.foi.air.in4maticsquiz.R;
 import hr.foi.air.in4maticsquiz.db.Odgovor;
 import hr.foi.air.in4maticsquiz.db.Poglavlje;
+
 
 /**
  * Created by Matija Popijač on 25.1.2016..
@@ -106,6 +109,8 @@ public class PoglavljaListaAdapter extends ArrayAdapter<Poglavlje>{
                                     alertD.dismiss();
                                     popisPogljavljaLista.remove(poglavlje);
                                     notifyDataSetChanged();
+                                    poglavlje.setObrisano(1);
+                                    poglavlje.updatePoglavlje(poglavlje);
 
 
                                 }
@@ -119,6 +124,7 @@ public class PoglavljaListaAdapter extends ArrayAdapter<Poglavlje>{
                                     alertD.dismiss();
                                     notifyDataSetChanged();
                                     Log.i("Ime",poglavlje.getNaziv());
+                                    poglavlje.updatePoglavlje(poglavlje);
 
                                 }
                             });
