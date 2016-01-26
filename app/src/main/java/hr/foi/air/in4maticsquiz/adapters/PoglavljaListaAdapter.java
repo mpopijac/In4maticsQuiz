@@ -27,6 +27,7 @@ import hr.foi.air.in4maticsquiz.PoglavljaActivity;
 import hr.foi.air.in4maticsquiz.R;
 import hr.foi.air.in4maticsquiz.db.Odgovor;
 import hr.foi.air.in4maticsquiz.db.Poglavlje;
+import hr.foi.air.in4maticsquiz.singletons.Azuriranje;
 
 
 /**
@@ -39,6 +40,11 @@ public class PoglavljaListaAdapter extends ArrayAdapter<Poglavlje>{
     private EditText ime;
     Button btnIzbrisi,btnAzuriraj;
     AlertDialog alertD;
+    Switch sw;
+
+    Azuriranje azuriranje = new Azuriranje();
+
+    Boolean tocno = false;
 
     public PoglavljaListaAdapter(Context context, int textViewResourceId, ArrayList<Poglavlje> lista) {
         super(context, textViewResourceId, lista);
@@ -64,10 +70,31 @@ public class PoglavljaListaAdapter extends ArrayAdapter<Poglavlje>{
             holder.ukljuceno = (Switch) convertView.findViewById(R.id.ukljuceno);
             convertView.setTag(holder);
 
+            if(holder.ukljuceno.isChecked() == true){
+                poglavlje.setUkljuceno(1);
+            }
+            else{
+                poglavlje.setUkljuceno(0);
+            }
+
+            for(Poglavlje poglavlje1: azuriranje.poglavljeLista){
+                if(poglavlje == poglavlje1){
+                    tocno=true;
+                    poglavlje1.setUkljuceno(poglavlje.getUkljuceno());
+                    break;
+                }
+            }
+
+            if(tocno==false){
+                azuriranje.poglavljeLista.add(poglavlje);
+            }
+
+
+
             holder.ukljuceno.setOnClickListener(
                     new View.OnClickListener() {
                         public void onClick(View v) {
-                            Switch sw = (Switch) v;
+                             sw = (Switch) v;
                             Poglavlje poglavlje = (Poglavlje) sw.getTag();
                             Toast.makeText(getContext().getApplicationContext(), "Ukljuceno: " + sw.getText() + "je" + sw.isChecked(), Toast.LENGTH_LONG).show();
                             Log.i("Poglavlje x:", poglavlje.getNaziv());
