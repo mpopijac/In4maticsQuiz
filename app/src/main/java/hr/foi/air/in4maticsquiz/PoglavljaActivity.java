@@ -53,10 +53,7 @@ public class PoglavljaActivity extends AppCompatActivity {
         FloatingActionButton dodaj = (FloatingActionButton) findViewById(R.id.dodaj);
         dodaj.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
+            public void onClick(final View view) {
                 LayoutInflater layoutInflater = LayoutInflater.from(PoglavljaActivity.this);
                 View promptView = layoutInflater.inflate(R.layout.dodajpoglavlje, null);
 
@@ -71,11 +68,13 @@ public class PoglavljaActivity extends AppCompatActivity {
                 btnDodaj.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         alertDodaj.dismiss();
-                        Poglavlje p=new Poglavlje();
+                        Poglavlje p = new Poglavlje();
                         p.setNaziv(imePoglavlja.getText().toString());
                         p.setUkljuceno(0);
                         listaZaPrikazArrayList.add(p);
                         poglavljaAdapter.notifyDataSetChanged();
+                        Snackbar.make(view, "Poglavlje je dodano!! "+"\nTrebate dodati pitanje!!", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
 
                     }
                 });
