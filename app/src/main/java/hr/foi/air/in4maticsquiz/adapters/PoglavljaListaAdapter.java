@@ -1,13 +1,16 @@
 package hr.foi.air.in4maticsquiz.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -20,6 +23,7 @@ import java.util.List;
 
 import hr.foi.air.in4maticsquiz.PoglavljaActivity;
 import hr.foi.air.in4maticsquiz.R;
+import hr.foi.air.in4maticsquiz.db.Odgovor;
 import hr.foi.air.in4maticsquiz.db.Poglavlje;
 
 /**
@@ -28,7 +32,10 @@ import hr.foi.air.in4maticsquiz.db.Poglavlje;
 public class PoglavljaListaAdapter extends ArrayAdapter<Poglavlje>{
 
     private ArrayList<Poglavlje> popisPogljavljaLista;
-
+    private Poglavlje poglavlje;
+    private EditText ime;
+    Button btnIzbrisi,btnAzuriraj;
+    AlertDialog alertD;
 
     public PoglavljaListaAdapter(Context context, int textViewResourceId, ArrayList<Poglavlje> lista) {
         super(context, textViewResourceId, lista);
@@ -78,8 +85,49 @@ public class PoglavljaListaAdapter extends ArrayAdapter<Poglavlje>{
                     new View.OnLongClickListener(){
                         public boolean onLongClick(View v) {
                             TextView tv = (TextView) v;
-                            Poglavlje poglavlje = (Poglavlje) tv.getTag();
+                            poglavlje = (Poglavlje) tv.getTag();
                             Log.i("LongClickActivated","jupi");
+
+                            LayoutInflater layoutInflater = LayoutInflater.from(getContext());
+                            View promptView = layoutInflater.inflate(R.layout.azurirajpoglavlja, null);
+
+                            alertD = new AlertDialog.Builder(getContext()).create();
+
+                            ime = (EditText) promptView.findViewById(R.id.prIme);
+
+                            ime.setText(poglavlje.getNaziv());
+
+                            btnIzbrisi = (Button) promptView.findViewById(R.id.btnIzbrisi);
+
+                            btnAzuriraj = (Button) promptView.findViewById(R.id.btnAzuriraj);
+
+                            btnIzbrisi.setOnClickListener(new View.OnClickListener() {
+                                public void onClick(View v) {
+                                    alertD.dismiss();
+                                    popisPogljavljaLista.remove(poglavlje);
+                                    notifyDataSetChanged();
+
+
+                                }
+                            });
+
+                            btnAzuriraj.setOnClickListener(new View.OnClickListener() {
+                                public void onClick(View v) {
+
+
+                                    poglavlje.setNaziv(ime.getText().toString());
+                                    alertD.dismiss();
+                                    notifyDataSetChanged();
+                                    Log.i("Ime",poglavlje.getNaziv());
+
+                                }
+                            });
+
+                            alertD.setView(promptView);
+
+                            alertD.show();
+
+
                             return false;
                         }
                     }
