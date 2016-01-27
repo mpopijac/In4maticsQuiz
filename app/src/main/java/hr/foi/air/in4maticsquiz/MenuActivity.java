@@ -115,4 +115,11 @@ public class MenuActivity extends AppCompatActivity implements  View.OnClickList
         return true;
     }
 
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(MenuActivity.this, OdabirRazredaActivity.class);
+        startActivity(intent);
+
+    }
+
 }
