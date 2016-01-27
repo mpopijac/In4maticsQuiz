@@ -41,10 +41,7 @@ public class PoglavljaListaAdapter extends ArrayAdapter<Poglavlje>{
     Button btnIzbrisi,btnAzuriraj;
     AlertDialog alertD;
     Switch sw;
-
-    Azuriranje azuriranje = new Azuriranje();
-
-    Boolean tocno = false;
+    private Boolean postojiUListi = false;
 
     public PoglavljaListaAdapter(Context context, int textViewResourceId, ArrayList<Poglavlje> lista) {
         super(context, textViewResourceId, lista);
@@ -70,39 +67,36 @@ public class PoglavljaListaAdapter extends ArrayAdapter<Poglavlje>{
             holder.ukljuceno = (Switch) convertView.findViewById(R.id.ukljuceno);
             convertView.setTag(holder);
 
-            if(holder.ukljuceno.isChecked() == true){
-                poglavlje.setUkljuceno(1);
-            }
-            else{
-                poglavlje.setUkljuceno(0);
-            }
-
-            for(Poglavlje poglavlje1: azuriranje.poglavljeLista){
-                if(poglavlje == poglavlje1){
-                    tocno=true;
-                    poglavlje1.setUkljuceno(poglavlje.getUkljuceno());
-                    break;
-                }
-            }
-
-            if(tocno==false){
-                azuriranje.poglavljeLista.add(poglavlje);
-            }
-
-
 
             holder.ukljuceno.setOnClickListener(
                     new View.OnClickListener() {
                         public void onClick(View v) {
-                             sw = (Switch) v;
+                            sw = (Switch) v;
                             Poglavlje poglavlje = (Poglavlje) sw.getTag();
                             Toast.makeText(getContext().getApplicationContext(), "Ukljuceno: " + sw.getText() + "je" + sw.isChecked(), Toast.LENGTH_LONG).show();
-                            Log.i("Poglavlje x:", poglavlje.getNaziv());
-                            Log.i("Poglavlje status:", Integer.toString(poglavlje.getUkljuceno()));
+                            //Log.i("Poglavlje x:", poglavlje.getNaziv());
+                            //Log.i("Poglavlje status:", Integer.toString(poglavlje.getUkljuceno()));
                             if (sw.isChecked() == true) {
                                 poglavlje.setUkljuceno(1);
                             } else {
                                 poglavlje.setUkljuceno(0);
+                            }
+
+                            poglavlje.updatePoglavlje(poglavlje);
+                            //zastavica za provjeru dali postoji već u listi za ažuriranje
+                            postojiUListi=false;
+
+                            //provjeravanje dali postoji promjenjeni element već u listi, ako postoji da se promjeni samo status
+                            for (Poglavlje pog : Azuriranje.getInstance().getPoglavljeLista()){
+                                if(pog==poglavlje){
+                                    postojiUListi=true;
+                                    pog.setUkljuceno(poglavlje.getUkljuceno());
+                                    break;
+                                }
+                            }
+                            //ako ne postoji u listi, da se doda u listu
+                            if(postojiUListi==false){
+                                Azuriranje.getInstance().getPoglavljeLista().add(poglavlje);
                             }
 
                         }
@@ -116,7 +110,7 @@ public class PoglavljaListaAdapter extends ArrayAdapter<Poglavlje>{
                         public boolean onLongClick(View v) {
                             TextView tv = (TextView) v;
                             poglavlje = (Poglavlje) tv.getTag();
-                            Log.i("LongClickActivated","jupi");
+                            //Log.i("LongClickActivated","jupi");
 
                             LayoutInflater layoutInflater = LayoutInflater.from(getContext());
                             View promptView = layoutInflater.inflate(R.layout.azurirajpoglavlja, null);
@@ -139,19 +133,48 @@ public class PoglavljaListaAdapter extends ArrayAdapter<Poglavlje>{
                                     poglavlje.setObrisano(1);
                                     poglavlje.updatePoglavlje(poglavlje);
 
+                                    //zastavica za provjeru dali postoji već u listi za ažuriranje
+                                    postojiUListi=false;
+
+                                    //provjeravanje dali postoji promjenjeni element već u listi, ako postoji da se promjeni samo status
+                                    for (Poglavlje pog : Azuriranje.getInstance().getPoglavljeLista()){
+                                        if(pog==poglavlje){
+                                            postojiUListi=true;
+                                            pog.setObrisano(poglavlje.getObrisano());
+                                            break;
+                                        }
+                                    }
+                                    //ako ne postoji u listi, da se doda u listu
+                                    if(postojiUListi==false){
+                                        Azuriranje.getInstance().getPoglavljeLista().add(poglavlje);
+                                    }
 
                                 }
                             });
 
                             btnAzuriraj.setOnClickListener(new View.OnClickListener() {
                                 public void onClick(View v) {
-
-
                                     poglavlje.setNaziv(ime.getText().toString());
                                     alertD.dismiss();
                                     notifyDataSetChanged();
-                                    Log.i("Ime",poglavlje.getNaziv());
+                                    Log.i("Ime", poglavlje.getNaziv());
                                     poglavlje.updatePoglavlje(poglavlje);
+
+                                    //zastavica za provjeru dali postoji već u listi za ažuriranje
+                                    postojiUListi=false;
+
+                                    //provjeravanje dali postoji promjenjeni element već u listi, ako postoji da se promjeni samo status
+                                    for (Poglavlje pog : Azuriranje.getInstance().getPoglavljeLista()){
+                                        if(pog==poglavlje){
+                                            postojiUListi=true;
+                                            pog.setNaziv(poglavlje.getNaziv());
+                                            break;
+                                        }
+                                    }
+                                    //ako ne postoji u listi, da se doda u listu
+                                    if(postojiUListi==false){
+                                        Azuriranje.getInstance().getPoglavljeLista().add(poglavlje);
+                                    }
 
                                 }
                             });
@@ -181,4 +204,5 @@ public class PoglavljaListaAdapter extends ArrayAdapter<Poglavlje>{
 
         return convertView;
      }
+
 }

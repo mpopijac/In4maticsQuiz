@@ -26,6 +26,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import hr.foi.air.in4maticsquiz.adapters.PoglavljaListaAdapter;
 import hr.foi.air.in4maticsquiz.db.Pitanja;
 import hr.foi.air.in4maticsquiz.db.Poglavlje;
+import hr.foi.air.in4maticsquiz.singletons.Azuriranje;
 import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;
 
 public class PoglavljaActivity extends AppCompatActivity {
@@ -71,8 +72,14 @@ public class PoglavljaActivity extends AppCompatActivity {
                         Poglavlje p = new Poglavlje();
                         p.setNaziv(imePoglavlja.getText().toString());
                         p.setUkljuceno(0);
+                        p.setObrisano(0);
                         listaZaPrikazArrayList.add(p);
                         poglavljaAdapter.notifyDataSetChanged();
+
+                        //slanje zahtjeva na web server s podacima
+
+
+
                         Snackbar.make(view, "Poglavlje je dodano!! "+"\nTrebate dodati pitanje!!", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
 
@@ -110,7 +117,7 @@ public class PoglavljaActivity extends AppCompatActivity {
             }
         }
 
-        ///adapter za prikaz rezultata fali
+        ///adapter za prikaz liste poglavlja
         poglavljaAdapter = new PoglavljaListaAdapter(this, R.layout.fragment_poglavlja_lista, listaZaPrikazArrayList);
         ListView listView = (ListView)findViewById(R.id.list);
 

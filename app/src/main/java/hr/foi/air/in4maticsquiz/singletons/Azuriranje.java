@@ -11,16 +11,29 @@ import hr.foi.air.in4maticsquiz.db.Poglavlje;
  */
 public class Azuriranje {
 
+    private static Azuriranje ourInstance = null;
+
     public ArrayList<Poglavlje> poglavljeLista = new ArrayList<Poglavlje>();
 
-    public void dodajPoglavlje(Poglavlje poglavljee){
-        poglavljeLista.add(poglavljee);
+    public static Azuriranje getInstance() {
+        if (ourInstance == null){
+            ourInstance = new Azuriranje();
+        }
+        return ourInstance;
     }
 
-    private ArrayList<Pitanja> pitanje = new ArrayList<Pitanja>();
 
-    private ArrayList<Odgovor> odgovor = new ArrayList<Odgovor>();
+    private Azuriranje() {
+
+    }
 
 
+    public ArrayList<Poglavlje> getPoglavljeLista() {
+        return poglavljeLista;
+    }
+
+    public void setPoglavljeLista(ArrayList<Poglavlje> poglavljeLista) {
+        this.poglavljeLista = poglavljeLista;
+    }
 
 }
