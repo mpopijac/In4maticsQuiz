@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.activeandroid.query.Select;
 
@@ -74,32 +76,39 @@ public class PoglavljaActivity extends AppCompatActivity {
 
                 btnDodaj.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        alertDodaj.dismiss();
-                        Poglavlje p = new Poglavlje();
-                        p.setNaziv(imePoglavlja.getText().toString());
-                        p.setUkljuceno(0);
-                        p.setObrisano(0);
-                        listaZaPrikazArrayList.add(p);
-                        poglavljaAdapter.notifyDataSetChanged();
+                        if(TextUtils.isEmpty(imePoglavlja.getText().toString())) {
+                            Toast.makeText(getApplicationContext(), "Niste upisali poglavlje! ", Toast.LENGTH_LONG).show();
 
-                        //slanje zahtjeva na web server s podacima
-                        addToBase(p.getIDpoglavlje(), p.getNaziv(), p.getUkljuceno());
+                        }
 
-                        Poglavlje poSave = new Poglavlje();
-                        Log.i("sranje:",Long.toString(Azuriranje.getInstance().getZadnjeDodanoPoglavljeId()));
-                        poSave.setIDpoglavlje(Azuriranje.getInstance().getZadnjeDodanoPoglavljeId());
-                        poSave.setNaziv(p.getNaziv());
-                        poSave.setUkljuceno(p.getUkljuceno());
-                        poSave.setObrisano(p.getObrisano());
-                        poSave.save();
+                        else {
+                            alertDodaj.dismiss();
+                            Poglavlje p = new Poglavlje();
+                            p.setNaziv(imePoglavlja.getText().toString());
+                            p.setUkljuceno(0);
+                            p.setObrisano(0);
+                            listaZaPrikazArrayList.add(p);
+                            poglavljaAdapter.notifyDataSetChanged();
+
+                            //slanje zahtjeva na web server s podacima
+                            addToBase(p.getIDpoglavlje(), p.getNaziv(), p.getUkljuceno());
+
+                            Poglavlje poSave = new Poglavlje();
+                            Log.i("sranje:", Long.toString(Azuriranje.getInstance().getZadnjeDodanoPoglavljeId()));
+                            poSave.setIDpoglavlje(Azuriranje.getInstance().getZadnjeDodanoPoglavljeId());
+                            poSave.setNaziv(p.getNaziv());
+                            poSave.setUkljuceno(p.getUkljuceno());
+                            poSave.setObrisano(p.getObrisano());
+                            poSave.save();
 
 
-                        Snackbar.make(view, "Poglavlje je dodano!! " + "\nTrebate dodati pitanje!!", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
+                            Snackbar.make(view, "Poglavlje je dodano!! " + "\nTrebate dodati pitanje!!", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+
+                        }
 
                     }
                 });
-
                 alertDodaj.setView(promptView);
                 alertDodaj.show();
 

@@ -104,7 +104,6 @@ public class DodajNovoPitanje extends AppCompatActivity implements View.OnClickL
                 } else {
                     LayoutInflater layoutInflater = LayoutInflater.from(DodajNovoPitanje.this);
                     View promptView = layoutInflater.inflate(R.layout.dialog_dodaj_odgovor, null);
-
                     alertD = new AlertDialog.Builder(DodajNovoPitanje.this).create();
                     odgNaPit = (TextView) promptView.findViewById(R.id.txtDodajOdgNaPit);
 
