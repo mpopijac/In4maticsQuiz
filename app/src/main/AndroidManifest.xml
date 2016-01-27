@@ -27,6 +27,7 @@
             android:name=".MenuActivity"
             android:label="@string/title_activity_registracija"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".ProvjeriZnanjeActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />

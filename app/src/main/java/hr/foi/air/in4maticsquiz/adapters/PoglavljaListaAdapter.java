@@ -125,6 +125,7 @@ public class PoglavljaListaAdapter extends ArrayAdapter<Poglavlje>{
 
                             btnAzuriraj = (Button) promptView.findViewById(R.id.btnAzuriraj);
 
+
                             btnIzbrisi.setOnClickListener(new View.OnClickListener() {
                                 public void onClick(View v) {
                                     alertD.dismiss();

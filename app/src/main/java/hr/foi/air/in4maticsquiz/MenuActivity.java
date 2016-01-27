@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import hr.foi.air.in4maticsquiz.core.DataLoader;
+import hr.foi.air.in4maticsquiz.loaders.WebServiceDataLoader;
 import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;
 
 /*

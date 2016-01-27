@@ -120,7 +120,7 @@ public class UserQuizResultPushOnWebService extends AsyncTask<String, String, St
     @Override
     protected void onPostExecute(String result){
         /*
-            ako vraća 0 tada je došlo do greške prilikom registracije
+            ako vraća 0 tada je došlo do greške prilikom spremanja u bazu
          */
         if(result.equals("0")){
             Toast toast = Toast.makeText(context, "Došlo je do greške. Pokušajte ponovo.", Toast.LENGTH_SHORT);
