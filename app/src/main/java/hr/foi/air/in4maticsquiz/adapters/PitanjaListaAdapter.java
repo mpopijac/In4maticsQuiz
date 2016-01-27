@@ -54,16 +54,15 @@ public class PitanjaListaAdapter extends ArrayAdapter<Pitanja> {
             convertView = vi.inflate(R.layout.fragment_pitanja_lista,null);
 
             holder =new ViewHolder();
-            holder.pitanje=(TextView) convertView.findViewById(R.id.pitanje);
-
+            holder.pitanje=(TextView) convertView.findViewById(R.id.pitanjeAzuriraj);
             convertView.setTag(holder);
 
             holder.pitanje.setOnLongClickListener(
-                    new View.OnLongClickListener(){
+                    new View.OnLongClickListener() {
                         public boolean onLongClick(View v) {
                             TextView tv = (TextView) v;
                             pitanje = (Pitanja) tv.getTag();
-                            Log.i("LongClickActivated","jupi");
+                            Log.i("LongClickActivated", pitanje.getPitanje());
 
                             LayoutInflater layoutInflater = LayoutInflater.from(getContext());
                             View promptView = layoutInflater.inflate(R.layout.dialog_azuriraj_pitanja, null);
@@ -76,6 +75,7 @@ public class PitanjaListaAdapter extends ArrayAdapter<Pitanja> {
 
                             btnIzbrisiPit.setOnClickListener(new View.OnClickListener() {
                                 public void onClick(View v) {
+                                    alertD.dismiss();
                                     popisPitanjaLista.remove(pitanje);
                                     notifyDataSetChanged();
                                     pitanje.setObrisano(1);
@@ -110,20 +110,26 @@ public class PitanjaListaAdapter extends ArrayAdapter<Pitanja> {
                             alertD.setView(promptView);
 
                             alertD.show();
-
-
                             return false;
                         }
                     }
             );
 
+
+
+
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
-        Pitanja pitanje = popisPitanjaLista.get(position);
-        holder.pitanje.setText(pitanje.getPitanje());
+        Pitanja pitanja = popisPitanjaLista.get(position);
+        holder.pitanje.setText(pitanja.getPitanje());
+
+        holder.pitanje.setTag(pitanja);
 
         return convertView;
     }
-
 }
+
+
+
+
