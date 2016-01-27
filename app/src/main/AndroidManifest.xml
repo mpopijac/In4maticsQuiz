@@ -27,18 +27,18 @@
             android:name=".MenuActivity"
             android:label="@string/title_activity_registracija"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".ProvjeriZnanjeActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
         <activity android:name=".RangListeActivity" />
         <activity
             android:name=".PoglavljaActivity"
-            android:label="Ažuriranje poglavlja"></activity>
+            android:label="Ažuriranje poglavlja" />
         <activity
             android:name=".PitanjaActivity"
             android:label="@string/title_activity_pitanja"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".DodajNovoPitanje"></activity>
     </application>
 
 </manifest>
