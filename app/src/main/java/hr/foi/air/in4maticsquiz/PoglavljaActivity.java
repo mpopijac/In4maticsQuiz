@@ -42,7 +42,7 @@ public class PoglavljaActivity extends AppCompatActivity {
     ArrayList<Poglavlje> kopija = new ArrayList<Poglavlje>();
     //List<poglavljeLista> listaZaPrikazArrayList = new CopyOnWriteArrayList<>();
     private PoglavljaListaAdapter poglavljaAdapter;
-    Long id;
+
     private EditText imePoglavlja;
     Button btnDodaj;
     AlertDialog alertDodaj;
@@ -86,16 +86,8 @@ public class PoglavljaActivity extends AppCompatActivity {
                         addToBase(p.getIDpoglavlje(), p.getNaziv(), p.getUkljuceno());
 
                         Poglavlje poSave = new Poglavlje();
-
-                        List<Poglavlje> poId = new ArrayList<Poglavlje>();
-                        poId = new Select().from(Poglavlje.class).execute();
-
-                        for(Poglavlje i: poId){
-                            id=i.getIDpoglavlje();
-                        }
-                        Log.i("ID: ",Long.toString(id));
-                        id++;
-                        poSave.setIDpoglavlje(id);
+                        Log.i("sranje:",Long.toString(Azuriranje.getInstance().getZadnjeDodanoPoglavljeId()));
+                        poSave.setIDpoglavlje(Azuriranje.getInstance().getZadnjeDodanoPoglavljeId());
                         poSave.setNaziv(p.getNaziv());
                         poSave.setUkljuceno(p.getUkljuceno());
                         poSave.setObrisano(p.getObrisano());

@@ -19,6 +19,7 @@ import hr.foi.air.in4maticsquiz.PoglavljaActivity;
 import hr.foi.air.in4maticsquiz.core.DataLoader;
 import hr.foi.air.in4maticsquiz.db.Poglavlje;
 import hr.foi.air.in4maticsquiz.loaders.WebServiceDataLoader;
+import hr.foi.air.in4maticsquiz.singletons.Azuriranje;
 
 /**
  * Created by Matija Popijač on 27.1.2016..
@@ -145,7 +146,7 @@ public class AddUpdateDeletePoglavlja extends AsyncTask<String,String, String> {
 
         }else{
             Log.i("Uspješno: idPog ", result);
-
+            Azuriranje.getInstance().setZadnjeDodanoPoglavljeId(Integer.parseInt(result));
             //pokreni sinkronizaciju tamo gdje se i poziva klasa
 
         }
