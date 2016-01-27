@@ -24,6 +24,7 @@ public class PitanjaActivity extends AppCompatActivity {
 
     private List<Pitanja> pitanjasArrayList = new ArrayList<Pitanja>();
     private PitanjaListaAdapter pitanjaAdapter;
+    ArrayList<Pitanja> listaZaPrikazArrayList = new ArrayList<Pitanja>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +54,16 @@ public class PitanjaActivity extends AppCompatActivity {
         pitanjasArrayList = new Select().from(Pitanja.class).where("IDrazred==?", PrijavljeniKorisnik.getInstance().getOdabraniRazred()).execute();
 
 
+        for (Pitanja pitanje :pitanjasArrayList){
+                if(pitanje.getObrisano()==0){
+                    listaZaPrikazArrayList.add(pitanje);
+                    
+                }
+        }
+
 
         ///adapter za prikaz rezultata fali
-        pitanjaAdapter = new PitanjaListaAdapter(this, R.layout.fragment_pitanja_lista, pitanjasArrayList);
+        pitanjaAdapter = new PitanjaListaAdapter(this, R.layout.fragment_pitanja_lista, listaZaPrikazArrayList);
         ListView listView = (ListView)findViewById(R.id.listPitanja);
 
 
