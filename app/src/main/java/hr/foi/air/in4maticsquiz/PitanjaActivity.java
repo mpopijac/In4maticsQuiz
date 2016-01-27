@@ -21,6 +21,7 @@ import hr.foi.air.in4maticsquiz.db.Poglavlje;
 import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;
 
 public class PitanjaActivity extends AppCompatActivity {
+
     private List<Pitanja> pitanjasArrayList = new ArrayList<Pitanja>();
     private PitanjaListaAdapter pitanjaAdapter;
 

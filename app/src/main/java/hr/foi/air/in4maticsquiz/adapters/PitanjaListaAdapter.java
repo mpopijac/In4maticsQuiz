@@ -19,6 +19,7 @@ import java.util.List;
 import hr.foi.air.in4maticsquiz.R;
 import hr.foi.air.in4maticsquiz.db.Pitanja;
 import hr.foi.air.in4maticsquiz.db.Poglavlje;
+import hr.foi.air.in4maticsquiz.singletons.Azuriranje;
 
 /**
  * Created by Dario on 26.1.2016..
@@ -31,6 +32,7 @@ public class PitanjaListaAdapter extends ArrayAdapter<Pitanja> {
 
     Button btnIzbrisiPit,btnAzurirajPit;
     AlertDialog alertD;
+    private Boolean postojiUListi = false;
 
     public PitanjaListaAdapter(Context context, int textViewResourceId, List<Pitanja> lista) {
         super(context, textViewResourceId, lista);
@@ -74,6 +76,27 @@ public class PitanjaListaAdapter extends ArrayAdapter<Pitanja> {
 
                             btnIzbrisiPit.setOnClickListener(new View.OnClickListener() {
                                 public void onClick(View v) {
+                                    popisPitanjaLista.remove(pitanje);
+                                    notifyDataSetChanged();
+                                    pitanje.setObrisano(1);
+                                    pitanje.updatePitanja(pitanje);
+
+                                    //zastavica za provjeru dali postoji već u listi za ažuriranje
+                                    postojiUListi=false;
+
+                                    //provjeravanje dali postoji promjenjeni element već u listi, ako postoji da se promjeni samo status
+                                    for (Pitanja pit : Azuriranje.getInstance().getPitanjaLista()){
+                                        if(pit==pitanje){
+                                            postojiUListi=true;
+                                            pit.setObrisano(pitanje.getObrisano());
+                                            break;
+
+                                        }
+                                    }
+                                    //ako ne postoji u listi, da se doda u listu
+                                    if(postojiUListi==false){
+                                        Azuriranje.getInstance().getPitanjaLista().add(pitanje);
+                                    }
 
                                 }
                             });
@@ -81,7 +104,6 @@ public class PitanjaListaAdapter extends ArrayAdapter<Pitanja> {
                             btnAzurirajPit.setOnClickListener(new View.OnClickListener() {
                                 public void onClick(View v) {
                                     alertD.dismiss();
-
                                 }
                             });
 
