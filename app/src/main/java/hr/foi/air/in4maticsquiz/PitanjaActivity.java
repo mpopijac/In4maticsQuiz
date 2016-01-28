@@ -38,8 +38,10 @@ public class PitanjaActivity extends AppCompatActivity {
         dodaj.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                */
                 Intent in=new Intent(PitanjaActivity.this,DodajNovoPitanje.class);
                 startActivity(in);
             }
@@ -50,9 +52,6 @@ public class PitanjaActivity extends AppCompatActivity {
 
     private void prikaziListu() {
 
-
-
-
         //dohvačanje iz baze pitanja samo iz odabranog razreda
         pitanjasArrayList = new Select().from(Pitanja.class).where("IDrazred==?", PrijavljeniKorisnik.getInstance().getOdabraniRazred()).execute();
 
@@ -60,16 +59,11 @@ public class PitanjaActivity extends AppCompatActivity {
         for (Pitanja pitanje :pitanjasArrayList){
                 if(pitanje.getObrisano()==0){
                     listaZaPrikazArrayList.add(pitanje);
-                    
                 }
         }
-
-
-        ///adapter za prikaz rezultata fali
+        ///adapter za prikaz rezultata
         pitanjaAdapter = new PitanjaListaAdapter(this, R.layout.fragment_pitanja_lista, listaZaPrikazArrayList);
         ListView listView = (ListView)findViewById(R.id.listPitanja);
-
-
         listView.setAdapter(pitanjaAdapter);
 
 

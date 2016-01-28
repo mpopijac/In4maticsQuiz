@@ -20,13 +20,18 @@ import com.activeandroid.query.Select;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import hr.foi.air.in4maticsquiz.AsyncTaskClass.AddUpdateDeleteOdgovora;
+import hr.foi.air.in4maticsquiz.AsyncTaskClass.AddUpdateDeletePitanja;
+import hr.foi.air.in4maticsquiz.AsyncTaskClass.AddUpdateDeletePitanja;
 import hr.foi.air.in4maticsquiz.adapters.CheckboxPoglavljaAdapter;
 import hr.foi.air.in4maticsquiz.adapters.PoglavljaListaAdapter;
 import hr.foi.air.in4maticsquiz.db.Odgovor;
 import hr.foi.air.in4maticsquiz.db.Pitanja;
 import hr.foi.air.in4maticsquiz.db.Poglavlje;
+import hr.foi.air.in4maticsquiz.singletons.Azuriranje;
 import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;
 
 public class DodajNovoPitanje extends AppCompatActivity implements View.OnClickListener {
@@ -39,6 +44,12 @@ public class DodajNovoPitanje extends AppCompatActivity implements View.OnClickL
     private List<Poglavlje> poglavljeArrayList = new ArrayList<Poglavlje>();
     private List<Pitanja> pitanjasArrayList = new ArrayList<Pitanja>();
     ArrayList<Poglavlje> listaZaPrikazArrayList = new ArrayList<Poglavlje>();
+    Poglavlje po = new Poglavlje();
+    List<Poglavlje> po2 = new ArrayList<Poglavlje>();
+    ArrayList<Odgovor> odgovorLista = new ArrayList<Odgovor>();
+
+    Boolean zastavica=false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +65,7 @@ public class DodajNovoPitanje extends AppCompatActivity implements View.OnClickL
 
         //dohvačanje iz baze neobrisanih poglavlja
         poglavljeArrayList = new Select().from(Poglavlje.class).where("obrisano==?", 0).execute();
+
         //dohvačanje iz baze pitanja samo iz odabranog razreda
         pitanjasArrayList = new Select().from(Pitanja.class).where("IDrazred==?", PrijavljeniKorisnik.getInstance().getOdabraniRazred()).execute();
 
@@ -67,6 +79,31 @@ public class DodajNovoPitanje extends AppCompatActivity implements View.OnClickL
                 }
             }
         }
+
+        pitanjasArrayList = new Select().from(Pitanja.class).execute();
+
+        ArrayList<Long> idp = new ArrayList<Long>();
+        for (Pitanja pitanje: pitanjasArrayList){
+            idp.add(pitanje.getIDpoglavlje());
+        }
+
+        for (Long x:idp){
+            for (Poglavlje poglavlje: poglavljeArrayList){
+                if(x==poglavlje.getIDpoglavlje()){
+                    po=poglavlje;
+                    zastavica=true;
+                }
+            }
+            if(zastavica){
+                poglavljeArrayList.remove(po);
+                zastavica=false;
+            }
+        }
+
+        for(Poglavlje e:poglavljeArrayList){
+            listaZaPrikazArrayList.add(e);
+        }
+
 
         poglavljaAdapter = new CheckboxPoglavljaAdapter(this, R.layout.fragment_checkbox_layout, listaZaPrikazArrayList);
         ListView listView = (ListView)findViewById(R.id.listPoglavlje);
@@ -102,6 +139,7 @@ public class DodajNovoPitanje extends AppCompatActivity implements View.OnClickL
                     Toast.makeText(getApplicationContext(), R.string.greska_pitanje, Toast.LENGTH_LONG).show();
 
                 } else {
+
                     LayoutInflater layoutInflater = LayoutInflater.from(DodajNovoPitanje.this);
                     View promptView = layoutInflater.inflate(R.layout.dialog_dodaj_odgovor, null);
                     alertD = new AlertDialog.Builder(DodajNovoPitanje.this).create();
@@ -126,20 +164,61 @@ public class DodajNovoPitanje extends AppCompatActivity implements View.OnClickL
 
                 break;
             case R.id.btnDodTocanOdg:
+                Odgovor o = new Odgovor();
+                o.setIDodgovor(-1);
+                o.setNaziv(txtodgovor.getText().toString());
+                o.setTocan(1);
+                o.setIDpitanja(-1);
+                o.setObrisano(0);
 
+                odgovorLista.add(o);
                 Toast.makeText(getApplicationContext(), R.string.potvrdaOdgovor, Toast.LENGTH_LONG).show();
                 txtodgovor.getText().clear();
 
 
                 break;
             case R.id.btnDodNetocanOdg:
+                Odgovor on = new Odgovor();
+                on.setIDodgovor(-1);
+                on.setNaziv(txtodgovor.getText().toString());
+                on.setTocan(0);
+                on.setIDpitanja(-1);
+                on.setObrisano(0);
+
+                odgovorLista.add(on);
                 Toast.makeText(getApplicationContext(), R.string.potvrdaOdgovor, Toast.LENGTH_LONG).show();
                 txtodgovor.getText().clear();
                 break;
 
             case R.id.btnPovratak:
+
+
+                po2 = new Select().from(Poglavlje.class).where("naziv==?",tekstPoglavlja.getText().toString()).execute();
+
+                //dodavanje this, 0 dodavanje, 0 obrisano
+                new AddUpdateDeletePitanja(this, 0, "0").execute("0", tekstPitanja.getText().toString(), Long.toString(po2.get(0).getIDpoglavlje()), Long.toString(PrijavljeniKorisnik.getInstance().getOdabraniRazred()));
+
+                Pitanja pi = new Pitanja();
+                pi.setObrisano(0);
+                pi.setIDrazred(PrijavljeniKorisnik.getInstance().getOdabraniRazred());
+                pi.setIDpoglavlje(po2.get(0).getIDpoglavlje());
+                pi.setPitanje(tekstPitanja.getText().toString());
+                pi.setIDpitanja(Azuriranje.getInstance().getZadnjeDodanoPitanjeId());
+                pi.save();
+
+                Log.i("pitanje",tekstPitanja.getText().toString());
+                for (Odgovor oi:odgovorLista){
+                    Log.i("odgovori", oi.getNaziv());
+                    oi.setIDpitanja(Azuriranje.getInstance().getZadnjeDodanoPitanjeId());
+                    //dodavanje this, 0 dodavanje, 0 obrisano
+                    new AddUpdateDeleteOdgovora(this, 0, "0").execute("0",oi.getNaziv(), Long.toString(oi.getTocan()), Long.toString(oi.getIDpitanja()));
+                    oi.setIDodgovor(Azuriranje.getInstance().getZadnjiDodaniOdgovorId());
+                    oi.save();
+                }
+                odgovorLista.clear();
                 alertD.dismiss();
                 DodajNovoPitanje.this.finish();
+
         }
 
     }

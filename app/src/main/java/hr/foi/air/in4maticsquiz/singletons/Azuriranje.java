@@ -11,12 +11,17 @@ import hr.foi.air.in4maticsquiz.db.Poglavlje;
  */
 public class Azuriranje {
 
+
+
     private static Azuriranje ourInstance = null;
 
     public ArrayList<Poglavlje> poglavljeLista = new ArrayList<Poglavlje>();
     public Integer zadnjeDodanoPoglavljeId = 0;
+    public Integer zadnjeDodanoPitanjeId = 0;
+    public Integer zadnjiDodaniOdgovorId = 0;
     public ArrayList<Pitanja> pitanjaLista = new ArrayList<Pitanja>();
     public Long idPit;
+    public Pitanja pitanje =new Pitanja();
 
     public static Azuriranje getInstance() {
         if (ourInstance == null){
@@ -63,5 +68,29 @@ public class Azuriranje {
 
     public void setIdPit(Long idPit) {
         this.idPit = idPit;
+    }
+
+    public Pitanja getPitanje() {
+        return pitanje;
+    }
+
+    public void setPitanje(Pitanja poglavlje) {
+        this.pitanje = poglavlje;
+    }
+
+    public Integer getZadnjeDodanoPitanjeId() {
+        return zadnjeDodanoPitanjeId;
+    }
+
+    public void setZadnjeDodanoPitanjeId(Integer zadnjeDodanoPitanjeId) {
+        this.zadnjeDodanoPitanjeId = zadnjeDodanoPitanjeId;
+    }
+
+    public Integer getZadnjiDodaniOdgovorId() {
+        return zadnjiDodaniOdgovorId;
+    }
+
+    public void setZadnjiDodaniOdgovorId(Integer zadnjiDodaniOdgovorId) {
+        this.zadnjiDodaniOdgovorId = zadnjiDodaniOdgovorId;
     }
 }
