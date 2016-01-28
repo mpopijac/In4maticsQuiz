@@ -8,7 +8,7 @@
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ažuriranje pitanja"
+        android:text="@string/title_activity_pitanja"
         android:gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -21,7 +21,7 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center_vertical|center_horizontal"
         android:layout_marginTop="20dp"
-        android:text="Izbriši" />
+        android:text="@string/txtBtnIzbrisi" />
 
 
     <Button
@@ -31,7 +31,7 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center_vertical|center_horizontal"
         android:layout_marginTop="20dp"
-        android:text="Ažuriraj" />
+        android:text="@string/txtBtnAzuriraj" />
 
 
 </LinearLayout>

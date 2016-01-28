@@ -38,5 +38,29 @@
     <string name="btnRang">  Rang  liste </string>
     <string name="title_activity_poglavlja">Ažuriranje poglavlja</string>
     <string name="title_activity_pitanja">Ažuriranje pitanja</string>
+    <string name="txtNovoPitanje">Novo pitanje</string>
+    <string name="txtTekstPitanja">Tekst pitanja: </string>
+    <string name="txtUnesiPitanja">Unesi tekst pitanja</string>
+    <string name="txtPoglavlja">Poglavlja: </string>
+    <string name="txtBtnDodaj">Dodaj pitanje</string>
+    <string name="txtVrijeme">Vrijeme:</string>
+    <string name="txtTimer">New Text</string>
+    <string name="txtBtnSljedece">Sljedece</string>
+    <string name="txtBtnIzbrisi">Izbrisi</string>
+    <string name="txtUnesiIme">Unesi drugo ime</string>
+    <string name="txtBtnProimjeni">Promijeni ime</string>
+    <string name="txtBtnAzuriraj">Ažuriraj</string>
+    <string name="txtPitanje">PITANJE</string>
+    <string name="txtUnesiOdg">Unesi tekst odgovora</string>
+    <string name="txtBtnTocan">Dodaj točan odgovor</string>
+    <string name="txtBtnNeTocan">Dodaj netočan odgovor</string>
+    <string name="txtBtnPovratak">Povratak</string>
+    <string name="txDodajPog">Dodavanje poglavlja</string>
+    <string name="txUnesiPog">Unesi ime poglavlja</string>
+    <string name="txBtnDodaj">Dodaj</string>
+    <string name="greska_pitanje">Niste upisali pitanje! </string>Odgovor je dodan!
+    <string name="potvrdaOdgovor">Odgovor je dodan! </string>
+    <string name="greskaPoglavlje">Niste upisali poglavlje! </string>
+    <string name="potvrdaDodPoglavlje">Poglavlje je dodano!! Trebate dodati pitanje!!" </string>
 
 </resources>

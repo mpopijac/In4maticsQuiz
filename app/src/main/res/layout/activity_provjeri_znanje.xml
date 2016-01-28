@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Vrijeme:"
+        android:text="@string/txtVrijeme"
         android:id="@+id/textViewVrijeme"
         android:layout_gravity="right"
         android:textStyle="bold" />
@@ -27,7 +27,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="@string/txtTimer"
         android:id="@+id/vrijemeTimer"
         android:layout_gravity="right" />
 
@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Sljedece"
+        android:text="@string/txtBtnSljedece"
         android:id="@+id/btnSljedeceP"
 
         android:layout_gravity="center|bottom"

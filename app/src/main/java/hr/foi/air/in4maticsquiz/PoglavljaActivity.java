@@ -77,7 +77,7 @@ public class PoglavljaActivity extends AppCompatActivity {
                 btnDodaj.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         if(TextUtils.isEmpty(imePoglavlja.getText().toString())) {
-                            Toast.makeText(getApplicationContext(), "Niste upisali poglavlje! ", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), R.string.greskaPoglavlje, Toast.LENGTH_LONG).show();
 
                         }
 
@@ -102,7 +102,7 @@ public class PoglavljaActivity extends AppCompatActivity {
                             poSave.save();
 
 
-                            Snackbar.make(view, "Poglavlje je dodano!! " + "\nTrebate dodati pitanje!!", Snackbar.LENGTH_LONG)
+                            Snackbar.make(view, R.string.potvrdaDodPoglavlje, Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
 
                         }

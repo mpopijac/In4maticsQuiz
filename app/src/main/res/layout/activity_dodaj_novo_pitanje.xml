@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Novo pitanje"
+        android:text="@string/txtNovoPitanje"
         android:id="@+id/naslov"
         android:layout_gravity="center_horizontal"
         android:textAlignment="center"
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Tekst pitanja: "
+        android:text="@string/txtTekstPitanja"
         android:id="@+id/nasl"
         android:layout_gravity="left"
         android:textAlignment="center"
@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:hint="Unesi tekst pitanja"
+        android:hint="@string/txtUnesiPitanja"
         />
     <LinearLayout
         android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Poglavlje "
+            android:text="@string/txtPoglavlja"
             android:id="@+id/pogl"
             android:layout_gravity="left"
             android:textAlignment="center"
@@ -84,7 +84,7 @@
         <Button android:id="@+id/btnDodajPitanje"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Dodaj pitanje"/>
+            android:text="@string/txtBtnDodaj"/>
 
     </LinearLayout>
 </LinearLayout>

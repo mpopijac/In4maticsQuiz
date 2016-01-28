@@ -8,7 +8,7 @@
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ažuriranje poglavlja"
+        android:text="@string/title_activity_poglavlja"
         android:gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -21,7 +21,7 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center_vertical|center_horizontal"
         android:layout_marginTop="20dp"
-        android:text="Izbriši" />
+        android:text="@string/txtBtnIzbrisi" />
 
     <EditText
         android:id="@+id/prIme"
@@ -31,7 +31,7 @@
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
         android:layout_marginTop="20dp"
-        android:hint="Unesi drugo ime"/>
+        android:hint="@string/txtUnesiIme"/>
 
     <Button
         android:id="@+id/btnAzuriraj"
@@ -40,7 +40,7 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center_vertical|center_horizontal"
         android:layout_marginTop="20dp"
-        android:text="Promijeni ime" />
+        android:text="@string/txtBtnProimjeni" />
 
 
 </LinearLayout>

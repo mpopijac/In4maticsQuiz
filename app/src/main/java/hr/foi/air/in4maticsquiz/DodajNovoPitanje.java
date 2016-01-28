@@ -99,7 +99,7 @@ public class DodajNovoPitanje extends AppCompatActivity implements View.OnClickL
 
                 if (TextUtils.isEmpty(tekstPitanja.getText().toString()) || TextUtils.isEmpty(tekstPoglavlja.getText().toString())) {
 
-                    Toast.makeText(getApplicationContext(), "Niste upisali pitanje! ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.greska_pitanje, Toast.LENGTH_LONG).show();
 
                 } else {
                     LayoutInflater layoutInflater = LayoutInflater.from(DodajNovoPitanje.this);
@@ -127,13 +127,13 @@ public class DodajNovoPitanje extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.btnDodTocanOdg:
 
-                Toast.makeText(getApplicationContext(), "Odgovor je dodan! ", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.potvrdaOdgovor, Toast.LENGTH_LONG).show();
                 txtodgovor.getText().clear();
 
 
                 break;
             case R.id.btnDodNetocanOdg:
-                Toast.makeText(getApplicationContext(), "Odgovor je dodan! ", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.potvrdaOdgovor, Toast.LENGTH_LONG).show();
                 txtodgovor.getText().clear();
                 break;
 

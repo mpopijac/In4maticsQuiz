@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="PITANJE"
+        android:text="@string/txtPitanje"
         android:id="@+id/txtDodajOdgNaPit"
         android:layout_gravity="center"
         android:textAlignment="center"
@@ -35,7 +35,7 @@
 
 
         <Button
-            android:text="Dodaj točan odgovor"
+            android:text="@string/txtBtnTocan"
             android:textSize="15sp"
             android:layout_width="110dp"
             android:layout_height="match_parent"
@@ -44,7 +44,7 @@
         </Button>
 
 
-        <Button android:text="Dodaj netočan odgovor"
+        <Button android:text="@string/txtBtnNeTocan"
             android:textSize="15sp"
             android:layout_width="110dp"
             android:layout_height="match_parent"
@@ -52,7 +52,7 @@
             >
         </Button>
 
-        <Button android:text="Povratak"
+        <Button android:text="@string/txtBtnPovratak"
             android:textSize="15sp"
             android:layout_width="110dp"
             android:layout_height="match_parent"
