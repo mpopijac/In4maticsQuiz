@@ -1,6 +1,7 @@
 package hr.foi.air.in4maticsquiz.adapters;
 
 import android.app.AlertDialog;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -14,14 +15,19 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.activeandroid.query.Select;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import hr.foi.air.in4maticsquiz.AsyncTaskClass.AddUpdateDeletePitanja;
 import hr.foi.air.in4maticsquiz.R;
 import hr.foi.air.in4maticsquiz.azuriraj;
+import hr.foi.air.in4maticsquiz.db.Odgovor;
 import hr.foi.air.in4maticsquiz.db.Pitanja;
 import hr.foi.air.in4maticsquiz.db.Poglavlje;
 import hr.foi.air.in4maticsquiz.singletons.Azuriranje;
+import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;
 
 /**
  * Created by Dario on 26.1.2016..
@@ -31,6 +37,7 @@ import hr.foi.air.in4maticsquiz.singletons.Azuriranje;
 public class PitanjaListaAdapter extends ArrayAdapter<Pitanja> {
     private List<Pitanja> popisPitanjaLista;
     private Pitanja pitanje;
+    List<Odgovor> odgovori = new ArrayList<Odgovor>();
 
     Button btnIzbrisiPit,btnAzurirajPit;
     AlertDialog alertD;
@@ -83,21 +90,14 @@ public class PitanjaListaAdapter extends ArrayAdapter<Pitanja> {
                                     pitanje.setObrisano(1);
                                     pitanje.updatePitanja(pitanje);
 
-                                    //zastavica za provjeru dali postoji već u listi za ažuriranje
-                                    postojiUListi=false;
+                                    //dodavanje this, 0 dodavanje - 1 azuriranje, 0 ne obrisano - 1 obrisano
+                                    new AddUpdateDeletePitanja(getContext().getApplicationContext(), 1, pitanje.getObrisano().toString()).execute(Long.toString(pitanje.getIDpitanja()),pitanje.getPitanje(), Long.toString(pitanje.getIDpoglavlje()),Long.toString(PrijavljeniKorisnik.getInstance().getOdabraniRazred()));
 
-                                    //provjeravanje dali postoji promjenjeni element već u listi, ako postoji da se promjeni samo status
-                                    for (Pitanja pit : Azuriranje.getInstance().getPitanjaLista()){
-                                        if(pit==pitanje){
-                                            postojiUListi=true;
-                                            pit.setObrisano(pitanje.getObrisano());
-                                            break;
+                                    odgovori = new Select().from(Odgovor.class).where("IDpitanja==?",pitanje.getIDpitanja()).execute();
 
-                                        }
-                                    }
-                                    //ako ne postoji u listi, da se doda u listu
-                                    if(postojiUListi==false){
-                                        Azuriranje.getInstance().getPitanjaLista().add(pitanje);
+                                    for (Odgovor o:odgovori){
+                                        o.setObrisano(1);
+                                        o.updateOdgovor(o);
                                     }
 
                                 }

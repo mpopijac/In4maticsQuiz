@@ -1,6 +1,7 @@
 package hr.foi.air.in4maticsquiz;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -207,7 +208,7 @@ public class DodajNovoPitanje extends AppCompatActivity implements View.OnClickL
                 pi.save();
 
                 Odgovor odg = new Odgovor();
-                Log.i("pitanje",tekstPitanja.getText().toString());
+                Log.i("pitanje", tekstPitanja.getText().toString());
                 for (Odgovor oi:odgovorLista){
                     Log.i("odgovori", oi.getNaziv());
                     oi.setIDpitanja(Azuriranje.getInstance().getZadnjeDodanoPitanjeId());
@@ -217,10 +218,14 @@ public class DodajNovoPitanje extends AppCompatActivity implements View.OnClickL
                     odg=oi;
                     odg.save();
                 }
-                pitanjaAdapter.notifyDataSetChanged();
+
                 odgovorLista.clear();
                 alertD.dismiss();
                 DodajNovoPitanje.this.finish();
+                /*
+                Intent intent = new Intent(DodajNovoPitanje.this, PitanjaActivity.class);
+                startActivity(intent);
+                */
 
         }
 
