@@ -1,5 +1,6 @@
 package hr.foi.air.in4maticsquiz.AsyncTaskClass;
 
+import android.app.Application;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -11,7 +12,10 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
+import hr.foi.air.in4maticsquiz.db.Odgovor;
+import hr.foi.air.in4maticsquiz.db.Pitanja;
 import hr.foi.air.in4maticsquiz.singletons.Azuriranje;
 
 /**
@@ -139,9 +143,32 @@ public class AddUpdateDeletePitanja extends AsyncTask<String,String, String> {
             Toast toast = Toast.makeText(context, "Došlo je do greške. Pokušajte ponovo.", Toast.LENGTH_SHORT);
             toast.show();
 
+
         }else{
             Log.i("Uspješno: idPog ", result);
-            Azuriranje.getInstance().setZadnjeDodanoPitanjeId(Integer.parseInt(result));
+            //Azuriranje.getInstance().setZadnjeDodanoPitanjeId(Long.getLong(result));
+            if (Azuriranje.getInstance().getZastavica()){
+                Pitanja pitanje = new Pitanja();
+                pitanje= Azuriranje.getInstance().getPitanje();
+                pitanje.setIDpitanja(Long.parseLong(result));
+                pitanje.save();
+
+                Odgovor odg = new Odgovor();
+                ArrayList<Odgovor> odgovorLista = new ArrayList<>();
+                odgovorLista=Azuriranje.getInstance().getOdgovor();
+                for (Odgovor oi:odgovorLista){
+                    Log.i("odgovori", oi.getNaziv());
+                    //oi.setIDpitanja();
+
+                    //dodavanje this, 0 dodavanje, 0 obrisano
+                    new AddUpdateDeleteOdgovora(context, 0, "0").execute("0", oi.getNaziv(), Long.toString(oi.getTocan()), Long.toString(oi.getIDpitanja()));
+                    oi.setIDodgovor(Azuriranje.getInstance().getZadnjiDodaniOdgovorId());
+                    odg=oi;
+                    odg.save();
+                }
+                Azuriranje.getInstance().setZastavica(false);
+            }
+
 
 
         }

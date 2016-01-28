@@ -18,17 +18,12 @@ import android.widget.Toast;
 
 import com.activeandroid.query.Select;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import hr.foi.air.in4maticsquiz.AsyncTaskClass.AddUpdateDeleteOdgovora;
 import hr.foi.air.in4maticsquiz.AsyncTaskClass.AddUpdateDeletePitanja;
-import hr.foi.air.in4maticsquiz.AsyncTaskClass.AddUpdateDeletePitanja;
 import hr.foi.air.in4maticsquiz.adapters.CheckboxPoglavljaAdapter;
-import hr.foi.air.in4maticsquiz.adapters.PoglavljaListaAdapter;
 import hr.foi.air.in4maticsquiz.db.Odgovor;
 import hr.foi.air.in4maticsquiz.db.Pitanja;
 import hr.foi.air.in4maticsquiz.db.Poglavlje;
@@ -195,31 +190,37 @@ public class DodajNovoPitanje extends AppCompatActivity implements View.OnClickL
 
 
                 po2 = new Select().from(Poglavlje.class).where("naziv==?",tekstPoglavlja.getText().toString()).execute();
-
-                //dodavanje this, 0 dodavanje, 0 obrisano
-                new AddUpdateDeletePitanja(this, 0, "0").execute("0", tekstPitanja.getText().toString(), Long.toString(po2.get(0).getIDpoglavlje()), Long.toString(PrijavljeniKorisnik.getInstance().getOdabraniRazred()));
-
                 Pitanja pi = new Pitanja();
                 pi.setObrisano(0);
                 pi.setIDrazred(PrijavljeniKorisnik.getInstance().getOdabraniRazred());
                 pi.setIDpoglavlje(po2.get(0).getIDpoglavlje());
                 pi.setPitanje(tekstPitanja.getText().toString());
-                pi.setIDpitanja(Azuriranje.getInstance().getZadnjeDodanoPitanjeId());
-                pi.save();
 
+                //pi.setIDpitanja(i);
+                Azuriranje.getInstance().setPitanje(pi);
+                //pi.save();
+                Azuriranje.getInstance().setZastavica(true);
+                //dodavanje this, 0 dodavanje, 0 obrisano
+                new AddUpdateDeletePitanja(this, 0, "0").execute("0", tekstPitanja.getText().toString(), Long.toString(po2.get(0).getIDpoglavlje()), Long.toString(PrijavljeniKorisnik.getInstance().getOdabraniRazred()));
+
+                Azuriranje.getInstance().setOdgovor(odgovorLista);
+                /*
                 Odgovor odg = new Odgovor();
                 Log.i("pitanje", tekstPitanja.getText().toString());
                 for (Odgovor oi:odgovorLista){
                     Log.i("odgovori", oi.getNaziv());
-                    oi.setIDpitanja(Azuriranje.getInstance().getZadnjeDodanoPitanjeId());
+                    //oi.setIDpitanja();
+
                     //dodavanje this, 0 dodavanje, 0 obrisano
                     new AddUpdateDeleteOdgovora(this, 0, "0").execute("0", oi.getNaziv(), Long.toString(oi.getTocan()), Long.toString(oi.getIDpitanja()));
                     oi.setIDodgovor(Azuriranje.getInstance().getZadnjiDodaniOdgovorId());
                     odg=oi;
                     odg.save();
                 }
+                */
 
                 odgovorLista.clear();
+
                 alertD.dismiss();
                 DodajNovoPitanje.this.finish();
                 /*

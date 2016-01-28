@@ -11,17 +11,17 @@ import hr.foi.air.in4maticsquiz.db.Poglavlje;
  */
 public class Azuriranje {
 
-
-
     private static Azuriranje ourInstance = null;
 
     public ArrayList<Poglavlje> poglavljeLista = new ArrayList<Poglavlje>();
-    public Integer zadnjeDodanoPoglavljeId = 0;
-    public Integer zadnjeDodanoPitanjeId = 0;
-    public Integer zadnjiDodaniOdgovorId = 0;
+    public Long zadnjeDodanoPoglavljeId;
+    public Long zadnjeDodanoPitanjeId;
+    public Long zadnjiDodaniOdgovorId;
     public ArrayList<Pitanja> pitanjaLista = new ArrayList<Pitanja>();
     public Long idPit;
     public Pitanja pitanje =new Pitanja();
+    public ArrayList<Odgovor> odgovor = new ArrayList<Odgovor>();
+    public Boolean zastavica=false;
 
     public static Azuriranje getInstance() {
         if (ourInstance == null){
@@ -54,11 +54,11 @@ public class Azuriranje {
     }
 
 
-    public Integer getZadnjeDodanoPoglavljeId() {
+    public Long getZadnjeDodanoPoglavljeId() {
         return zadnjeDodanoPoglavljeId;
     }
 
-    public void setZadnjeDodanoPoglavljeId(Integer zadnjeDodanoPoglavljeId) {
+    public void setZadnjeDodanoPoglavljeId(Long zadnjeDodanoPoglavljeId) {
         this.zadnjeDodanoPoglavljeId = zadnjeDodanoPoglavljeId;
     }
 
@@ -74,23 +74,39 @@ public class Azuriranje {
         return pitanje;
     }
 
-    public void setPitanje(Pitanja poglavlje) {
-        this.pitanje = poglavlje;
+    public void setPitanje(Pitanja pitanje) {
+        this.pitanje = pitanje;
     }
 
-    public Integer getZadnjeDodanoPitanjeId() {
+    public Long getZadnjeDodanoPitanjeId() {
         return zadnjeDodanoPitanjeId;
     }
 
-    public void setZadnjeDodanoPitanjeId(Integer zadnjeDodanoPitanjeId) {
+    public void setZadnjeDodanoPitanjeId(Long zadnjeDodanoPitanjeId) {
         this.zadnjeDodanoPitanjeId = zadnjeDodanoPitanjeId;
     }
 
-    public Integer getZadnjiDodaniOdgovorId() {
+    public Long getZadnjiDodaniOdgovorId() {
         return zadnjiDodaniOdgovorId;
     }
 
-    public void setZadnjiDodaniOdgovorId(Integer zadnjiDodaniOdgovorId) {
+    public void setZadnjiDodaniOdgovorId(Long zadnjiDodaniOdgovorId) {
         this.zadnjiDodaniOdgovorId = zadnjiDodaniOdgovorId;
+    }
+
+    public Boolean getZastavica() {
+        return zastavica;
+    }
+
+    public void setZastavica(Boolean zastavica) {
+        this.zastavica = zastavica;
+    }
+
+    public ArrayList<Odgovor> getOdgovor() {
+        return odgovor;
+    }
+
+    public void setOdgovor(ArrayList<Odgovor> odgovor) {
+        this.odgovor = odgovor;
     }
 }

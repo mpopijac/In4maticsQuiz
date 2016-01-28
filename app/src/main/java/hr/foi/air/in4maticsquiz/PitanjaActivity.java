@@ -44,6 +44,7 @@ public class PitanjaActivity extends AppCompatActivity {
                 */
                 Intent in=new Intent(PitanjaActivity.this,DodajNovoPitanje.class);
                 startActivity(in);
+
             }
         });
 
