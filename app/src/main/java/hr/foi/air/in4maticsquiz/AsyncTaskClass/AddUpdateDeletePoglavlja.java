@@ -147,8 +147,16 @@ public class AddUpdateDeletePoglavlja extends AsyncTask<String,String, String> {
 
         }else{
             Log.i("Uspješno: idPog ", result);
-            Azuriranje.getInstance().setZadnjeDodanoPoglavljeId(Long.parseLong(result));
-            //pokreni sinkronizaciju tamo gdje se i poziva klasa
+            if (Azuriranje.getInstance().getZastavica()){
+                Poglavlje po = new Poglavlje();
+                po=Azuriranje.getInstance().getPoglavlje();
+                po.setIDpoglavlje(Long.parseLong(result));
+                po.save();
+                Azuriranje.getInstance().setZastavica(false);
+            }else {
+                Azuriranje.getInstance().setZadnjeDodanoPoglavljeId(Long.parseLong(result));
+            }
+
 
         }
    }

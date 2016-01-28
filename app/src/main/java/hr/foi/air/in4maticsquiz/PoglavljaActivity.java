@@ -90,16 +90,20 @@ public class PoglavljaActivity extends AppCompatActivity {
                             listaZaPrikazArrayList.add(p);
                             poglavljaAdapter.notifyDataSetChanged();
 
-                            //slanje zahtjeva na web server s podacima
-                            addToBase(p.getIDpoglavlje(), p.getNaziv(), p.getUkljuceno());
-
                             Poglavlje poSave = new Poglavlje();
-                            Log.i("sranje:", Long.toString(Azuriranje.getInstance().getZadnjeDodanoPoglavljeId()));
-                            poSave.setIDpoglavlje(Azuriranje.getInstance().getZadnjeDodanoPoglavljeId());
+                            //Log.i("sranje:", Long.toString(Azuriranje.getInstance().getZadnjeDodanoPoglavljeId()));
+                            //poSave.setIDpoglavlje(Azuriranje.getInstance().getZadnjeDodanoPoglavljeId());
                             poSave.setNaziv(p.getNaziv());
                             poSave.setUkljuceno(p.getUkljuceno());
                             poSave.setObrisano(p.getObrisano());
-                            poSave.save();
+                            Azuriranje.getInstance().setPoglavlje(poSave);
+                            //poSave.save();
+
+                            Azuriranje.getInstance().setZastavica(true);
+                            //slanje zahtjeva na web server s podacima
+                            addToBase(p.getIDpoglavlje(), p.getNaziv(), p.getUkljuceno());
+
+
 
 
                             Snackbar.make(view, R.string.potvrdaDodPoglavlje, Snackbar.LENGTH_LONG)
@@ -122,7 +126,7 @@ public class PoglavljaActivity extends AppCompatActivity {
 
 
     private void addToBase(Long id, String naziv, Integer ukljuceno){
-        new AddUpdateDeletePoglavlja(this, 0, "").execute(Long.toString(id), naziv, Integer.toString(ukljuceno));
+        new AddUpdateDeletePoglavlja(this, 0, "0").execute(Long.toString(id), naziv, Integer.toString(ukljuceno));
         //trebalo dodati za sinkronizaciju podataka
 
     }
@@ -134,7 +138,7 @@ public class PoglavljaActivity extends AppCompatActivity {
         //dohvačanje iz baze neobrisanih poglavlja
         poglavljeArrayList = new Select().from(Poglavlje.class).where("obrisano==?", 0).execute();
         //dohvačanje iz baze pitanja samo iz odabranog razreda
-        pitanjasArrayList = new Select().from(Pitanja.class).where("IDrazred==?",PrijavljeniKorisnik.getInstance().getOdabraniRazred()).execute();
+        pitanjasArrayList = new Select().from(Pitanja.class).where("IDrazred==?",PrijavljeniKorisnik.getInstance().getOdabraniRazred()).where("obrisano==?",0).execute();
         
 
         //dodavanje elemenata u listu za prikaz

@@ -29,6 +29,7 @@ import java.util.concurrent.TimeUnit;
 
 import hr.foi.air.in4maticsquiz.AsyncTaskClass.UserQuizResultPushOnWebService;
 import hr.foi.air.in4maticsquiz.core.IzracunBodovaKviza;
+import hr.foi.air.in4maticsquiz.db.Poglavlje;
 import hr.foi.air.in4maticsquiz.fragments.TocnoNetocnoFragment;
 import hr.foi.air.in4maticsquiz.fragments.UnesiTocanPojamFragment;
 import hr.foi.air.in4maticsquiz.fragments.VisePonudenihOdgovoraFragment;
@@ -62,6 +63,7 @@ public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.On
         Integer odabraniRazred = PrijavljeniKorisnik.getInstance().getOdabraniRazred();
 
         pitanja = new Select().from(Pitanja.class).where("IDrazred==?", odabraniRazred).where("obrisano==?",0).orderBy("RANDOM()").limit(brojPitanja).execute();
+
         idPit = new Random().nextInt(pitanja.size());
 
         /*

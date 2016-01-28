@@ -14,6 +14,7 @@ public class Azuriranje {
     private static Azuriranje ourInstance = null;
 
     public ArrayList<Poglavlje> poglavljeLista = new ArrayList<Poglavlje>();
+    public Poglavlje poglavlje = new Poglavlje();
     public Long zadnjeDodanoPoglavljeId;
     public Long zadnjeDodanoPitanjeId;
     public Long zadnjiDodaniOdgovorId;
@@ -108,5 +109,13 @@ public class Azuriranje {
 
     public void setOdgovor(ArrayList<Odgovor> odgovor) {
         this.odgovor = odgovor;
+    }
+
+    public Poglavlje getPoglavlje() {
+        return poglavlje;
+    }
+
+    public void setPoglavlje(Poglavlje poglavlje) {
+        this.poglavlje = poglavlje;
     }
 }

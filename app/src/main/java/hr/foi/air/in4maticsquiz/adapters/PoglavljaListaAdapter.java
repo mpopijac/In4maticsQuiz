@@ -73,13 +73,15 @@ public class PoglavljaListaAdapter extends ArrayAdapter<Poglavlje>{
                         public void onClick(View v) {
                             sw = (Switch) v;
                             Poglavlje poglavlje = (Poglavlje) sw.getTag();
-                            Toast.makeText(getContext().getApplicationContext(), "Ukljuceno: " + sw.getText() + "je" + sw.isChecked(), Toast.LENGTH_LONG).show();
                             //Log.i("Poglavlje x:", poglavlje.getNaziv());
                             //Log.i("Poglavlje status:", Integer.toString(poglavlje.getUkljuceno()));
                             if (sw.isChecked() == true) {
                                 poglavlje.setUkljuceno(1);
+                                Toast.makeText(getContext().getApplicationContext(), "Poglavlje je uključeno.", Toast.LENGTH_LONG).show();
+
                             } else {
                                 poglavlje.setUkljuceno(0);
+                                Toast.makeText(getContext().getApplicationContext(), "Poglavlje je isključeno.", Toast.LENGTH_LONG).show();
                             }
 
                             poglavlje.updatePoglavlje(poglavlje);
@@ -158,7 +160,7 @@ public class PoglavljaListaAdapter extends ArrayAdapter<Poglavlje>{
                                     poglavlje.setNaziv(ime.getText().toString());
                                     alertD.dismiss();
                                     notifyDataSetChanged();
-                                    Log.i("Ime", poglavlje.getNaziv());
+                                    //Log.i("Ime", poglavlje.getNaziv());
                                     poglavlje.updatePoglavlje(poglavlje);
 
                                     //zastavica za provjeru dali postoji već u listi za ažuriranje
