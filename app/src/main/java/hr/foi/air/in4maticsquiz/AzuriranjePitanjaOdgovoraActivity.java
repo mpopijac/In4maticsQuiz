@@ -11,12 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.activeandroid.query.Select;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import hr.foi.air.in4maticsquiz.AsyncTaskClass.AddUpdateDeleteOdgovora;
 import hr.foi.air.in4maticsquiz.adapters.AdapterZaBrisanjeOdgvora;
 import hr.foi.air.in4maticsquiz.db.Odgovor;
 import hr.foi.air.in4maticsquiz.db.Pitanja;
@@ -25,6 +27,7 @@ import hr.foi.air.in4maticsquiz.singletons.Azuriranje;
 public class AzuriranjePitanjaOdgovoraActivity extends AppCompatActivity implements View.OnClickListener {
     private List<Pitanja> pitanja=new ArrayList<Pitanja>();
     private List<Odgovor> odgovoriArrayList=new ArrayList<Odgovor>();
+    private List<Odgovor> odgovoriZazuriranjeArrayList=new ArrayList<Odgovor>();
     private AdapterZaBrisanjeOdgvora odgovoriAdapter;
     ArrayList<Odgovor> listaZaPrikazArrayList = new ArrayList<Odgovor>();
     EditText txtPitanja;
@@ -33,6 +36,9 @@ public class AzuriranjePitanjaOdgovoraActivity extends AppCompatActivity impleme
     EditText txtodgovor;
     TextView odgNaPit;
     AlertDialog alertD;
+    ArrayList<Odgovor> odgovorLista = new ArrayList<Odgovor>();
+    long i;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +47,7 @@ public class AzuriranjePitanjaOdgovoraActivity extends AppCompatActivity impleme
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        long i= Azuriranje.getInstance().getIdPit();
+        i= Azuriranje.getInstance().getIdPit();
         Log.i("idPitanja", String.valueOf(i));
         dodajOdg=(Button)findViewById(R.id.btnDodOdgovor);
         azuriraj=(Button)findViewById(R.id.btnAzurirajOdgPit);
@@ -54,7 +60,7 @@ public class AzuriranjePitanjaOdgovoraActivity extends AppCompatActivity impleme
         txtPitanja.setText(trenutno.getPitanje());
 
         //dohvačanje iz baze pitanja samo iz odabranog razreda
-        odgovoriArrayList = new Select().from(Odgovor.class).where("IDpitanja==?", i).execute();
+        odgovoriArrayList = new Select().from(Odgovor.class).where("IDpitanja==?", i).where("obrisano==?",0).execute();
 
 
         for (Pitanja pitanje :pitanja){
@@ -70,7 +76,7 @@ public class AzuriranjePitanjaOdgovoraActivity extends AppCompatActivity impleme
 
         ///adapter za prikaz rezultata fali
         odgovoriAdapter = new AdapterZaBrisanjeOdgvora(this, R.layout.listaodgovora, listaZaPrikazArrayList);
-        ListView listView = (ListView)findViewById(R.id.listAzuriraj);
+        listView = (ListView)findViewById(R.id.listAzuriraj);
 
 
         listView.setAdapter(odgovoriAdapter);
@@ -84,7 +90,9 @@ public class AzuriranjePitanjaOdgovoraActivity extends AppCompatActivity impleme
         switch (v.getId()) {
             case R.id.btnAzurirajOdgPit:
 
-                //ažurirati promjene
+                AzuriranjePitanjaOdgovoraActivity.this.finish();
+
+
                 break;
 
             case R.id.btnDodOdgovor:
@@ -108,6 +116,40 @@ public class AzuriranjePitanjaOdgovoraActivity extends AppCompatActivity impleme
                 alertD.setView(promptView);
                 alertD.setCancelable(false);
                 alertD.show();
+                break;
+
+            case R.id.btnDodTocanOdg:
+                Odgovor o = new Odgovor();
+                o.setIDodgovor(-1);
+                o.setNaziv(txtodgovor.getText().toString());
+                o.setTocan(1);
+                o.setIDpitanja(-1);
+                o.setObrisano(0);
+
+                odgovorLista.add(o);
+                Toast.makeText(getApplicationContext(), R.string.potvrdaOdgovor, Toast.LENGTH_LONG).show();
+                txtodgovor.getText().clear();
+
+                break;
+            case R.id.btnDodNetocanOdg:
+                Odgovor on = new Odgovor();
+                on.setIDodgovor(-1);
+                on.setNaziv(txtodgovor.getText().toString());
+                on.setTocan(0);
+                on.setIDpitanja(-1);
+                on.setObrisano(0);
+
+                odgovorLista.add(on);
+                Toast.makeText(getApplicationContext(), R.string.potvrdaOdgovor, Toast.LENGTH_LONG).show();
+                txtodgovor.getText().clear();
+
+                break;
+            case R.id.btnPovratak:
+
+                //ažurirati promjenu
+                odgovoriAdapter.notifyDataSetChanged();
+                alertD.dismiss();
+
                 break;
 
 

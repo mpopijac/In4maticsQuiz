@@ -22,6 +22,7 @@ public class AdapterZaBrisanjeOdgvora extends ArrayAdapter<Odgovor> {
     private ArrayList<Odgovor> popisOdgovoraLista;
     Odgovor o;
     EditText pit;
+    Odgovor odgovor;
 
     public AdapterZaBrisanjeOdgvora(Context context, int textViewResourceId, ArrayList<Odgovor> lista) {
         super(context, textViewResourceId, lista);
@@ -47,24 +48,26 @@ public class AdapterZaBrisanjeOdgvora extends ArrayAdapter<Odgovor> {
             holder.btnIzbrisi = (Button) convertView.findViewById(R.id.btnObrisi);
             convertView.setTag(holder);
 
-            holder.btnIzbrisi.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-
-                }
-            });
-
-
-
 
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
-        Odgovor odgovor = popisOdgovoraLista.get(position);
+         odgovor = popisOdgovoraLista.get(position);
         holder.odg.setText(odgovor.getNaziv());
         holder.odg.setTag(odgovor);
         holder.btnIzbrisi.setTag(odgovor);
+
+        holder.btnIzbrisi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popisOdgovoraLista.remove(odgovor);
+                notifyDataSetChanged();
+                odgovor.setObrisano(1);
+                odgovor.updateOdgovor(odgovor);
+                //fali update na web server
+
+            }
+        });
 
         return convertView;
     }
