@@ -2,6 +2,7 @@ package hr.foi.air.in4maticsquiz.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import hr.foi.air.in4maticsquiz.R;
+import hr.foi.air.in4maticsquiz.azuriraj;
 import hr.foi.air.in4maticsquiz.db.Odgovor;
+import hr.foi.air.in4maticsquiz.db.Pitanja;
 import hr.foi.air.in4maticsquiz.db.Poglavlje;
 import hr.foi.air.in4maticsquiz.singletons.Azuriranje;
 
@@ -26,6 +29,8 @@ import hr.foi.air.in4maticsquiz.singletons.Azuriranje;
 public class AdapterZaBrisanjeOdgvora extends ArrayAdapter<Odgovor> {
 
     private ArrayList<Odgovor> popisOdgovoraLista;
+    Odgovor o;
+    EditText pit;
 
     public AdapterZaBrisanjeOdgvora(Context context, int textViewResourceId, ArrayList<Odgovor> lista) {
         super(context, textViewResourceId, lista);
@@ -51,6 +56,13 @@ public class AdapterZaBrisanjeOdgvora extends ArrayAdapter<Odgovor> {
             holder.btnIzbrisi = (Button) convertView.findViewById(R.id.btnObrisi);
             convertView.setTag(holder);
 
+            holder.btnIzbrisi.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                }
+            });
 
 
 
