@@ -2,8 +2,6 @@ package hr.foi.air.in4maticsquiz;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -19,15 +17,12 @@ import com.activeandroid.query.Select;
 import java.util.ArrayList;
 import java.util.List;
 
-import hr.foi.air.in4maticsquiz.R;
 import hr.foi.air.in4maticsquiz.adapters.AdapterZaBrisanjeOdgvora;
-import hr.foi.air.in4maticsquiz.adapters.PitanjaListaAdapter;
 import hr.foi.air.in4maticsquiz.db.Odgovor;
 import hr.foi.air.in4maticsquiz.db.Pitanja;
 import hr.foi.air.in4maticsquiz.singletons.Azuriranje;
-import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;
 
-public class azuriraj extends AppCompatActivity implements View.OnClickListener {
+public class AzuriranjePitanjaOdgovoraActivity extends AppCompatActivity implements View.OnClickListener {
     private List<Pitanja> pitanja=new ArrayList<Pitanja>();
     private List<Odgovor> odgovoriArrayList=new ArrayList<Odgovor>();
     private AdapterZaBrisanjeOdgvora odgovoriAdapter;
@@ -42,7 +37,7 @@ public class azuriraj extends AppCompatActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_azuriraj);
+        setContentView(R.layout.activity_azuriranje_pitanja_odgovora);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -93,9 +88,9 @@ public class azuriraj extends AppCompatActivity implements View.OnClickListener 
                 break;
 
             case R.id.btnDodOdgovor:
-                LayoutInflater layoutInflater = LayoutInflater.from(azuriraj.this);
+                LayoutInflater layoutInflater = LayoutInflater.from(AzuriranjePitanjaOdgovoraActivity.this);
                 View promptView = layoutInflater.inflate(R.layout.dialog_dodaj_odgovor, null);
-                alertD = new AlertDialog.Builder(azuriraj.this).create();
+                alertD = new AlertDialog.Builder(AzuriranjePitanjaOdgovoraActivity.this).create();
                 odgNaPit = (TextView) promptView.findViewById(R.id.txtDodajOdgNaPit);
 
                 odgNaPit.setText(txtPitanja.getText());

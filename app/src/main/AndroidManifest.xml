@@ -40,7 +40,7 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".DodajNovoPitanje" />
         <activity
-            android:name=".azuriraj"
+            android:name=".AzuriranjePitanjaOdgovoraActivity"
             android:label="@string/title_activity_azuriraj"
             android:theme="@style/AppTheme"></activity>
     </application>

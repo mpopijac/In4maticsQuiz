@@ -1,8 +1,6 @@
 package hr.foi.air.in4maticsquiz.adapters;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,18 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import hr.foi.air.in4maticsquiz.R;
-import hr.foi.air.in4maticsquiz.azuriraj;
 import hr.foi.air.in4maticsquiz.db.Odgovor;
-import hr.foi.air.in4maticsquiz.db.Pitanja;
-import hr.foi.air.in4maticsquiz.db.Poglavlje;
-import hr.foi.air.in4maticsquiz.singletons.Azuriranje;
 
 /**
  * Created by Dario on 28.1.2016..
