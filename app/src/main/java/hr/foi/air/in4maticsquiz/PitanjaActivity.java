@@ -3,7 +3,7 @@ package hr.foi.air.in4maticsquiz;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -16,9 +16,7 @@ import java.util.List;
 
 import hr.foi.air.in4maticsquiz.R;
 import hr.foi.air.in4maticsquiz.adapters.PitanjaListaAdapter;
-import hr.foi.air.in4maticsquiz.adapters.PoglavljaListaAdapter;
 import hr.foi.air.in4maticsquiz.db.Pitanja;
-import hr.foi.air.in4maticsquiz.db.Poglavlje;
 import hr.foi.air.in4maticsquiz.singletons.PrijavljeniKorisnik;
 
 public class PitanjaActivity extends AppCompatActivity {
@@ -33,6 +31,7 @@ public class PitanjaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pitanja);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         FloatingActionButton dodaj = (FloatingActionButton) findViewById(R.id.dodajPit);
         dodaj.setOnClickListener(new View.OnClickListener() {

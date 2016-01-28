@@ -148,10 +148,12 @@ public class AddUpdateDeletePitanja extends AsyncTask<String,String, String> {
             Log.i("Uspješno: idPog ", result);
 
             if (Azuriranje.getInstance().getZastavica()){
+                Azuriranje.getInstance().setZadnjeDodanoPitanjeId(Long.parseLong(result));
                 Pitanja pitanje = new Pitanja();
                 pitanje= Azuriranje.getInstance().getPitanje();
                 pitanje.setIDpitanja(Long.parseLong(result));
                 pitanje.save();
+
 
                 Odgovor odg = new Odgovor();
                 ArrayList<Odgovor> odgovorLista = new ArrayList<>();
@@ -166,6 +168,7 @@ public class AddUpdateDeletePitanja extends AsyncTask<String,String, String> {
                     odg=oi;
                     odg.save();
                 }
+
                 Azuriranje.getInstance().setZastavica(false);
             }else {
                 Azuriranje.getInstance().setZadnjeDodanoPitanjeId(Long.parseLong(result));

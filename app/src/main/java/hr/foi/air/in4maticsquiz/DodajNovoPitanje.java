@@ -209,8 +209,11 @@ public class DodajNovoPitanje extends AppCompatActivity implements View.OnClickL
                 Log.i("pitanje", tekstPitanja.getText().toString());
                 for (Odgovor oi:odgovorLista){
                     Log.i("odgovori", oi.getNaziv());
-                    //oi.setIDpitanja();
-
+                    if(Azuriranje.getInstance().getZadnjeDodanoPitanjeId()!=null) {
+                        oi.setIDpitanja(Azuriranje.getInstance().getZadnjeDodanoPitanjeId());
+                    }else {
+                        oi.setIDpitanja(9999);
+                    }
                     //dodavanje this, 0 dodavanje, 0 obrisano
                     new AddUpdateDeleteOdgovora(this, 0, "0").execute("0", oi.getNaziv(), Long.toString(oi.getTocan()), Long.toString(oi.getIDpitanja()));
                     oi.setIDodgovor(Azuriranje.getInstance().getZadnjiDodaniOdgovorId());

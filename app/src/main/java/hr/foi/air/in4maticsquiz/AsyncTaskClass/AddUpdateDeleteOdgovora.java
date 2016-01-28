@@ -144,7 +144,7 @@ public class AddUpdateDeleteOdgovora extends AsyncTask<String,String, String> {
             toast.show();
 
         }else{
-            Log.i("Uspješno: idPog ", result);
+            Log.i("Uspješno: idOdg ", result);
             Azuriranje.getInstance().setZadnjiDodaniOdgovorId(Long.parseLong(result));
 
 
