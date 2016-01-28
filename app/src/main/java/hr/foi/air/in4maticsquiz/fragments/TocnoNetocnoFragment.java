@@ -67,7 +67,7 @@ public class TocnoNetocnoFragment extends Fragment {
 
         final Bundle data = getArguments();
         long id = data.getLong("pitanje_key");
-        odgovori=new Select().all().from(Odgovor.class).where("IDpitanja==?", id).execute();
+        odgovori=new Select().all().from(Odgovor.class).where("IDpitanja==?", id).where("obrisano==?",0).execute();
         for(Odgovor odg:odgovori){
             brojac++;
             if(brojac==1){

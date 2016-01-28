@@ -47,7 +47,7 @@ public class UnesiTocanPojamFragment extends Fragment {
 
         long id = data.getLong("pitanje_key");
 
-        pitanja=new Select().from(Pitanja.class).where("IDpitanja==?",id).execute();
+        pitanja=new Select().from(Pitanja.class).where("IDpitanja==?",id).where("obrisano==?",0).execute();
         trenutno=pitanja.get(0);
 
         txtP=(TextView)getView().findViewById(R.id.txtPitanjeodg);
@@ -64,7 +64,7 @@ public class UnesiTocanPojamFragment extends Fragment {
         final Bundle data=getArguments();
 
         long id = data.getLong("pitanje_key");
-        odgovori=new Select().all().from(Odgovor.class).where("IDpitanja==?", id).execute();
+        odgovori=new Select().all().from(Odgovor.class).where("IDpitanja==?", id).where("obrisano==?",0).execute();
 
         odgnaPitanje=(EditText)getView().findViewById(R.id.odgovorNaPitanje);
         odgnaPitanje.addTextChangedListener(new TextWatcher() {

@@ -55,7 +55,7 @@ public class VisePonudenihOdgovoraFragment extends ListFragment{
 
         final Bundle da=getArguments();
         long id = da.getLong("pitanje_key");
-        odgovori=new Select().all().from(Odgovor.class).where("IDpitanja==?", id).execute();
+        odgovori=new Select().all().from(Odgovor.class).where("IDpitanja==?", id).where("obrisano==?",0).execute();
         CheckboxOdgovoriAdapter adapter = new CheckboxOdgovoriAdapter(getActivity(),R.layout.fragment_checkbox_layout, odgovori);
         brOz=0;
         brTocnoOz=0;

@@ -61,7 +61,7 @@ public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_provjeri_znanje);
         Integer odabraniRazred = PrijavljeniKorisnik.getInstance().getOdabraniRazred();
 
-        pitanja = new Select().from(Pitanja.class).where("IDrazred==?", odabraniRazred).orderBy("RANDOM()").limit(brojPitanja).execute();
+        pitanja = new Select().from(Pitanja.class).where("IDrazred==?", odabraniRazred).where("obrisano==?",0).orderBy("RANDOM()").limit(brojPitanja).execute();
         idPit = new Random().nextInt(pitanja.size());
 
         /*
@@ -186,7 +186,7 @@ public class ProvjeriZnanjeActivity extends AppCompatActivity implements View.On
 
     public void vrstaPitanja(Pitanja p) {
 
-        odgovoriTrenutno = new Select().all().from(Odgovor.class).where("IDpitanja==?", p.getIDpitanja()).execute();
+        odgovoriTrenutno = new Select().all().from(Odgovor.class).where("IDpitanja==?", p.getIDpitanja()).where("obrisano==?",0).execute();
         /*
             ako su samo dva odgovora ponuđena
          */
