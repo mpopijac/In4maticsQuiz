@@ -34,6 +34,15 @@ public class OdabirRazredaActivityTest extends ActivityInstrumentationTestCase2<
 
         solo.waitForActivity(MainActivity.class, 5000);
 
+        //Briše tekst iz polja
+        solo.clearEditText(0);
+        solo.clearEditText(1);
+
+        //Unosi tekst
+        solo.enterText(0, "tjarcov");
+        solo.enterText(1, "123456");
+
+
         //Pritisni gumb Prijava
         solo.clickOnView(solo.getView(R.id.btnPrijava));
 
