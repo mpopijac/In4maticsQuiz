@@ -16,6 +16,7 @@ public class Azuriranje {
     public ArrayList<Poglavlje> poglavljeLista = new ArrayList<Poglavlje>();
     public Integer zadnjeDodanoPoglavljeId = 0;
     public ArrayList<Pitanja> pitanjaLista = new ArrayList<Pitanja>();
+    public Long idPit;
 
     public static Azuriranje getInstance() {
         if (ourInstance == null){
@@ -54,5 +55,13 @@ public class Azuriranje {
 
     public void setZadnjeDodanoPoglavljeId(Integer zadnjeDodanoPoglavljeId) {
         this.zadnjeDodanoPoglavljeId = zadnjeDodanoPoglavljeId;
+    }
+
+    public Long getIdPit() {
+        return idPit;
+    }
+
+    public void setIdPit(Long idPit) {
+        this.idPit = idPit;
     }
 }

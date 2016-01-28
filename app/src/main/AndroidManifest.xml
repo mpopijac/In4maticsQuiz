@@ -38,7 +38,11 @@
             android:name=".PitanjaActivity"
             android:label="@string/title_activity_pitanja"
             android:theme="@style/AppTheme" />
-        <activity android:name=".DodajNovoPitanje"></activity>
+        <activity android:name=".DodajNovoPitanje" />
+        <activity
+            android:name=".azuriraj"
+            android:label="@string/title_activity_azuriraj"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

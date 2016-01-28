@@ -62,5 +62,6 @@
     <string name="potvrdaOdgovor">Odgovor je dodan! </string>
     <string name="greskaPoglavlje">Niste upisali poglavlje! </string>
     <string name="potvrdaDodPoglavlje">Poglavlje je dodano!! Trebate dodati pitanje!!" </string>
+    <string name="title_activity_azuriraj">azuriraj</string>
 
 </resources>
