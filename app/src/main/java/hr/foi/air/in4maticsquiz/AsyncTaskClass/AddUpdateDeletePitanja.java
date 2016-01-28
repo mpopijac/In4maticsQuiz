@@ -47,8 +47,8 @@ public class AddUpdateDeletePitanja extends AsyncTask<String,String, String> {
             if(Integer.parseInt(operacija)==0){
                 //slanje zahtjeva na web servis
                 link="http://www.in4maticsquiz.16mb.com/AddUpdateDeletePitanja.php";
-
-                data = "&" + URLEncoder.encode("nazivPitanja","UTF-8") + "=" + URLEncoder.encode(nazivPitanja, "UTF-8");
+                data = URLEncoder.encode("idPitanja", "UTF-8") + "=" + URLEncoder.encode(idPitanja, "UTF-8");
+                data += "&" + URLEncoder.encode("nazivPitanja","UTF-8") + "=" + URLEncoder.encode(nazivPitanja, "UTF-8");
                 data += "&" + URLEncoder.encode("idPoglavlje","UTF-8") + "=" + URLEncoder.encode(idPoglavlje, "UTF-8");
                 data += "&" + URLEncoder.encode("idRazred", "UTF-8") + "=" + URLEncoder.encode(idRazred, "UTF-8");
                 data += "&" + URLEncoder.encode("operacija", "UTF-8") + "=" + URLEncoder.encode(operacija, "UTF-8");

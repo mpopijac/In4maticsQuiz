@@ -55,6 +55,7 @@ public class AddUpdateDeleteOdgovora extends AsyncTask<String,String, String> {
                 data += "&" + URLEncoder.encode("idPitanja", "UTF-8") + "=" + URLEncoder.encode(idPitanja, "UTF-8");
                 data += "&" + URLEncoder.encode("obrisano", "UTF-8") + "=" + URLEncoder.encode(obrisano, "UTF-8");
                 data += "&" + URLEncoder.encode("operacija", "UTF-8") + "=" + URLEncoder.encode(operacija, "UTF-8");
+                data += "&" + URLEncoder.encode("idOdgovora", "UTF-8") + "=" + URLEncoder.encode(idOdgovora, "UTF-8");
             }
 
             //azuriranje

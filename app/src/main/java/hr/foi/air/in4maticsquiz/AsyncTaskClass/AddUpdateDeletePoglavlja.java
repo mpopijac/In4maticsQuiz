@@ -59,6 +59,7 @@ public class AddUpdateDeletePoglavlja extends AsyncTask<String,String, String> {
                 data += "&" + URLEncoder.encode("operacija", "UTF-8") + "=" + URLEncoder.encode(operacija, "UTF-8");
                 data += "&" + URLEncoder.encode("nazivPoglavlja","UTF-8") + "=" + URLEncoder.encode(nazivPoglavlja, "UTF-8");
                 data += "&" + URLEncoder.encode("ukljuceno","UTF-8") + "=" + URLEncoder.encode(ukljuceno, "UTF-8");
+                data += "&" + URLEncoder.encode("obrisano","UTF-8") + "=" + URLEncoder.encode(obrisano, "UTF-8");
             }
 
             //azuriranje
