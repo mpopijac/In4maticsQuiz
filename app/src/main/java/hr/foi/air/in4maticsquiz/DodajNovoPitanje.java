@@ -40,7 +40,7 @@ public class DodajNovoPitanje extends AppCompatActivity implements View.OnClickL
     EditText tekstPitanja,txtodgovor;
     TextView tekstPoglavlja,odgNaPit;
     AlertDialog alertD;
-    private CheckboxPoglavljaAdapter poglavljaAdapter;
+    private CheckboxPoglavljaAdapter pitanjaAdapter;
     private List<Poglavlje> poglavljeArrayList = new ArrayList<Poglavlje>();
     private List<Pitanja> pitanjasArrayList = new ArrayList<Pitanja>();
     ArrayList<Poglavlje> listaZaPrikazArrayList = new ArrayList<Poglavlje>();
@@ -105,11 +105,11 @@ public class DodajNovoPitanje extends AppCompatActivity implements View.OnClickL
         }
 
 
-        poglavljaAdapter = new CheckboxPoglavljaAdapter(this, R.layout.fragment_checkbox_layout, listaZaPrikazArrayList);
+        pitanjaAdapter = new CheckboxPoglavljaAdapter(this, R.layout.fragment_checkbox_layout, listaZaPrikazArrayList);
         ListView listView = (ListView)findViewById(R.id.listPoglavlje);
 
 
-        listView.setAdapter(poglavljaAdapter);
+        listView.setAdapter(pitanjaAdapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -206,15 +206,18 @@ public class DodajNovoPitanje extends AppCompatActivity implements View.OnClickL
                 pi.setIDpitanja(Azuriranje.getInstance().getZadnjeDodanoPitanjeId());
                 pi.save();
 
+                Odgovor odg = new Odgovor();
                 Log.i("pitanje",tekstPitanja.getText().toString());
                 for (Odgovor oi:odgovorLista){
                     Log.i("odgovori", oi.getNaziv());
                     oi.setIDpitanja(Azuriranje.getInstance().getZadnjeDodanoPitanjeId());
                     //dodavanje this, 0 dodavanje, 0 obrisano
-                    new AddUpdateDeleteOdgovora(this, 0, "0").execute("0",oi.getNaziv(), Long.toString(oi.getTocan()), Long.toString(oi.getIDpitanja()));
+                    new AddUpdateDeleteOdgovora(this, 0, "0").execute("0", oi.getNaziv(), Long.toString(oi.getTocan()), Long.toString(oi.getIDpitanja()));
                     oi.setIDodgovor(Azuriranje.getInstance().getZadnjiDodaniOdgovorId());
-                    oi.save();
+                    odg=oi;
+                    odg.save();
                 }
+                pitanjaAdapter.notifyDataSetChanged();
                 odgovorLista.clear();
                 alertD.dismiss();
                 DodajNovoPitanje.this.finish();
